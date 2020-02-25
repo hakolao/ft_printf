@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/24 14:18:34 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/25 15:55:13 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ LIBFT = ./libft
 DIR_SRC = src
 DIR_OBJ = temp
 HEADERS = incl
+LIBFTFLAGS = -L$(LIBFT) -lft
 FLAGS = -Wall -Wextra -Werror -O2
 SOURCES = ft_printf.c
 
@@ -25,7 +26,7 @@ OBJS = $(addprefix $(DIR_OBJ)/,$(SOURCES:.c=.o))
 all: $(DIR_OBJ) $(NAME)
 
 $(NAME): $(OBJS)
-	@ar rc $(NAME) $(OBJS)
+	ar rc $(NAME) $(OBJS)
 
 $(DIR_OBJ):
 	@mkdir -p temp
@@ -44,6 +45,13 @@ fclean: clean
 
 norm:
 	norminette $(HEADERS) $(LIBFT) $(DIR_SRC)
+
+test: all
+	@make -C $(LIBFT)
+	@$(CC) -o test_run test/main.c $(NAME) $(LIBFTFLAGS) -I$(HEADERS)
+	./test_run
+	@/bin/rm -f main.o
+	@/bin/rm -f test_run
 
 re: fclean all
 

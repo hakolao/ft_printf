@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/25 15:28:10 by ohakola          ###   ########.fr       */
+/*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
+/*   Updated: 2020/02/25 16:55:15 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include "../libft/libft.h"
-# include <stdarg.h>
-
-typedef struct	s_printf
+int		main(void)
 {
-	va_list		*variables;
-}				t_printf;
+	int		okko;
+	char	*pokko;
+	char	*format;
 
-int				ft_printf(const char *format, ...);
-
-#endif
+	okko = 55;
+	pokko = "lol";
+	format = "Some different %% %w radices: %d %x %o %#x %#o \n";
+	ft_putstr("TEST:---------->\n");
+	ft_putendl("Format:");
+	ft_putendl(format);
+	ft_putendl("");
+	ft_printf(format, okko);
+	return (0);
+}
