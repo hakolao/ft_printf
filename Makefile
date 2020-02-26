@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/26 15:14:31 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/26 16:31:58 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ HEADERS = incl
 LIBFTFLAGS = -L$(LIBFT) -lft
 FLAGS = -Wall -Wextra -Werror -O2
 SOURCES = ft_printf.c \
+			log.c \
 			validate.c
 
 SRCS = $(addprefix $(DIR_SRC)/,$(SOURCES))

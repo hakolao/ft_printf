@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/26 14:39:37 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/26 15:26:12 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		main(void)
 	ft_putendl("");
 	ft_printf(format, okko);
 	ft_putendl("\n\nFormat2:");
-	ft_putendl(format);
+	ft_putendl(format2);
 	ft_putendl("");
 	ft_printf(format2, okko, pokko);
 	return (0);
