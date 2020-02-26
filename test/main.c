@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/26 17:49:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/26 17:56:27 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		main(void)
 	okko = 55;
 	pokko = "lol";
 	format = "Some diffe %+-05hhd rent %% %w kakka: %d %x %o %#x %#o \n";
-	format2 = "%% %w lol: %d %x %o %#x %#o \n";
+	format2 = "PASKAAAAA %d\n";
 	ft_putstr("TEST1:---------->\n");
 	ft_putendl("Format1:");
 	ft_putendl(format);

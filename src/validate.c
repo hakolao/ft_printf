@@ -6,18 +6,33 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 15:13:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/26 17:47:02 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/26 18:44:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+int						is_int_specifier(char c)
+{
+	return (c == 'd' || c == 'i' || c == 'u' ||
+			c == 'o' || c == 'x' || c == 'X');
+}
+
+int						is_float_specifier(char c)
+{
+	return (c == 'f' || c == 'F' || c == 'e' || c == 'E' || c == 'g' ||
+			c == 'G' || c == 'a' || c == 'A');
+}
+
+int						is_char_specifier(char c)
+{
+	return (c == 'c' || c == 's');
+}
+
 int						is_allowed_specifier(char c)
 {
-	return (c == 'd' || c == 'i' || c == 'u' || c == 'o' || c == 'x' || c == 'X'
-			|| c == 'f' || c == 'F' || c == 'e' || c == 'E' || c == 'g' ||
-			c == 'G' || c == 'a' || c == 'A' || c == 'c' || c == 's' ||
-			c == 'p' || c == 'n' || c == '%');
+	return (is_int_specifier(c) || is_float_specifier(c) ||
+			is_char_specifier(c) || c == 'p' || c == 'n' || c == '%');
 }
 
 int						is_allowed_sub_specifier(char c)

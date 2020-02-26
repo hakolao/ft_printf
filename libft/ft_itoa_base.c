@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohakola <ohakola@student.helsinki.fi>      +#+  +:+       +#+        */
+/*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:21:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/01/20 16:09:12 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/26 18:32:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ char				*ft_itoa_base(int nb, int base)
 	char	*bases;
 
 	sign = nb < 0 ? -1 : 1;
+	if (base > 16 || base < 1)
+		return (NULL);
 	bases = "0123456789ABCDEF";
 	if (!(arr = (char*)ft_memalloc(get_arr_size(nb, base, sign))))
 		return (NULL);
