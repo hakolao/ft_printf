@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/25 15:55:13 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/26 15:14:31 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ DIR_OBJ = temp
 HEADERS = incl
 LIBFTFLAGS = -L$(LIBFT) -lft
 FLAGS = -Wall -Wextra -Werror -O2
-SOURCES = ft_printf.c
+SOURCES = ft_printf.c \
+			validate.c
 
 SRCS = $(addprefix $(DIR_SRC)/,$(SOURCES))
 OBJS = $(addprefix $(DIR_OBJ)/,$(SOURCES:.c=.o))
