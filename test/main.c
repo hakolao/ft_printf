@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/26 14:13:03 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/26 14:39:37 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		main(void)
 
 	okko = 55;
 	pokko = "lol";
-	format = "Some different %% %w radices: %d %x %o %#x %#o \n";
+	format = "Some diffe %+-05hhd rent %% %w radices: %d %x %o %#x %#o \n";
 	format2 = "%% %w radices: %d %x %o %#x %#o \n";
 	ft_putstr("TEST:---------->\n");
 	ft_putendl("Format1:");
