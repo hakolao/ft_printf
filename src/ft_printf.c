@@ -6,19 +6,12 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:00:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/26 18:48:46 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/26 19:27:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
-
-int						parse_sub_specs(t_printf *data, char *symbol, int spec_len)
-{
-	if (spec_len == 1)
-		return (TRUE);
-	return (TRUE);
-}
 
 char					*parse_int(char c, int var)
 {
@@ -36,9 +29,11 @@ char					*parse_int(char c, int var)
 	{
 		res = ft_itoa_base((unsigned int)var, 16);
 		if (c == 'X')
-		i = 0;
-		while (res[i])
-			ft_toupper(res[i++]);
+		{
+			i = 0;
+			while (res[i])
+				ft_toupper(res[i++]);
+		}
 	}
 	return (res);
 }
@@ -46,47 +41,57 @@ char					*parse_int(char c, int var)
 char					*parse_float(char c, float var)
 {
 	char	*res;
-	int		i;
 
+	(void)c;
 	res = ft_ftoa(var, 5);
 	return (res);
 }
 
-char					*parse_arg(char c, t_printf *data)
+char					*parse_address(char c, void *var)
 {
-	char	*ret;
-	int		tmp;
-
-			||  || c == 'c' || c == 's' ||
-			c == 'p' || c == 'n' || c == '%')
-	if (is_int_specifier(c))
-		ret = parse_int(c, va_arg(data->variables, int));
-	if (is_float_specifier(c))
-		ret = parse_float(c, va_arg(data->variables, float))
+	(void)c;
+	(void)var;
+	return (NULL);
 }
 
-char					*variable_by_spec(t_printf *data, char *spec, int spec_len)
+char					*parse_arg(char c, t_printf *data, char *specs)
 {
-	char	*result;
+	char	*ret;
 
-	if (!(result = parse_arg(data, spec[spec_len - 1])))
-		return (NULL);
-	
-	return (result);
+	(void)specs;
+	if (is_int_specifier(c))
+		ret = parse_int(c, va_arg(data->variables, int));
+	else if (is_float_specifier(c))
+		ret = parse_float(c, va_arg(data->variables, double));
+	else if (c == 's')
+		ret = ft_strdup(va_arg(data->variables, char*));
+	else if (c == 'c')
+	{
+		if (!(ret = ft_strnew(1)))
+			return (NULL);
+		ret[0] = va_arg(data->variables, int);
+	}
+	else if (c == 'p')
+		ret = parse_address(c, va_arg(data->variables, void *));
+	else if (c == '%')
+		ret = ft_strdup("%");
+	else
+		ret = ft_strnew(0);
+	return (ret);
 }
 
 int						parse_specifiers(t_printf *data, char *fmt,
 						int spec_len)
 {
-	char	*spec;
+	char	*specs;
 	char	*tmp;
 	char	*variable;
 
 	(void)data;
-	if (!(spec = ft_strnew(spec_len)))
+	if (!(specs = ft_strnew(spec_len)))
 		return (FALSE);
-	spec = ft_strncpy(spec, fmt, spec_len);
-	if (!(variable = variable_by_spec(data, spec, spec_len)))
+	specs = ft_strncpy(specs, fmt, spec_len);
+	if (!(variable = parse_arg(specs[spec_len - 1], data, specs)))
 		return (FALSE);
 	tmp = data->result;
 	if (!(data->result = ft_strjoin(data->result, variable)))

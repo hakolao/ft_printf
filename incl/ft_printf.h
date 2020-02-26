@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/26 18:07:04 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/26 19:00:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ int					ft_printf(const char *format, ...);
 
 int					is_allowed_specifier(char c);
 int					is_allowed_sub_specifier(char c);
+int					is_char_specifier(char c);
+int					is_float_specifier(char c);
+int					is_int_specifier(char c);
 t_printf_lengths	ft_printf_lengths(char *fmt, t_printf_lengths lengths);
 
 /*
