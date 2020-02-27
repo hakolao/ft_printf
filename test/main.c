@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 15:49:18 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 16:29:49 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int		main(void)
 	lol3 = -30303;
 	format = "Hello number %d, are you bigger than %u, or perhaps %o?\n"
 			"Or should I call you? %x, %X?\n"
-			"Address neg: %p, pos: %p, %p, mistake %w\n";
+			"Address neg: %p, pos: %p, %p, mistake %w\n"
+			"what about these? %% %%\n";
 	ft_putstr("TEST1:---------->\n");
 	ft_putendl("format:");
 	ft_putendl(format);
