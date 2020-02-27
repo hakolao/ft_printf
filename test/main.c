@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 20:25:22 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 21:06:37 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		main(void)
 
 	ft_putstr("\nTEST2:--------->\n");
 	ft_printf ("Characters: %c %c \n", 'a', 65);
-	ft_printf ("Decimals: %d %ld\n", 1977, 650000L);
+	ft_printf ("Decimals: %00050d %d\n", 1977, 650000);
 	ft_printf ("Preceding with blanks: %10d \n", 1977);
 	ft_printf ("Preceding with zeros: %010d \n", 1977);
 	ft_printf ("Some different radices: %d %x %o %#x %#o \n", 100, 100, 100, 100, 100);
@@ -58,7 +58,7 @@ int		main(void)
 
 	ft_putstr("PRINTF:----------->\n");
 	printf ("Characters: %c %c \n", 'a', 65);
-	printf ("Decimals: %d %ld\n", 1977, 650000L);
+	printf ("Decimals: %00050d %d\n", 1977, 650000);
 	printf ("Preceding with blanks: %10d \n", 1977);
 	printf ("Preceding with zeros: %010d \n", 1977);
 	printf ("Some different radices: %d %x %o %#x %#o \n", 100, 100, 100, 100, 100);

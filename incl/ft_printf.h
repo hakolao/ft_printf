@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 20:22:08 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 21:04:51 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct		s_printf_lengths
 }					t_printf_lengths;
 
 int					ft_printf(const char *format, ...);
+int					reset_bools(t_printf *data);
 
 /*
 ** Validation
@@ -71,5 +72,7 @@ char				*parse_float(t_printf *data);
 char				*parse_address(t_printf *data);
 int					parse_variables(t_printf *data, char *fmt);
 int					parse_sub_specifiers(t_printf *data);
+int					is_allowed_flag(char c);
+int					is_allowed_width_spec(char c);
 
 #endif
