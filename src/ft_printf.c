@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:00:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/26 19:27:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 12:50:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,45 +120,46 @@ char					*parse_middle(t_printf *data, char *fmt,
 
 int						parse_variables(t_printf *data, char *fmt)
 {
-	t_printf_lengths	lengths;
+	t_printf_lengths	l;
 
-	lengths = ft_printf_lengths(fmt, (t_printf_lengths){0, 0, 0});
-	if (lengths.middle_len > 0)
-		if (!(data->result = parse_middle(data, fmt, lengths.middle_len)))
-			return (FALSE);
-	if (lengths.middle_len == 0 && lengths.spec_len == 0 && *fmt == '%')
-		if (!(data->result = parse_middle(data, fmt, 1)))
-			return (FALSE);
-	if (lengths.spec_len > 0)
-	{
-		parse_specifiers(data, fmt + lengths.middle_len + 1,
-			lengths.spec_len);
-		fmt += lengths.middle_len + 1 + lengths.spec_len;
-	}
-	else if (lengths.middle_len > 0)
-		fmt += lengths.middle_len;
+	l = ft_printf_lengths(fmt, (t_printf_lengths){0, 0, 0});
+	if (l.middle_len > 0 &&
+		!(data->result = parse_middle(data, fmt, l.middle_len)))
+		return (FALSE);
+	if (l.middle_len == 0 && l.spec_len == 0 && *fmt == '%' &&
+		!(data->result = parse_middle(data, fmt, 1)))
+		return (FALSE);
+	if (l.spec_len > 0 &&
+		parse_specifiers(data, fmt + l.middle_len + 1,
+		l.spec_len))
+		fmt += l.middle_len + 1 + l.spec_len;
+	else if (l.middle_len > 0)
+		fmt += l.middle_len;
 	else if (*fmt == '%')
 		fmt += 1;
 	return (*fmt ? parse_variables(data, fmt) : TRUE);
+}
+
+static int				init_printf(t_printf *data, const char *format)
+{
+	data->fd = 1;
+	data->len = 0;
+	if (!(data->result = ft_strnew(0)))
+		return (FALSE);
+	data->format = (char*)format;
+	return (TRUE);
 }
 
 int						ft_printf(const char *format, ...)
 {
 	t_printf	data;
 
-	data.fd = 1;
-	data.len = 0;
-	if (!(data.result = ft_strnew(0)))
+	if (!(init_printf(&data, format)))
 		return (FALSE);
-	data.format = (char*)format;
 	va_start(data.variables, format);
 	if (!parse_variables(&data, (char*)format))
-	{
-		ft_putstr_fd(data.error, 2);
 		return (FALSE);
-	}
 	va_end(data.variables);
-	printf("data_len: %d\n", data.len);
 	write(data.fd, data.result, data.len);
 	ft_strdel(&data.result);
 	return (data.len);
