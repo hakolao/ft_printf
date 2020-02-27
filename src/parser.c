@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 16:29:08 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 17:14:58 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static int				parse_specifiers(t_printf *data, char *fmt,
 	char	*tmp;
 	char	*variable;
 
-	(void)data;
 	if (!(spec = ft_strnew(spec_len)))
 		return (FALSE);
 	spec = ft_strncpy(spec, fmt, spec_len);
