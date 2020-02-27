@@ -6,27 +6,29 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 13:01:03 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 13:37:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char					*parse_int(char c, int var)
+char					*parse_int(t_printf *data)
 {
-	char	*res;
-	int		i;
+	char			*res;
+	char			c;
+	int				i;
 
 	res = NULL;
+	c = data->spec[data->spec_len - 1];
 	if (c == 'd' || c == 'i')
-		res = ft_itoa(var);
+		res = ft_itoa(va_arg(data->variables, int));
 	else if (c == 'u')
-		res = ft_itoa((unsigned int)var);
+		res = ft_itoa(va_arg(data->variables, unsigned int));
 	else if (c == 'o')
-		res = ft_itoa_base((unsigned int)var, 8);
+		res = ft_itoa_base(va_arg(data->variables, unsigned int), 8);
 	else if (c == 'x' || c == 'X')
 	{
-		res = ft_itoa_base((unsigned int)var, 16);
+		res = ft_itoa_base(va_arg(data->variables, unsigned int), 16);
 		if (c == 'X')
 		{
 			i = -1;
@@ -34,5 +36,15 @@ char					*parse_int(char c, int var)
 				res[i] = ft_toupper(res[i]);
 		}
 	}
+	return (res);
+}
+
+char					*parse_float(t_printf *data)
+{
+	char	*res;
+	char	c;
+
+	c = data->spec[data->spec_len - 1];
+	res = ft_ftoa(va_arg(data->variables, double), 5);
 	return (res);
 }

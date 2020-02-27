@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 12:53:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 13:34:49 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,14 @@
 # include "../libft/libft.h"
 # include <stdarg.h>
 
+# define ABS(nb) (nb >= 0 ? nb : -nb)
+
 typedef struct		s_printf
 {
 	va_list		variables;
 	char		*format;
+	char		*spec;
+	int			spec_len;
 	char		*result;
 	char		*error;
 	char		**symbols;
@@ -55,6 +59,9 @@ int					log_err(char *str, char *strerror);
 /*
 **  Parsing
 */
-char				*parse_int(char c, int var);
+char				*parse_int(t_printf *data);
+char				*parse_float(t_printf *data);
+char				*parse_address(t_printf *data);
+int					parse_variables(t_printf *data, char *fmt);
 
 #endif
