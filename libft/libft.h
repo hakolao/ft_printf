@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 13:47:12 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 15:41:52 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 # define TRUE 1
 # define FALSE 0
+
+# define ABS(nb) (nb < 0  ? -nb : nb)
 
 # include <string.h>
 # include <fcntl.h>
@@ -143,8 +145,12 @@ void			ft_sort_int_tab(int *tab, unsigned int size, int dir);
 long double		ft_abs_long_double(long double nb);
 long double		ft_powl(double nb, int pow);
 char			*ft_ftoa(long double nb, int precision);
-void			ft_str_rev(char *str);
 int				ft_match(char *s1, char *s2);
 char			*ft_itoa_long_base(long int nb, int base);
+char			*ft_itoa_longl_base(long long int nb, int base);
+char			*ft_itoa_uintmax_base(uintmax_t nb, int base);
+void			ft_strrev(char *str);
+size_t			get_num_len(long long unsigned int nb,
+				long long unsigned int base);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 13:34:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 15:41:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include "../libft/libft.h"
 # include <stdarg.h>
-
-# define ABS(nb) (nb >= 0 ? nb : -nb)
 
 typedef struct		s_printf
 {

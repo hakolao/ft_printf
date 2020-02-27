@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   address.c                                          :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/27 13:07:57 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 15:49:56 by ohakola          ###   ########.fr       */
+/*   Created: 2020/02/27 15:32:10 by ohakola           #+#    #+#             */
+/*   Updated: 2020/02/27 15:32:51 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-char					*parse_address(t_printf *data)
+void			ft_strrev(char *str)
 {
-	char					*hex;
-	char					*beg;
-	char					*res;
+	int		i;
+	int		len;
+	char	temp;
 
-	hex = ft_itoa_uintmax_base(va_arg(data->variables, long long int), 16);
-	beg = "0x";
-	res = ft_strjoin(beg, hex);
-	ft_strdel(&hex);
-	return (res);
+	len = ft_strlen(str);
+	i = 0;
+	while (i < len / 2)
+	{
+		temp = str[i];
+		str[i] = str[len - i - 1];
+		str[len - i - 1] = temp;
+		i++;
+	}
 }

@@ -6,23 +6,11 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 12:41:22 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 15:43:07 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int		get_num_len(long int nb)
-{
-	int	i;
-
-	i = 0;
-	if (nb == FALSE)
-		return (1);
-	while (nb != 0 && i++ >= 0)
-		nb = nb / 10;
-	return (i);
-}
 
 static char		*add_zeros(long int fpart, int precision, char *str)
 {
@@ -32,7 +20,7 @@ static char		*add_zeros(long int fpart, int precision, char *str)
 	int		zeros;
 	char	*res;
 
-	len = get_num_len(fpart);
+	len = get_num_len(fpart, 10);
 	zeros = precision - len;
 	if (zeros <= 0)
 		return (str);
@@ -62,9 +50,9 @@ static char		*handle_negative_zero(long double nb, char *str)
 		if (!(res = ft_strnew(len + 1)))
 			return (NULL);
 		res = ft_strcpy(res, str);
-		ft_str_rev(res);
+		ft_strrev(res);
 		res[len] = '-';
-		ft_str_rev(res);
+		ft_strrev(res);
 		ft_strdel(&str);
 		return (res);
 	}
