@@ -6,11 +6,25 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 17:36:22 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 20:24:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+unsigned int			next_var_arg(t_printf *data)
+{
+	unsigned		var;
+
+	var = va_arg(data->variables, unsigned);
+	if (data->use_prev_var)
+	{
+		data->previous_variable = var;
+		var = va_arg(data->variables, unsigned);
+		data->width = (int)var;
+	}
+	return (var);
+}
 
 char					*parse_int(t_printf *data)
 {
@@ -21,7 +35,7 @@ char					*parse_int(t_printf *data)
 
 	res = NULL;
 	c = data->spec[data->spec_len - 1];
-	var = va_arg(data->variables, int);
+	var = next_var_arg(data);
 	if (c == 'd' || c == 'i')
 		res = ft_itoa(var);
 	else if (c == 'u')

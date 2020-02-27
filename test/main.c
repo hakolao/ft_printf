@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 19:55:07 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 20:25:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,24 @@ int		main(void)
 	"okko", 'c', "lol");
 
 
-	// int number    =  5;
-	// char *pointer = "little";
+	ft_putstr("\nTEST2:--------->\n");
+	ft_printf ("Characters: %c %c \n", 'a', 65);
+	ft_printf ("Decimals: %d %ld\n", 1977, 650000L);
+	ft_printf ("Preceding with blanks: %10d \n", 1977);
+	ft_printf ("Preceding with zeros: %010d \n", 1977);
+	ft_printf ("Some different radices: %d %x %o %#x %#o \n", 100, 100, 100, 100, 100);
+	ft_printf ("floats: %4.2f %+.0e %E \n", 3.1416, 3.1416, 3.1416);
+	ft_printf ("Width trick: %*x \n", 5, 10);
+	ft_printf ("%s \n", "A string\n");
 
-	// printf("Here is a number-%4d-and a-%10s-word.\n", number, pointer);
+	ft_putstr("PRINTF:----------->\n");
+	printf ("Characters: %c %c \n", 'a', 65);
+	printf ("Decimals: %d %ld\n", 1977, 650000L);
+	printf ("Preceding with blanks: %10d \n", 1977);
+	printf ("Preceding with zeros: %010d \n", 1977);
+	printf ("Some different radices: %d %x %o %#x %#o \n", 100, 100, 100, 100, 100);
+	printf ("floats: %4.2f %+.0e %E \n", 3.1416, 3.1416, 3.1416);
+	printf ("Width trick: %*x \n", 5, 10);
+	printf ("%s \n", "A string\n");
 	return (0);
 }

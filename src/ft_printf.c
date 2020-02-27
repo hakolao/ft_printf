@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:00:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 17:35:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 20:20:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int				init_printf(t_printf *data, const char *format)
 	data->zerox = FALSE;
 	data->width = 0;
 	data->precision = 6;
+	data->use_prev_var = FALSE;
 	return (TRUE);
 }
 
