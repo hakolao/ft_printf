@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 13:19:37 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 13:50:52 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int		main(void)
 
 	okko = 55;
 	pokko = "lol";
-	format_int = "Hello numbebr %d, are you bigger than %i, or perhaps %o?\n"
-			"Or should I call you missing? %x with actually missing %X?\n";
+	format_int = "Hello numbebr %d, are you bigger than %u, or perhaps %o?\n"
+			"Or should I call you missing? %x with actually missing::: %X, %d, %d, %d, %d?\n";
 	ft_putstr("TEST1:---------->\n");
 	ft_putendl("Format_int:");
 	ft_putendl(format_int);

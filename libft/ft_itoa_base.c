@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:21:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 12:59:58 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 13:46:52 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void			str_rev(char *str)
 	}
 }
 
-static size_t		get_num_len(int nb, int base)
+static size_t		get_num_len(long int nb, long int base)
 {
 	size_t	i;
 	int		temp_nb;
@@ -60,6 +60,33 @@ static size_t		get_arr_size(int nb, int base, int sign)
 }
 
 char				*ft_itoa_base(int nb, int base)
+{
+	int		i;
+	char	*arr;
+	int		sign;
+	char	*bases;
+
+	sign = nb < 0 ? -1 : 1;
+	if (base > 16 || base < 1)
+		return (NULL);
+	bases = "0123456789abcdef";
+	if (!(arr = (char*)ft_memalloc(get_arr_size(nb, base, sign))))
+		return (NULL);
+	if (nb == FALSE)
+		arr[0] = '0';
+	i = 0;
+	while (nb != 0)
+	{
+		arr[i++] = bases[sign * (nb % base)];
+		nb = nb / base;
+	}
+	if (sign == -1 && base == TRUE)
+		arr[i] = '-';
+	str_rev(arr);
+	return (arr);
+}
+
+char				*ft_itoa_long_base(long int nb, int base)
 {
 	int		i;
 	char	*arr;
