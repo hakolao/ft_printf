@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 13:49:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 16:30:40 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,10 @@ char					*parse_int(t_printf *data)
 	{
 		res = var < 0 ? ft_itoa_long_base(((long int)1 << 32) + var, 16) :
 			ft_itoa_long_base(var, 16);
+		i = -1;
 		if (c == 'X')
-		{
-			i = -1;
 			while (res[++i])
 				res[i] = ft_toupper(res[i]);
-		}
 	}
 	return (res);
 }
