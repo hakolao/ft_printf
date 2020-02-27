@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:00:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 13:08:07 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 17:35:51 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ static int				init_printf(t_printf *data, const char *format)
 	if (!(data->result = ft_strnew(0)))
 		return (FALSE);
 	data->format = (char*)format;
+	data->left_justify = FALSE;
+	data->pad_zeros = FALSE;
+	data->show_sign = FALSE;
+	data->blank_space = FALSE;
+	data->zerox = FALSE;
+	data->width = 0;
+	data->precision = 6;
 	return (TRUE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 15:41:14 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 17:34:55 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ typedef struct		s_printf
 	char		**symbols;
 	int			len;
 	int			fd;
+	int			left_justify;
+	int			pad_zeros;
+	int			show_sign;
+	int			blank_space;
+	int			zerox;
+	int			width;
+	int			precision;
 }					t_printf;
 
 typedef struct		s_printf_lengths
@@ -61,5 +68,6 @@ char				*parse_int(t_printf *data);
 char				*parse_float(t_printf *data);
 char				*parse_address(t_printf *data);
 int					parse_variables(t_printf *data, char *fmt);
+int					parse_sub_specifiers(t_printf *data);
 
 #endif
