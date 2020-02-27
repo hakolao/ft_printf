@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:21:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/26 18:32:38 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 12:59:58 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char				*ft_itoa_base(int nb, int base)
 	sign = nb < 0 ? -1 : 1;
 	if (base > 16 || base < 1)
 		return (NULL);
-	bases = "0123456789ABCDEF";
+	bases = "0123456789abcdef";
 	if (!(arr = (char*)ft_memalloc(get_arr_size(nb, base, sign))))
 		return (NULL);
 	if (nb == FALSE)

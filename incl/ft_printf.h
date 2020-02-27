@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/26 19:00:18 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 12:53:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,10 @@ t_printf_lengths	ft_printf_lengths(char *fmt, t_printf_lengths lengths);
 ** Log
 */
 int					log_err(char *str, char *strerror);
+
+/*
+**  Parsing
+*/
+char				*parse_int(char c, int var);
 
 #endif
