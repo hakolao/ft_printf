@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 16:38:53 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/27 17:13:50 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,13 @@ char					*parse_float(t_printf *data)
 {
 	char	*res;
 	char	c;
+	int		precision;
 
 	c = data->spec[data->spec_len - 1];
-	res = ft_ftoa(va_arg(data->variables, double), 6);
+	precision = 6;
+	if (c == 'f')
+		res = ft_ftoa(va_arg(data->variables, double), precision);
+	else
+		res = ft_ftoa(va_arg(data->variables, double), precision);
 	return (res);
 }
