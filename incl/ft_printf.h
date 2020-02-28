@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 21:04:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/28 13:41:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include <stdarg.h>
+# include <stdio.h>
 
 typedef struct		s_printf
 {
@@ -25,7 +26,6 @@ typedef struct		s_printf
 	char		*result;
 	char		*error;
 	char		**symbols;
-	long int	previous_variable;
 	int			len;
 	int			fd;
 	int			left_justify;
@@ -35,14 +35,12 @@ typedef struct		s_printf
 	int			zerox;
 	int			width;
 	int			precision;
-	int			use_prev_var;
 }					t_printf;
 
 typedef struct		s_printf_lengths
 {
 	int			middle_len;
 	int			spec_len;
-	int			sub_spec_len;
 }					t_printf_lengths;
 
 int					ft_printf(const char *format, ...);

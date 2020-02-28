@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 15:13:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 20:48:01 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/28 13:47:27 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,21 @@ int						is_allowed_sub_specifier(char c)
 t_printf_lengths		ft_printf_lengths(char *fmt, t_printf_lengths lengths)
 {
 	int					i;
+	char				*next;
 
 	i = 0;
-	while (fmt[i] && fmt[i] != '%')
+	next = ft_strchr(fmt, '%');
+	if (!next)
 	{
-		lengths.middle_len++;
-		i++;
+		i = -1;
+		while (fmt[++i])
+			lengths.middle_len++;
+		return (lengths);
+	}
+	if (fmt && next && next - fmt > 0)
+	{
+		i = next - fmt;
+		lengths.middle_len = next - fmt;
 	}
 	i++;
 	if (fmt[i] && (!is_allowed_sub_specifier(fmt[i]) &&
@@ -79,7 +88,6 @@ t_printf_lengths		ft_printf_lengths(char *fmt, t_printf_lengths lengths)
 		return (lengths);
 	while (fmt[i] && is_allowed_sub_specifier(fmt[i]))
 	{
-		lengths.sub_spec_len++;
 		lengths.spec_len++;
 		i++;
 	}
