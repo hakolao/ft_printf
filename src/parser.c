@@ -6,11 +6,23 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/28 13:45:18 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/28 14:23:24 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int						reset_var_specific_data(t_printf *data)
+{
+	data->left_justify = FALSE;
+	data->pad_zeros = FALSE;
+	data->show_sign = FALSE;
+	data->blank_space = FALSE;
+	data->zerox = FALSE;
+	data->width = 0;
+	data->precision = 6;
+	return (TRUE);
+}
 
 static char				*parse_arg(t_printf *data)
 {
@@ -86,6 +98,7 @@ int						parse_variables(t_printf *data, char *fmt)
 {
 	t_printf_lengths	l;
 
+	reset_var_specific_data(data);
 	l = ft_printf_lengths(fmt, (t_printf_lengths){0, 0});
 	if (l.middle_len > 0 &&
 		!(data->result = parse_middle(data, fmt, l.middle_len)))

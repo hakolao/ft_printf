@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 16:27:31 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/26 16:27:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/28 14:09:15 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,25 @@ int				log_err(char *str, char *strerror)
 	ft_putendl_fd(str, 2);
 	ft_putstr("\033[0m");
 	return (1);
+}
+
+int				debug_flags(t_printf *data)
+{
+	printf("spec len: %d "
+			"left_justify: %d\n"
+			"pad_zeros: %d "
+			"show_sign: %d "
+			"blank_space: %d "
+			"zerox: %d\n"
+			"width: %d "
+			"precision: %d\n",
+			data->spec_len,
+			data->left_justify,
+			data->pad_zeros,
+			data->show_sign,
+			data->blank_space,
+			data->zerox,
+			data->width,
+			data->precision);
+	return (TRUE);
 }
