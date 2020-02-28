@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/28 15:10:19 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/28 16:32:41 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int			parse_flags(t_printf *data, int *i)
 			data->blank_space = TRUE;
 		else if (data->spec[*i] == '0')
 			data->pad_zeros = TRUE;
+		else if (data->spec[*i] == '#')
+			data->zerox = TRUE;
 		(*i)++;
 	}
 	return (TRUE);

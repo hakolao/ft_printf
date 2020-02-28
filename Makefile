@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/27 17:36:40 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/28 16:26:40 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SOURCES = ft_printf.c \
 			address.c \
 			numbers.c \
 			log.c \
+			strings.c \
 			validate.c
 
 SRCS = $(addprefix $(DIR_SRC)/,$(SOURCES))

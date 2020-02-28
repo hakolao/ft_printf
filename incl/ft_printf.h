@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/28 14:53:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/28 16:36:26 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,12 @@ char				*parse_float(t_printf *data);
 char				*parse_address(t_printf *data);
 int					parse_variables(t_printf *data, char *fmt);
 int					parse_sub_specifiers(t_printf *data);
+
+/*
+** Strings
+*/
+char					*add_to_str(char *str, size_t new_size);
+char					*add_char_to_beg(char *str, char c, size_t new_size);
+char					*add_str_to_beg(char *str, char *add);
 
 #endif
