@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 16:27:31 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/28 14:09:15 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/28 14:58:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int				debug_flags(t_printf *data)
 			"blank_space: %d "
 			"zerox: %d\n"
 			"width: %d "
+			"length type: %d "
 			"precision: %d\n",
 			data->spec_len,
 			data->left_justify,
@@ -39,6 +40,7 @@ int				debug_flags(t_printf *data)
 			data->blank_space,
 			data->zerox,
 			data->width,
+			data->length_type,
 			data->precision);
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/28 14:31:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/28 15:10:19 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int			parse_flags(t_printf *data, int *i)
 {
-	printf("parsing flags: %s\n", data->spec + *i);
-	while (data->spec[*i] && is_allowed_flag(data->spec[*i]))
+	while (data->spec[*i] && is_flag(data->spec[*i]))
 	{
 		if (data->spec[*i] == '-')
 			data->left_justify = TRUE;
@@ -36,7 +35,6 @@ int			parse_width(t_printf *data, int *i)
 	unsigned 	var;
 
 	j = *i;
-	printf("parsing width: %s\n", data->spec + *i);
 	if (*i == data->spec_len - 2  && data->spec[data->spec_len - 2] == '*')
 	{
 		var = va_arg(data->variables, unsigned);
@@ -59,7 +57,6 @@ int			parse_precision(t_printf *data, int *i)
 	int			j;
 	unsigned 	var;
 
-	printf("parsing precision: %s\n", data->spec + *i);
 	if (data->spec[*i] != '.')
 		return (FALSE);
 	(*i)++;
@@ -82,6 +79,35 @@ int			parse_precision(t_printf *data, int *i)
 	return (TRUE);
 }
 
+int			parse_lengths(t_printf *data, int *i)
+{
+	if (data->spec[*i] == 'h' && data->spec[*i + 1] == 'h')
+	{
+		data->length_type = length_hh;
+		(*i) += 2;
+		return (TRUE);
+	}
+	if (data->spec[*i] == 'l' && data->spec[*i + 1] == 'l')
+	{
+		data->length_type = length_ll;
+		(*i) += 2;
+		return (TRUE);
+	}
+	if (data->spec[*i] == 'h')
+		data->length_type = length_h;
+	if (data->spec[*i] == 'l')
+		data->length_type = length_l;
+	if (data->spec[*i] == 'j')
+		data->length_type = length_j;
+	if (data->spec[*i] == 'z')
+		data->length_type = length_z;
+	if (data->spec[*i] == 't')
+		data->length_type = length_t;
+	if (data->spec[*i] == 'L')
+		data->length_type = length_L;
+	return (TRUE);
+}
+
 int			parse_sub_specifiers(t_printf *data)
 {
 	int		i;
@@ -93,7 +119,7 @@ int			parse_sub_specifiers(t_printf *data)
 		parse_width(data, &i);
 	if (i < data->spec_len - 1)
 		parse_precision(data, &i);
-	printf("SPEC: %s\n", data->spec);
-	debug_flags(data);
+	if (i < data->spec_len - 1)
+		parse_lengths(data, &i);
 	return (TRUE);
 }

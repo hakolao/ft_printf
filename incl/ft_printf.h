@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/28 14:34:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/28 14:53:48 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct		s_printf
 	int			zerox;
 	int			width;
 	int			precision;
+	int			length_type;
 }					t_printf;
 
 typedef struct		s_printf_lengths
@@ -43,6 +44,19 @@ typedef struct		s_printf_lengths
 	int			spec_len;
 }					t_printf_lengths;
 
+enum			e_lengths
+{
+	length_none,
+	length_hh,
+	length_h,
+	length_l,
+	length_ll,
+	length_j,
+	length_z,
+	length_t,
+	length_L
+};
+
 int					ft_printf(const char *format, ...);
 int					reset_var_specific_data(t_printf *data);
 
@@ -50,12 +64,12 @@ int					reset_var_specific_data(t_printf *data);
 ** Validation
 */
 
-int					is_allowed_specifier(char c);
-int					is_allowed_sub_specifier(char c);
+int					is_specifier(char c);
+int					is_sub_specifier(char c);
 int					is_char_specifier(char c);
 int					is_float_specifier(char c);
 int					is_int_specifier(char c);
-int					is_allowed_flag(char c);
+int					is_flag(char c);
 t_printf_lengths	ft_printf_lengths(char *fmt, t_printf_lengths lengths);
 
 /*

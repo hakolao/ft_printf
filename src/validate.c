@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 15:13:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/28 14:33:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/28 14:42:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,25 @@ int						is_char_specifier(char c)
 	return (c == 'c' || c == 's');
 }
 
-int						is_allowed_specifier(char c)
+int						is_specifier(char c)
 {
 	return (is_int_specifier(c) || is_float_specifier(c) ||
 			is_char_specifier(c) || c == 'p' || c == 'n' || c == '%');
 }
 
-int						is_allowed_flag(char c)
+int						is_flag(char c)
 {
 	return (c == '-' || c == '+' || c == ' ' || c == '#' || c == '0');
 }
 
-int						is_allowed_sub_specifier(char c)
+int						is_sub_specifier(char c)
 {
 	return ((c == '-' || c == '+' || c == 'h' || c == 'l' || c == 'j' ||
 			c == 'z' || c == 't' || c == 'L' || ft_isdigit(c) ||
 			c == '#' || c == '.' || c == '*' || c == ' '));
 }
+
+
 
 t_printf_lengths		ft_printf_lengths(char *fmt, t_printf_lengths lengths)
 {
@@ -67,15 +69,15 @@ t_printf_lengths		ft_printf_lengths(char *fmt, t_printf_lengths lengths)
 		lengths.middle_len = next - fmt;
 	}
 	i++;
-	if (fmt[i] && (!is_allowed_sub_specifier(fmt[i]) &&
-		!is_allowed_specifier(fmt[i])))
+	if (fmt[i] && (!is_sub_specifier(fmt[i]) &&
+		!is_specifier(fmt[i])))
 		return (lengths);
-	while (fmt[i] && is_allowed_sub_specifier(fmt[i]))
+	while (fmt[i] && is_sub_specifier(fmt[i]))
 	{
 		lengths.spec_len++;
 		i++;
 	}
-	if (is_allowed_specifier(fmt[i]))
+	if (is_specifier(fmt[i]))
 		lengths.spec_len++;
 	else
 		lengths.spec_len = 0;
