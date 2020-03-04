@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/28 16:35:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 15:36:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static char				*handle_number_formats(t_printf *data, char *res)
 {
 	int		len;
-	int		i;
 
 	len = ft_strlen(res);
 	if (data->show_sign && !ft_strchr(res, '-'))
@@ -23,24 +22,7 @@ static char				*handle_number_formats(t_printf *data, char *res)
 		res = add_char_to_beg(res, '+', len + 1);
 		len++;
 	}
-	if (data->width > 0 && len < data->width)
-	{
-		res = add_to_str(res, data->width);
-		if (!data->left_justify)
-		{
-			ft_strrev(res);
-			i = len;
-			while (i < data->width)
-				res[i++] = data->pad_zeros ? '0' : ' ';
-			ft_strrev(res);
-		}
-		else
-		{
-			i = len;
-			while (i < data->width)
-				res[i++] = data->pad_zeros ? '0' : ' ';
-		}
-	}
+	res = handle_padding(data, res, len);
 	if (!data->show_sign && data->blank_space)
 	{
 		len = ft_strlen(res);

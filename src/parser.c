@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/28 14:54:10 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 15:36:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char				*parse_arg(t_printf *data)
 	else if (c == 'p')
 		ret = parse_address(data);
 	else if (c == '%')
-		ret = ft_strdup("%");
+		ret = handle_padding(data, ft_strdup("%"), 1);
 	else
 		ret = ft_strnew(0);
 	return (ret);
@@ -101,6 +101,7 @@ int						parse_variables(t_printf *data, char *fmt)
 
 	reset_var_specific_data(data);
 	l = ft_printf_lengths(fmt, (t_printf_lengths){0, 0});
+	printf("middle len: %d, spec len: %d\n", l.middle_len, l.spec_len);
 	if (l.middle_len > 0 &&
 		!(data->result = parse_middle(data, fmt, l.middle_len)))
 		return (FALSE);

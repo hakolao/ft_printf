@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:26:26 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/28 16:40:30 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 15:35:56 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,27 @@ char					*add_str_to_beg(char *str, char *add)
 
 	res = ft_strjoin(add, str);
 	ft_strdel(&str);
+	return (res);
+}
+
+char					*handle_padding(t_printf *data, char *res, int len)
+{
+	int	i;
+
+	i = len;
+	if (data->width > 0 && len < data->width)
+	{
+		res = add_to_str(res, data->width);
+		if (!data->left_justify)
+		{
+			ft_strrev(res);
+			while (i < data->width)
+				res[i++] = data->pad_zeros ? '0' : ' ';
+			ft_strrev(res);
+		}
+		else
+			while (i < data->width)
+				res[i++] = data->pad_zeros ? '0' : ' ';
+	}
 	return (res);
 }
