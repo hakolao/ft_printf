@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 17:07:45 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 17:15:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ char					*parse_int(t_printf *data)
 	else if (c == 'x' || c == 'X')
 		res = var < 0 ? ft_itoa_long_base(((long int)1 << 32) + var, 16) :
 			ft_itoa_long_base(var, 16);
-	res = handle_number_formats(data, res);
 	if (data->zerox && c == 'o')
 		res = add_char_to_beg(res, '0', ft_strlen(res) + 1);
 	if (data->zerox && (c == 'x' || c == 'X') && var != 0)
 		res = add_str_to_beg(res, "0x");
+	res = handle_number_formats(data, res);
 	if (c == 'X')
 		ft_capitalize(res);
 	return (res);
