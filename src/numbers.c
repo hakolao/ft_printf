@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 16:11:12 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 16:16:06 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char					*parse_int(t_printf *data)
 			ft_itoa_long_base(var, 16);
 	if (data->zerox && c == 'o')
 		res = add_char_to_beg(res, '0', ft_strlen(res) + 1);
-	if (data->zerox && (c == 'x' || c == 'X'))
+	if (data->zerox && (c == 'x' || c == 'X') && var != 0)
 		res = add_str_to_beg(res, "0x");
 	res = handle_number_formats(data, res);
 	if (c == 'X')
