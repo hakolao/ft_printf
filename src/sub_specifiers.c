@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 16:56:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 17:55:58 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int			parse_width(t_printf *data, int *i)
 		data->width = (int)var;
 		return (TRUE);
 	}
+	else if (!ft_isdigit(data->spec[*i]))
+		return (FALSE);
 	while (j < data->spec_len - 1)
 	{
 		if (data->spec[j] == '.')
@@ -63,6 +65,7 @@ int			parse_precision(t_printf *data, int *i)
 
 	if (data->spec[*i] != '.')
 		return (FALSE);
+	data->has_precision = TRUE;
 	(*i)++;
 	if (*i == data->spec_len - 2 && data->spec[*i] == '*')
 	{

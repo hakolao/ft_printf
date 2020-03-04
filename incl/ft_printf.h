@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 15:35:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 17:46:39 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct		s_printf
 	int			zerox;
 	int			width;
 	int			precision;
+	int			has_precision;
 	int			length_type;
 }					t_printf;
 

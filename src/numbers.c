@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 17:27:05 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 17:58:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ char					*parse_int(t_printf *data)
 	res = NULL;
 	c = data->spec[data->spec_len - 1];
 	var = parse_type(data);
-	if (c == 'd' || c == 'i')
+	if (data->has_precision)
+		res = ft_strdup("");
+	else if (c == 'd' || c == 'i')
 		res = ft_itoa(var);
 	else if (c == 'u')
 		res = var < 0 ? ft_itoa_long(((long int)1 << 32) + var) :
