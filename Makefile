@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/03/04 15:10:10 by ohakola          ###   ########.fr        #
+#    Updated: 2020/03/04 16:33:58 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT = ./libft
 DIR_SRC = src
 HEADERS = incl
 LIBFTFLAGS = -L$(LIBFT) -lft
-FLAGS = -Wall -Wextra -Werror -O2
+FLAGS = -Wall -Wextra -O2
 SOURCES = ft_printf.c \
 			parser.c \
 			sub_specifiers.c \

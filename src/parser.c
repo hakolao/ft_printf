@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 15:45:25 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 16:55:40 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char				*parse_arg(t_printf *data)
 	return (ret);
 }
 
-static int				parse_specifiers(t_printf *data, char *fmt,
+static char				*parse_specifiers(t_printf *data, char *fmt,
 						int spec_len)
 {
 	char	*spec;
@@ -62,20 +62,20 @@ static int				parse_specifiers(t_printf *data, char *fmt,
 	char	*variable;
 
 	if (!(spec = ft_strnew(spec_len)))
-		return (FALSE);
+		return (NULL);
 	spec = ft_strncpy(spec, fmt, spec_len);
 	data->spec = spec;
 	data->spec_len = spec_len;
 	if (!(variable = parse_arg(data)))
-		return (FALSE);
+		return (NULL);
 	ft_strdel(&spec);
 	tmp = data->result;
 	if (!(data->result = ft_strjoin(data->result, variable)))
-		return (FALSE);
+		return (NULL);
 	data->len += ft_strlen(variable);
 	ft_strdel(&variable);
 	ft_strdel(&tmp);
-	return (TRUE);
+	return (data->result);
 }
 
 static char				*parse_middle(t_printf *data, char *fmt,
