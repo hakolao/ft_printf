@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 15:36:44 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 15:58:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,34 @@ static char				*handle_number_formats(t_printf *data, char *res)
 	return (res);
 }
 
+intmax_t				parse_type(t_printf *data)
+{
+	intmax_t		var;
+
+	if (data->length_type == length_hh)
+		var = (intmax_t)va_arg(data->variables, int);
+	if (data->length_type == length_h)
+		var = (intmax_t)((char)va_arg(data->variables, int));
+	if (data->length_type == length_l)
+		var = (intmax_t)(va_arg(data->variables, long int));
+	if (data->length_type == length_ll)
+		var = (intmax_t)(va_arg(data->variables, long long int));
+	if (data->length_type == length_j)
+		var = (intmax_t)(va_arg(data->variables, long long int));
+	if (data->length_type == length_z)
+		var = (intmax_t)(va_arg(data->variables, long long int));
+	return (var);
+}
+
 char					*parse_int(t_printf *data)
 {
 	char			*res;
 	char			c;
-	unsigned		var;
+	intmax_t		var;
 
 	res = NULL;
 	c = data->spec[data->spec_len - 1];
-	var = va_arg(data->variables, unsigned);
+	var = parse_type(data);
 	if (c == 'd' || c == 'i')
 		res = ft_itoa(var);
 	else if (c == 'u')

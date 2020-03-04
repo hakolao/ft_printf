@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 15:13:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 15:26:12 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 15:45:41 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ t_printf_lengths		ft_printf_lengths(char *fmt, t_printf_lengths lengths)
 
 	i = 0;
 	next = ft_strchr(fmt, '%');
-	printf("char: %c, next: %p\n", *fmt, next);
 	if (!next)
 	{
 		i = -1;
