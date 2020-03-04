@@ -6,15 +6,14 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/28 16:26:40 by ohakola          ###   ########.fr        #
+#    Updated: 2020/03/04 15:10:10 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-NAME = ft_printf.a
+NAME = libftprintf.a
 LIBFT = ./libft
 DIR_SRC = src
-DIR_OBJ = temp
 HEADERS = incl
 LIBFTFLAGS = -L$(LIBFT) -lft
 FLAGS = -Wall -Wextra -Werror -O2
@@ -28,23 +27,22 @@ SOURCES = ft_printf.c \
 			validate.c
 
 SRCS = $(addprefix $(DIR_SRC)/,$(SOURCES))
-OBJS = $(addprefix $(DIR_OBJ)/,$(SOURCES:.c=.o))
+OBJS = $(SOURCES:.c=.o)
 
 all: $(DIR_OBJ) $(NAME)
 
 $(NAME): $(OBJS)
+	@make -C $(LIBFT)
+	@cp libft/libft.a ./$(NAME)
 	ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
 
-$(DIR_OBJ):
-	@mkdir -p temp
-
-$(DIR_OBJ)/%.o: $(DIR_SRC)/%.c $(HEADERS)/ft_printf.h
+%.o: $(DIR_SRC)/%.c
 	@$(CC) $(FLAGS) -I $(HEADERS) -c -o $@ $<
 
 clean:
 	@/bin/rm -f $(OBJS)
 	@make -C $(LIBFT) clean
-	@/bin/rm -rf $(DIR_OBJ)
 
 fclean: clean
 	@/bin/rm -f $(NAME)
@@ -62,4 +60,4 @@ test: all
 
 re: fclean all
 
-.PHONY: all, $(DIR_OBJ), clean, fclean, norm
+.PHONY: all, clean, fclean, norm
