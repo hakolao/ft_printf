@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 16:03:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 16:11:12 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ intmax_t				parse_type(t_printf *data)
 
 	if (data->length_type == length_h)
 		var = (intmax_t)((char)va_arg(data->variables, int));
-	if (data->length_type == length_l)
+	else if (data->length_type == length_l)
 		var = (intmax_t)(va_arg(data->variables, long int));
-	if (data->length_type == length_ll)
+	else if (data->length_type == length_ll)
 		var = (intmax_t)(va_arg(data->variables, long long int));
-	if (data->length_type == length_j)
+	else if (data->length_type == length_j)
 		var = (intmax_t)(va_arg(data->variables, long long int));
-	if (data->length_type == length_z)
+	else if (data->length_type == length_z)
 		var = (intmax_t)(va_arg(data->variables, long long int));
 	else
 		var = (intmax_t)va_arg(data->variables, int);
