@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:26:26 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 16:23:17 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 17:10:15 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,15 @@ char					*add_str_to_beg(char *str, char *add)
 
 char					*handle_padding(t_printf *data, char *res, int len)
 {
-	int	i;
+	int		i;
+	char	c;
 
 	i = len;
+	c = data->spec[data->spec_len - 1];
+	if (data->zerox && data->pad_zeros &&
+		(c == 'x' || c == 'X' ||	c == 'o'))
+		data->width = (c == 'x' || c == 'X') ? data->width - 2 :
+			data->width - 1;
 	if (data->width > 0 && len < data->width)
 	{
 		res = add_to_str(res, data->width);

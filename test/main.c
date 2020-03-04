@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 16:47:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 17:08:54 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 int		main(void)
 {
 
-	ft_printf("%# 8x\n", 42);
-	printf("%# 8x\n", 42);
+	ft_printf("%#08x\n", 42);
+	printf("%#08x\n", 42);
+
+	ft_printf("%#010o\n", 42);
+	printf("%#010o\n", 42);
 	return (0);
 }
