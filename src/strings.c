@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:26:26 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 17:19:05 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 17:30:26 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char					*handle_padding(t_printf *data, char *res, int len)
 		else
 			while (i < data->width)
 				res[i++] = data->pad_zeros ? '0' : ' ';
-		if (data->pad_zeros && c == 'x' || c == 'X')
+		if (data->pad_zeros && data->zerox && (c == 'x' || c == 'X'))
 		{
 			i = -1;
 			while (++i < data->width)

@@ -6,13 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 17:15:14 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/04 17:27:05 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char				*handle_number_formats(t_printf *data, char *res)
+static char				*handle_formatting(t_printf *data, char *res)
 {
 	int		len;
 
@@ -74,7 +74,7 @@ char					*parse_int(t_printf *data)
 		res = add_char_to_beg(res, '0', ft_strlen(res) + 1);
 	if (data->zerox && (c == 'x' || c == 'X') && var != 0)
 		res = add_str_to_beg(res, "0x");
-	res = handle_number_formats(data, res);
+	res = handle_formatting(data, res);
 	if (c == 'X')
 		ft_capitalize(res);
 	return (res);
@@ -92,6 +92,6 @@ char					*parse_float(t_printf *data)
 	else
 		res = ft_ftoa(va_arg(data->variables, double),
 		data->precision);
-	res = handle_number_formats(data, res);
+	res = handle_formatting(data, res);
 	return (res);
 }
