@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/05 14:51:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/05 15:49:07 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ char					*add_to_str(char *str, size_t new_size);
 char					*add_char_to_beg(char *str, char c, size_t new_size);
 char					*add_str_to_beg(char *str, char *add);
 char					*handle_padding(t_printf *data, char *res, int len);
+char					*handle_precision(t_printf *data, char *res, int len);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/05 15:17:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/05 15:51:35 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static char				*handle_formatting(t_printf *data, char *res)
 {
 	int		len;
 
+	res = handle_precision(data, res, ft_strlen(res));
 	len = ft_strlen(res);
 	if (data->show_sign && !ft_strchr(res, '-') && data->c != 'u')
 	{
@@ -23,7 +24,7 @@ static char				*handle_formatting(t_printf *data, char *res)
 		len++;
 	}
 	res = handle_padding(data, res, len);
-	if (!data->show_sign && data->blank_space)
+	if (!data->show_sign && data->blank_space && data->c != 'u')
 	{
 		len = ft_strlen(res);
 		res = add_char_to_beg(res, ' ', len + 1);
@@ -57,7 +58,7 @@ char					*parse_int(t_printf *data)
 
 	res = NULL;
 	var = parse_type(data);
-	if (data->has_precision && data->precision == 0)
+	if (data->has_precision && data->precision == 0 && var == 0)
 		res = ft_strdup("");
 	else if (data->c == 'd' || data->c == 'i')
 		res = ft_itoa_long_base(var, 10);

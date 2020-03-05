@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:26:26 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/05 14:54:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/05 15:56:01 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,23 @@ char					*add_str_to_beg(char *str, char *add)
 char					*handle_precision(t_printf *data, char *res, int len)
 {
 	int		i;
+	int		end;
 	char	c;
 
-	i = len;
 	c = data->spec[data->spec_len - 1];
 	if (data->has_precision && is_int_specifier(c))
 	{
-		
+		i = len;
 		res = add_to_str(res, data->width);
 		ft_strrev(res);
-			while (i < data->precision)
-				res[i++] = '0';
+		end = res[len - 1] == '-' ? data->precision + 1 : data->precision;
+		while (i < end)
+			res[i++] = '0';
+		if (res[len - 1] == '-')
+		{
+			res[len - 1] = '0';
+			res[i - 1] = '-';
+		}
 		ft_strrev(res);
 	}
 	return (res);
@@ -68,7 +74,6 @@ char					*handle_padding(t_printf *data, char *res, int len)
 
 	i = len;
 	c = data->c;
-	res = handle_precision(data, res, len);
 	if (data->width > 0 && len < data->width)
 	{
 		res = add_to_str(res, data->width);
