@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:21:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/27 15:47:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/05 14:02:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char				*ft_itoa_base(int nb, int base)
 		arr[i++] = bases[sign * (nb % base)];
 		nb = nb / base;
 	}
-	if (sign == -1 && base == TRUE)
+	if (sign == -1)
 		arr[i] = '-';
 	ft_strrev(arr);
 	return (arr);

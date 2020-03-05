@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 18:02:27 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/05 14:00:13 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ char					*parse_int(t_printf *data)
 	if (data->has_precision && data->precision == 0)
 		res = ft_strdup("");
 	else if (c == 'd' || c == 'i')
-		res = ft_itoa(var);
-	else if (c == 'u')
-		res = var < 0 ? ft_itoa_long(((long int)1 << 32) + var) :
-			ft_itoa_long(var);
+		res = ft_itoa_long_base(var, 10);
+	else if (c == 'u' || c == 'd' || c == 'i')
+		res = var < 0 ? ft_itoa_long_base(((long int)1 << 32) + var, 10) :
+			ft_itoa_long_base(var, 10);
 	else if (c == 'o')
 		res = var < 0 ? ft_itoa_long_base(((long int)1 << 32) + var, 8) :
 			ft_itoa_long_base(var, 8);

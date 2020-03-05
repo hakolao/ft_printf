@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/04 17:46:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/05 13:49:05 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static char				*parse_arg(t_printf *data)
 {
 	char	*ret;
 	char	c;
+	void	*var;
 
 	if (data->spec_len > 1)
 		parse_sub_specifiers(data);
@@ -39,7 +40,10 @@ static char				*parse_arg(t_printf *data)
 	else if (is_float_specifier(c))
 		ret = parse_float(data);
 	else if (c == 's')
-		ret = ft_strdup(va_arg(data->variables, char*));
+	{
+		var = (void*)va_arg(data->variables, char*);
+		ret = var ? ft_strdup((char*)var) : ft_strdup("(null)");
+	}
 	else if (c == 'c')
 	{
 		if (!(ret = ft_strnew(1)))
