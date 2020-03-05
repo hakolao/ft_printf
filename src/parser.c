@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/05 13:49:05 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/05 15:20:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,29 @@ int						reset_var_specific_data(t_printf *data)
 static char				*parse_arg(t_printf *data)
 {
 	char	*ret;
-	char	c;
 	void	*var;
 
+	data->c = data->spec[data->spec_len - 1];
 	if (data->spec_len > 1)
 		parse_sub_specifiers(data);
-	c = data->spec[data->spec_len - 1];
-	if (is_int_specifier(c))
+	if (is_int_specifier(data->c))
 		ret = parse_int(data);
-	else if (is_float_specifier(c))
+	else if (is_float_specifier(data->c))
 		ret = parse_float(data);
-	else if (c == 's')
+	else if (data->c == 's')
 	{
 		var = (void*)va_arg(data->variables, char*);
 		ret = var ? ft_strdup((char*)var) : ft_strdup("(null)");
 	}
-	else if (c == 'c')
+	else if (data->c == 'c')
 	{
 		if (!(ret = ft_strnew(1)))
 			return (NULL);
 		ret[0] = va_arg(data->variables, int);
 	}
-	else if (c == 'p')
+	else if (data->c == 'p')
 		ret = parse_address(data);
-	else if (c == '%')
+	else if (data->c == '%')
 		ret = handle_padding(data, ft_strdup("%"), 1);
 	else
 		ret = ft_strnew(0);

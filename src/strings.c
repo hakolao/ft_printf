@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:26:26 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/05 14:39:58 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/05 14:54:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char					*handle_padding(t_printf *data, char *res, int len)
 	char	c;
 
 	i = len;
-	c = data->spec[data->spec_len - 1];
+	c = data->c;
 	res = handle_precision(data, res, len);
 	if (data->width > 0 && len < data->width)
 	{
