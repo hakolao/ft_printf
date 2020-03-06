@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:26:26 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/05 15:56:01 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/06 10:34:12 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ char					*handle_precision(t_printf *data, char *res, int len)
 char					*handle_padding(t_printf *data, char *res, int len)
 {
 	int		i;
+	int		first_zero;
+	int		has_minus;
+	int		minus;
 	char	c;
 
 	i = len;
@@ -95,6 +98,26 @@ char					*handle_padding(t_printf *data, char *res, int len)
 					res[i] = '0';
 			res[1] = 'x';
 		}
+	}
+	i = data->width;
+	first_zero = 0;
+	has_minus = FALSE;
+	minus = 0;
+	while (i > 0)
+	{
+		if (res[i] == '0')
+			first_zero = i;
+		else if (res[i] == '-')
+		{
+			minus = i;
+			has_minus = TRUE;
+		}
+		i--;
+	}
+	if (has_minus)
+	{
+		res[first_zero] = '-';
+		res[minus] = '0';
 	}
 	return (res);
 }

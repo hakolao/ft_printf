@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/05 15:21:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/06 11:10:51 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ int			parse_width(t_printf *data, int *i)
 		j++;
 	}
 	data->width = ft_atoi(data->spec + *i);
-	(*i) += j;
+	if (data->spec[j - 1] == '.')
+		j--;
+	(*i) = j;
 	return (TRUE);
 }
 
@@ -66,6 +68,7 @@ int			parse_precision(t_printf *data, int *i)
 	if (data->spec[*i] != '.')
 		return (FALSE);
 	data->has_precision = TRUE;
+	data->pad_zeros = FALSE;
 	(*i)++;
 	if (*i == data->spec_len - 2 && data->spec[*i] == '*')
 	{
@@ -82,7 +85,7 @@ int			parse_precision(t_printf *data, int *i)
 		j++;
 	}
 	data->precision = ft_atoi(data->spec + *i);
-	(*i) += j;
+	(*i) = j;
 	return (TRUE);
 }
 
