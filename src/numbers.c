@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/06 11:49:10 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/06 14:05:53 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ intmax_t				parse_type(t_printf *data)
 		var = (intmax_t)(va_arg(data->variables, long long int));
 	else
 		var = (intmax_t)va_arg(data->variables, int);
+	if (var < 0)
+		data->blank_space = FALSE;
 	return (var);
 }
 
