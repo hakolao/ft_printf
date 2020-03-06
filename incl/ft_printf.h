@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/05 15:49:07 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/06 16:33:27 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ typedef struct		s_printf
 	char		*spec;
 	char		c;
 	int			spec_len;
-	char		*result;
-	char		*error;
-	char		**symbols;
+	int			middle_len;
+	int			var_len;
+	char		*buffer;
 	int			len;
 	int			fd;
 	int			left_justify;
@@ -60,7 +60,6 @@ enum			e_lengths
 };
 
 int					ft_printf(const char *format, ...);
-int					reset_var_specific_data(t_printf *data);
 
 /*
 ** Validation
@@ -68,11 +67,9 @@ int					reset_var_specific_data(t_printf *data);
 
 int					is_specifier(char c);
 int					is_sub_specifier(char c);
-int					is_char_specifier(char c);
 int					is_float_specifier(char c);
 int					is_int_specifier(char c);
 int					is_flag(char c);
-t_printf_lengths	ft_printf_lengths(char *fmt, t_printf_lengths lengths);
 
 /*
 ** Log
@@ -83,19 +80,31 @@ int					debug_flags(t_printf *data);
 /*
 **  Parsing
 */
+int					reset_var_data(t_printf *data);
+int					parse_input(t_printf *data, char *fmt);
+int					parse_sub_specifiers(t_printf *data);
+char				*parse_spec_variable_pair(t_printf *data, char *fmt);
+
+/*
+** Number parsing
+*/
 char				*parse_int(t_printf *data);
 char				*parse_float(t_printf *data);
 char				*parse_address(t_printf *data);
-int					parse_variables(t_printf *data, char *fmt);
-int					parse_sub_specifiers(t_printf *data);
 
 /*
-** Strings
+** String utils
 */
-char					*add_to_str(char *str, size_t new_size);
-char					*add_char_to_beg(char *str, char c, size_t new_size);
-char					*add_str_to_beg(char *str, char *add);
-char					*handle_padding(t_printf *data, char *res, int len);
-char					*handle_precision(t_printf *data, char *res, int len);
+char				*add_to_str(char *str, size_t new_size);
+char				*add_char_to_beg(char *str, char c, size_t new_size);
+char				*add_str_to_beg(char *str, char *add);
+char				*extend_str(char *str, int size_in, int add_size);
+
+/*
+** Format
+*/
+t_printf_lengths	fmt_part_lengths(char *fmt, t_printf_lengths lengths);
+char				*handle_padding(t_printf *data, char *res);
+char				*handle_precision(t_printf *data, char *res);
 
 #endif

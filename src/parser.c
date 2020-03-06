@@ -6,13 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/06 11:40:53 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/06 16:29:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int						reset_var_specific_data(t_printf *data)
+int						reset_var_data(t_printf *data)
 {
 	data->left_justify = FALSE;
 	data->pad_zeros = FALSE;
@@ -22,100 +22,44 @@ int						reset_var_specific_data(t_printf *data)
 	data->zerox = FALSE;
 	data->width = 0;
 	data->precision = 6;
+	data->middle_len = 0;
+	data->spec_len = 0;
+	data->var_len = 0;
 	data->length_type = length_none;
 	return (TRUE);
 }
 
-static char				*parse_arg(t_printf *data)
+static char				*parse_middle(t_printf *data, char *fmt)
 {
-	char	*ret;
-	void	*var;
+	int		i;
 
-	data->c = data->spec[data->spec_len - 1];
-	if (data->spec_len > 1)
-		parse_sub_specifiers(data);
-	if (is_int_specifier(data->c))
-		ret = parse_int(data);
-	else if (is_float_specifier(data->c))
-		ret = parse_float(data);
-	else if (data->c == 's')
-	{
-		var = (void*)va_arg(data->variables, char*);
-		ret = var ? ft_strdup((char*)var) : ft_strdup("(null)");
-	}
-	else if (data->c == 'c')
-	{
-		if (!(ret = ft_strnew(1)))
-			return (NULL);
-		ret[0] = va_arg(data->variables, int);
-	}
-	else if (data->c == 'p')
-		ret = parse_address(data);
-	else if (data->c == '%')
-		ret = handle_padding(data, ft_strdup("%"), 1);
-	else
-		ret = ft_strnew(0);
-	return (ret);
+	data->buffer = extend_str(data->buffer, data->len, data->middle_len);
+	i = -1;
+	while (++i < data->middle_len)
+		data->buffer[data->len + i] = fmt[i];
+	data->len += data->middle_len;
+	data->buffer[data->len] = '\0';
+	return (data->buffer);
 }
 
-static char				*parse_specifiers(t_printf *data, char *fmt,
-						int spec_len)
-{
-	char	*spec;
-	char	*tmp;
-	char	*variable;
-
-	if (!(spec = ft_strnew(spec_len)))
-		return (NULL);
-	spec = ft_strncpy(spec, fmt, spec_len);
-	data->spec = spec;
-	data->spec_len = spec_len;
-	if (!(variable = parse_arg(data)))
-		return (NULL);
-	ft_strdel(&spec);
-	tmp = data->result;
-	if (!(data->result = ft_strjoin(data->result, variable)))
-		return (NULL);
-	data->len += ft_strlen(variable);
-	ft_strdel(&variable);
-	ft_strdel(&tmp);
-	return (data->result);
-}
-
-static char				*parse_middle(t_printf *data, char *fmt,
-						int middle_len)
-{
-	char	*middle;
-	char	*tmp;
-
-	tmp = data->result;
-	if (!(middle = ft_strnew(middle_len)) ||
-		!(middle = ft_strncpy(middle, fmt, middle_len)) ||
-		!(data->result = ft_strjoin(data->result, middle)))
-		return (NULL);
-	data->len += middle_len;
-	ft_strdel(&middle);
-	ft_strdel(&tmp);
-	return (data->result);
-}
-
-int						parse_variables(t_printf *data, char *fmt)
+int						parse_input(t_printf *data, char *fmt)
 {
 	t_printf_lengths	l;
 
-	reset_var_specific_data(data);
-	l = ft_printf_lengths(fmt, (t_printf_lengths){0, 0});
+	reset_var_data(data);
+	l = fmt_part_lengths(fmt, (t_printf_lengths){0, 0});
+	data->middle_len = l.middle_len;
+	data->spec_len = l.spec_len;
 	if (l.middle_len > 0 &&
-		!(data->result = parse_middle(data, fmt, l.middle_len)))
+		!(data->buffer = parse_middle(data, fmt)))
 		return (FALSE);
 	if (l.spec_len > 0 &&
-		parse_specifiers(data, fmt + l.middle_len + 1,
-		l.spec_len))
+		parse_spec_variable_pair(data, fmt + l.middle_len + 1))
 		fmt += l.middle_len + 1 + l.spec_len;
 	else if (l.middle_len > 0)
 		fmt += l.middle_len;
 	else if (*fmt == '%')
 		fmt += 1;
 	return (*fmt && (l.spec_len > 0 || l.middle_len > 0) ?
-			parse_variables(data, fmt) : TRUE);
+			parse_input(data, fmt) : TRUE);
 }

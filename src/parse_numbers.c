@@ -1,36 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   numbers.c                                          :+:      :+:    :+:   */
+/*   parse_numbers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/06 14:05:53 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/06 16:24:52 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static char				*handle_formatting(t_printf *data, char *res)
-{
-	int		len;
-
-	res = handle_precision(data, res, ft_strlen(res));
-	len = ft_strlen(res);
-	if (data->show_sign && !ft_strchr(res, '-') && data->c != 'u')
-	{
-		res = add_char_to_beg(res, '+', len + 1);
-		len++;
-	}
-	res = handle_padding(data, res, len);
-	if (!data->show_sign && data->blank_space && data->c != 'u')
-	{
-		len = ft_strlen(res);
-		res = add_char_to_beg(res, ' ', len + 1);
-	}
-	return (res);
-}
 
 intmax_t				parse_type(t_printf *data)
 {
@@ -78,13 +58,7 @@ char					*parse_int(t_printf *data)
 	else if (data->c == 'x' || data->c == 'X')
 		res = var < 0 ? ft_itoa_long_base(((long int)1 << 32) + var, 16) :
 			ft_itoa_long_base(var, 16);
-	if (data->zerox && data->c == 'o')
-		res = add_char_to_beg(res, '0', ft_strlen(res) + 1);
-	if (data->zerox && (data->c == 'x' || data->c == 'X') && var != 0)
-		res = add_str_to_beg(res, "0x");
-	res = handle_formatting(data, res);
-	if (data->c == 'X')
-		ft_capitalize(res);
+	data->var_len = ft_strlen(res);
 	return (res);
 }
 
@@ -98,6 +72,12 @@ char					*parse_float(t_printf *data)
 	else
 		res = ft_ftoa(va_arg(data->variables, double),
 		data->precision);
-	res = handle_formatting(data, res);
+	data->var_len = ft_strlen(res);
 	return (res);
+}
+
+char					*parse_address(t_printf *data)
+{
+	return (add_str_to_beg(ft_itoa_uintmax_base(va_arg(data->variables,
+		long long int), 16), "0x"));
 }
