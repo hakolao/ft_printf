@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:26:26 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/06 10:34:12 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/06 11:39:20 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char					*handle_precision(t_printf *data, char *res, int len)
 		end = res[len - 1] == '-' ? data->precision + 1 : data->precision;
 		while (i < end)
 			res[i++] = '0';
+		res[i] = '\0';
 		if (res[len - 1] == '-')
 		{
 			res[len - 1] = '0';
