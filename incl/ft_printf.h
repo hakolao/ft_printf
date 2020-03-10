@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/06 16:33:27 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/10 13:53:16 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,12 @@ char				*extend_str(char *str, int size_in, int add_size);
 t_printf_lengths	fmt_part_lengths(char *fmt, t_printf_lengths lengths);
 char				*handle_padding(t_printf *data, char *res);
 char				*handle_precision(t_printf *data, char *res);
+char				*handle_formatting(t_printf *data, char *res);
+char				*handle_int_padding(t_printf *data, char *res);
+char				*handle_string_padding(t_printf *data, char *res);
+char				*handle_char_padding(t_printf *data, char *res);
+char				*handle_int_precision(t_printf *data, char *res);
+char				*handle_string_precision(t_printf *data, char *res);
+char				*handle_char_precision(t_printf *data, char *res);
 
 #endif

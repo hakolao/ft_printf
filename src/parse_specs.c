@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 16:07:54 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/06 16:47:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/10 13:39:15 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char				*parse_variable(t_printf *data)
 		return (handle_formatting(data, res));
 	}
 	else if (data->c == '%' && (data->var_len = 1))
-		return (ft_strdup("%"));
+		return (handle_formatting(data, ft_strdup("%")));
 	return (ft_strnew(0));
 }
 

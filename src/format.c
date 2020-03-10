@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/06 16:31:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/10 13:53:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,36 @@
 
 char					*handle_precision(t_printf *data, char *res)
 {
-	(void)data;
+	if (is_int_specifier(data->c))
+		return (handle_int_precision(data, res));
+	else if (data->c == 'p')
+		return (handle_int_precision(data, res));
+	else if (data->c == 's')
+		return (handle_string_precision(data, res));
+	else if (data->c == 'c')
+		return (handle_char_precision(data, res));
 	return (res);
 }
 
 char					*handle_padding(t_printf *data, char *res)
 {
-	(void)data;
+	if (is_int_specifier(data->c))
+		return (res);
+	else if (is_float_specifier(data->c))
+		return (res);
+	else if (data->c == 'p')
+		return (res);
+	else if (data->c == 's')
+		return (res);
+	else if (data->c == 'c')
+		return (res);
+	else if (data->c == '%')
+		return (res);
 	return (res);
 }
 
 char					*handle_formatting(t_printf *data, char *res)
 {
-	int		len;
-
 	res = handle_precision(data, res);
 	res = handle_padding(data, res);
 	return (res);
