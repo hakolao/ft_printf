@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:42 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/10 16:31:39 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/10 16:49:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ char					*handle_string_padding(t_printf *data, char *res)
 
 char					*handle_int_padding(t_printf *data, char *res)
 {
+	if (data->is_negative || data->show_sign)
+		data->blank_space = FALSE;
 	return (handle_string_padding(data, res));
 }
 

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/10 15:49:53 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/10 16:34:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct		s_printf
 	int			precision;
 	int			has_precision;
 	int			length_type;
+	int			is_negative;
 }					t_printf;
 
 typedef struct		s_printf_lengths
