@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/10 16:56:44 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/10 17:00:23 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,8 @@ int		main(void)
 
 	ft_printf("'@moulitest: %.d %.0d'\n", 42, 43);
 	printf("'@moulitest: %.d %.0d'\n", 42, 43);
+
+	ft_printf("'%.2x'\n", 5427);
+	printf("'%.2x'\n", 5427);
 	return (0);
 }

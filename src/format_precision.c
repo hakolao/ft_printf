@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/10 16:57:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/10 17:06:15 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@ char					*handle_int_precision(t_printf *data, char *res)
 {
 	int		len;
 	int		add_size;
+	int		new_var_len;
 
 	len = data->var_len;
 	if (data->has_precision && data->precision > 0)
 	{
 		data->pad_zeros = FALSE;
-		data->var_len = data->is_negative || data->show_sign ?
-			data->precision + 1 : data->precision;
-		add_size = data->var_len - len;
-		if (data->var_len > len)
+		new_var_len = data->is_negative || data->show_sign ?
+				data->precision + 1 : data->precision;
+		if (new_var_len > len)
 		{
+			data->var_len = new_var_len;
+			add_size = data->var_len - len;
 			res = extend_str(res, len, add_size);
 			res = add_chars_to_str_begin(res, len, data->var_len, '0');
 			if (data->show_sign && !data->is_negative)
