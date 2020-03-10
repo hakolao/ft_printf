@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/10 15:42:20 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/10 15:49:53 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,12 @@ char				*parse_address(t_printf *data);
 /*
 ** String utils
 */
-char				*add_to_str(char *str, size_t new_size);
-char				*add_char_to_beg(char *str, char c, size_t new_size);
 char				*add_str_to_beg(char *str, char *add);
 char				*extend_str(char *str, int size_in, int add_size);
+char				*add_chars_to_str_begin(char *res, int start,
+					int end, char c);
+char				*add_chars_to_str_end(char *res, int start,
+					int end, char c);
 
 /*
 ** Format

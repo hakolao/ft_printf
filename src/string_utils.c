@@ -1,37 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strings.c                                          :+:      :+:    :+:   */
+/*   string_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:26:26 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/06 16:03:33 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/10 15:49:21 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char					*add_to_str(char *str, size_t new_size)
-{
-	char	*tmp;
-
-	if (!(tmp = ft_strnew(new_size)))
-		return (NULL);
-	tmp = ft_strcpy(tmp, str);
-	ft_strdel(&str);
-	str = tmp;
-	return (str);
-}
-
-char					*add_char_to_beg(char *str, char c, size_t new_size)
-{
-	str = add_to_str(str, new_size);
-	ft_strrev(str);
-	str[new_size - 1] = c;
-	ft_strrev(str);
-	return (str);
-}
 
 char					*add_str_to_beg(char *str, char *add)
 {
@@ -53,5 +32,29 @@ char					*extend_str(char *str, int size_in, int add_size)
 		res[i] = str[i];
 	res[i] = '\0';
 	ft_strdel(&str);
+	return (res);
+}
+
+char					*add_chars_to_str_begin(char *res, int start,
+						int end, char c)
+{
+	int		i;
+
+	ft_strrev(res);
+	i = start - 1;
+	while (++i < end)
+		res[i] = c;
+	ft_strrev(res);
+	return (res);
+}
+
+char					*add_chars_to_str_end(char *res, int start,
+						int end, char c)
+{
+	int		i;
+
+	i = start - 1;
+	while (++i < end)
+		res[i] = c;
 	return (res);
 }

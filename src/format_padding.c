@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:42 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/10 15:43:41 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/10 15:50:37 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,20 @@ char					*handle_float_padding(t_printf *data, char *res)
 char					*handle_string_padding(t_printf *data, char *res)
 {
 	int		len;
-	int		i;
 	
 	len = data->var_len;
-	i = 0;
 	if (data->width <= data->var_len)
 		return (res);
 	res = extend_str(res, len, data->width - len);
 	data->var_len = data->width;
-	i = len - 1;
-	debug_flags(data);
-	if (data->left_justify)
-		while (++i < data->width)
-			res[i] = data->pad_zeros ? '0' : ' ';
+	if (data->left_justify && data->pad_zeros)
+		add_chars_to_str_end(res, len, data->width, '0');
+	else if (data->left_justify && !data->pad_zeros)
+		add_chars_to_str_end(res, len, data->width, ' ');
+	else if (data->pad_zeros)
+		add_chars_to_str_begin(res, len, data->width, '0');
 	else
-	{
-		ft_strrev(res);
-		while (++i < data->width)
-			res[i] = data->pad_zeros ? '0' : ' ';
-		ft_strrev(res);
-	}
+		add_chars_to_str_begin(res, len, data->width, ' ');
 	return (res);
 }
 
