@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/10 14:10:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/10 15:43:03 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int			parse_precision(t_printf *data, int *i)
 	if (data->spec[*i] != '.')
 		return (FALSE);
 	data->has_precision = TRUE;
-	data->pad_zeros = FALSE;
 	(*i)++;
 	if (*i == data->spec_len - 2 && data->spec[*i] == '*')
 	{
