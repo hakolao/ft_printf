@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:42 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 15:49:29 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 16:09:55 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,20 +95,17 @@ char					*handle_int_padding(t_printf *data, char *res)
 	res = extend_str(res, len, add_size);
 	data->var_len = data->width;
 	if (data->left_justify && data->pad_zeros)
-	{
 		add_chars_to_str_end(res, len, data->width, '0');
-		swap_zerox(data, res, add_size + 1);
-		swap_sign(data, res, add_size);
-	}
 	else if (data->left_justify && !data->pad_zeros)
 		add_chars_to_str_end(res, len, data->width, ' ');
 	else if (data->pad_zeros)
-	{
 		add_chars_to_str_begin(res, len, data->width, '0');
+	else
+		add_chars_to_str_begin(res, len, data->width, ' ');
+	if (data->pad_zeros)
+	{
 		swap_zerox(data, res, add_size + 1);
 		swap_sign(data, res, add_size);
 	}
-	else
-		add_chars_to_str_begin(res, len, data->width, ' ');
 	return (res);
 }
