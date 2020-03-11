@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/10 17:06:15 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 12:41:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,11 @@ char					*handle_int_precision(t_printf *data, char *res)
 			add_size = data->var_len - len;
 			res = extend_str(res, len, add_size);
 			res = add_chars_to_str_begin(res, len, data->var_len, '0');
-			if (data->show_sign && !data->is_negative)
-			{
-				res[add_size] = '0';
+			if (data->show_sign && !data->is_negative &&
+				(res[add_size] = '0'))
 				res[0] = '+';
-			}
-			else if (data->is_negative)
-			{
-				res[add_size] = '0';
+			else if (data->is_negative && (res[add_size] = '0'))
 				res[0] = '-';
-			}
 		}
 	}
 	return (res);

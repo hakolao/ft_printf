@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:26:26 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/10 15:49:21 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 14:11:36 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char					*add_chars_to_str_begin(char *res, int start,
 	i = start - 1;
 	while (++i < end)
 		res[i] = c;
+	res[i] = '\0';
 	ft_strrev(res);
 	return (res);
 }
@@ -56,5 +57,6 @@ char					*add_chars_to_str_end(char *res, int start,
 	i = start - 1;
 	while (++i < end)
 		res[i] = c;
+	res[i] = '\0';
 	return (res);
 }
