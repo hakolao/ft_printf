@@ -6,17 +6,38 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 16:07:54 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 17:32:22 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 17:38:27 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char				*parse_variable(t_printf *data)
+static char				*parse_string(t_printf *data)
 {
 	char	*res;
 	void	*var;
 
+	var = (void*)va_arg(data->variables, char*);
+	if (!(res = var ? ft_strdup((char*)var) : ft_strdup("(null)")))
+		return (NULL);
+	data->var_len = ft_strlen(res);
+	return (res);
+}
+
+static char				*parse_char(t_printf *data)
+{
+	char	*res;
+	void	*var;
+
+	if (!(res = ft_strnew(1)))
+		return (NULL);
+	res[0] = va_arg(data->variables, int);
+	data->var_len = 1;
+	return (res);
+}
+
+static char				*parse_variable(t_printf *data)
+{
 	data->c = data->spec[data->spec_len - 1];
 	if (data->spec_len > 1)
 		parse_sub_specifiers(data);
@@ -27,20 +48,9 @@ static char				*parse_variable(t_printf *data)
 	else if (data->c == 'p')
 		return (handle_formatting(data, parse_address(data)));
 	else if (data->c == 's')
-	{
-		var = (void*)va_arg(data->variables, char*);
-		res = var ? ft_strdup((char*)var) : ft_strdup("(null)");
-		data->var_len = ft_strlen(res);
-		return (handle_formatting(data, res));
-	}
+		return (handle_formatting(data, parse_string(data)));
 	else if (data->c == 'c')
-	{
-		if (!(res = ft_strnew(1)))
-			return (NULL);
-		res[0] = va_arg(data->variables, int);
-		data->var_len = 1;
-		return (handle_formatting(data, res));
-	}
+		return (handle_formatting(data, parse_char(data)));
 	else if (data->c == '%' && (data->var_len = 1))
 		return (handle_formatting(data, ft_strdup("%")));
 	return (ft_strnew(0));
