@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 17:26:02 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 17:43:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ typedef struct		s_printf
 	int			is_negative;
 }					t_printf;
 
-typedef struct		s_printf_lengths
+typedef struct		s_fmt_specs
 {
 	int			middle_len;
 	int			spec_len;
-}					t_printf_lengths;
+}					t_fmt_specs;
 
-enum			e_lengths
+enum				e_lengths
 {
 	length_none,
 	length_hh,

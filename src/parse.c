@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 17:32:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 17:44:13 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,21 @@ static int						reset_var_data(t_printf *data)
 	return (TRUE);
 }
 
-static t_printf_lengths			fmt_part_lengths(char *fmt,
-								t_printf_lengths lengths)
+static void						set_spec_len(t_fmt_specs *lengths,
+								char *fmt, int i)
+{
+	while (fmt[i] && is_sub_specifier(fmt[i]))
+	{
+		lengths->spec_len++;
+		i++;
+	}
+	if (is_specifier(fmt[i]))
+		lengths->spec_len++;
+	else
+		lengths->spec_len = 0;
+}
+
+static t_fmt_specs				fmt_part_lengths(char *fmt, t_fmt_specs lengths)
 {
 	int					i;
 	char				*next;
@@ -54,15 +67,7 @@ static t_printf_lengths			fmt_part_lengths(char *fmt,
 	if (fmt[i] && (!is_sub_specifier(fmt[i]) &&
 		!is_specifier(fmt[i])))
 		return (lengths);
-	while (fmt[i] && is_sub_specifier(fmt[i]))
-	{
-		lengths.spec_len++;
-		i++;
-	}
-	if (is_specifier(fmt[i]))
-		lengths.spec_len++;
-	else
-		lengths.spec_len = 0;
+	set_spec_len(&lengths, fmt, i);
 	return (lengths);
 }
 
@@ -81,10 +86,10 @@ static char						*parse_middle(t_printf *data, char *fmt)
 
 int								parse_input(t_printf *data, char *fmt)
 {
-	t_printf_lengths	l;
+	t_fmt_specs	l;
 
 	reset_var_data(data);
-	l = fmt_part_lengths(fmt, (t_printf_lengths){0, 0});
+	l = fmt_part_lengths(fmt, (t_fmt_specs){0, 0});
 	data->middle_len = l.middle_len;
 	data->spec_len = l.spec_len;
 	if (l.middle_len > 0 &&
