@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 16:01:40 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 16:39:16 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 char					*handle_zerox(t_printf *data, char *res)
 {
-	if (data->c == 'o' && data->has_precision &&
-		data->precision < data->var_len)
+	if (data->c == 'o')
 	{
 		res = add_str_to_beg(res, "0");
 		data->var_len += 1;
