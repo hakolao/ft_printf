@@ -6,13 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/10 16:35:10 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 16:01:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int						reset_var_data(t_printf *data)
+static int						reset_var_data(t_printf *data)
 {
 	data->left_justify = FALSE;
 	data->pad_zeros = FALSE;
@@ -30,7 +30,42 @@ int						reset_var_data(t_printf *data)
 	return (TRUE);
 }
 
-static char				*parse_middle(t_printf *data, char *fmt)
+static t_printf_lengths			fmt_part_lengths(char *fmt, t_printf_lengths lengths)
+{
+	int					i;
+	char				*next;
+
+	i = 0;
+	next = ft_strchr(fmt, '%');
+	if (!next)
+	{
+		i = -1;
+		while (fmt[++i])
+			lengths.middle_len++;
+		return (lengths);
+	}
+	if (fmt && next && next - fmt > 0)
+	{
+		i = next - fmt;
+		lengths.middle_len = next - fmt;
+	}
+	i++;
+	if (fmt[i] && (!is_sub_specifier(fmt[i]) &&
+		!is_specifier(fmt[i])))
+		return (lengths);
+	while (fmt[i] && is_sub_specifier(fmt[i]))
+	{
+		lengths.spec_len++;
+		i++;
+	}
+	if (is_specifier(fmt[i]))
+		lengths.spec_len++;
+	else
+		lengths.spec_len = 0;
+	return (lengths);
+}
+
+static char					*parse_middle(t_printf *data, char *fmt)
 {
 	int		i;
 
@@ -43,7 +78,7 @@ static char				*parse_middle(t_printf *data, char *fmt)
 	return (data->buffer);
 }
 
-int						parse_input(t_printf *data, char *fmt)
+int							parse_input(t_printf *data, char *fmt)
 {
 	t_printf_lengths	l;
 

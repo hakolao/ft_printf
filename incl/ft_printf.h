@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 15:49:38 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 16:02:05 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int					debug_flags(t_printf *data);
 /*
 **  Parsing
 */
-int					reset_var_data(t_printf *data);
 int					parse_input(t_printf *data, char *fmt);
 int					parse_sub_specifiers(t_printf *data);
 char				*parse_spec_variable_pair(t_printf *data, char *fmt);
@@ -106,7 +105,6 @@ char				*add_chars_to_str_end(char *res, int start,
 /*
 ** Format
 */
-t_printf_lengths	fmt_part_lengths(char *fmt, t_printf_lengths lengths);
 char				*handle_padding(t_printf *data, char *res);
 char				*handle_precision(t_printf *data, char *res);
 char				*handle_formatting(t_printf *data, char *res);
