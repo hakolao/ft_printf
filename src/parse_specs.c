@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 16:07:54 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 17:38:27 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 17:51:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ char					*parse_spec_variable_pair(t_printf *data, char *fmt)
 		data->buffer[data->len + i] = variable[i];
 	data->len += data->var_len;
 	data->buffer[data->len] = '\0';
+	ft_strdel(&variable);
 	return (data->buffer);
 }
