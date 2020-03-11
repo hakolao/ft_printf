@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 16:39:16 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 16:43:24 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ char					*handle_zerox(t_printf *data, char *res)
 		res = add_str_to_beg(res, "0");
 		data->var_len += 1;
 	}
-	else if ((data->c == 'x' || data->c == 'X') && !ft_strequ(res, "0"))
+	else if ((data->c == 'x' || data->c == 'X') &&
+			!(res[0] == '0' && res[1] == '\0'))
 	{
+		if (res[0] == '\0')
+			return (res);
 		res = add_str_to_beg(res, "0x");
 		data->var_len += 2;
 	}
