@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 15:38:40 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 17:08:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char					*handle_int_precision(t_printf *data, char *res)
 
 char					*handle_string_precision(t_printf *data, char *res)
 {
-	if (data->has_precision)
+	if (data->has_precision && res[0])
 		data->var_len = data->precision;
 	return (res);
 }

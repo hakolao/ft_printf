@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 16:38:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 17:08:49 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,8 @@ int		main(void)
 
 	ft_printf("'@moulitest: %#.x %#.0x'\n", 0, 0);
 	printf("'@moulitest: %#.x %#.0x'\n", 0, 0);
+
+	ft_printf("'%.2s is a string'\n", "");
+	printf("'%.2s is a string'\n", "");
 	return (0);
 }
