@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/03/10 15:40:17 by ohakola          ###   ########.fr        #
+#    Updated: 2020/03/11 17:18:11 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SOURCES = ft_printf.c \
 			format.c \
 			format_precision.c \
 			format_padding.c \
+			format_utils.c \
 			validate.c
 
 SRCS = $(addprefix $(DIR_SRC)/,$(SOURCES))

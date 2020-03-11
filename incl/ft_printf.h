@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 16:02:05 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 17:21:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ char				*add_chars_to_str_begin(char *res, int start,
 					int end, char c);
 char				*add_chars_to_str_end(char *res, int start,
 					int end, char c);
+char				*add_chars_to_null_str_begin(char *res, int start,
+					int end, char c);
 
 /*
 ** Format
@@ -111,7 +113,12 @@ char				*handle_formatting(t_printf *data, char *res);
 char				*handle_int_padding(t_printf *data, char *res);
 char				*handle_float_padding(t_printf *data, char *res);
 char				*handle_string_padding(t_printf *data, char *res);
+char				*handle_char_padding(t_printf *data, char *res);
 char				*handle_int_precision(t_printf *data, char *res);
 char				*handle_string_precision(t_printf *data, char *res);
+void				swap_zerox(t_printf *data, char *res, int x_index);
+void				swap_sign_after_padding(t_printf *data, char *res, int sign_index);
+void				swap_sign_after_precision(t_printf *data, char *res, int sign_index);
+char				*handle_blank(t_printf *data, char *res);
 
 #endif
