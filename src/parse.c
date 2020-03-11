@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 16:01:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 17:32:55 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static int						reset_var_data(t_printf *data)
 	return (TRUE);
 }
 
-static t_printf_lengths			fmt_part_lengths(char *fmt, t_printf_lengths lengths)
+static t_printf_lengths			fmt_part_lengths(char *fmt,
+								t_printf_lengths lengths)
 {
 	int					i;
 	char				*next;
@@ -65,7 +66,7 @@ static t_printf_lengths			fmt_part_lengths(char *fmt, t_printf_lengths lengths)
 	return (lengths);
 }
 
-static char					*parse_middle(t_printf *data, char *fmt)
+static char						*parse_middle(t_printf *data, char *fmt)
 {
 	int		i;
 
@@ -78,7 +79,7 @@ static char					*parse_middle(t_printf *data, char *fmt)
 	return (data->buffer);
 }
 
-int							parse_input(t_printf *data, char *fmt)
+int								parse_input(t_printf *data, char *fmt)
 {
 	t_printf_lengths	l;
 

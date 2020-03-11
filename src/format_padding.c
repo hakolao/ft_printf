@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:42 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 17:22:15 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 17:29:37 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char					*handle_float_padding(t_printf *data, char *res)
 {
 	int		len;
-	
+
 	len = data->var_len;
 	if (data->width <= data->var_len)
 		return (res);
@@ -31,7 +31,7 @@ char					*handle_float_padding(t_printf *data, char *res)
 char					*handle_string_padding(t_printf *data, char *res)
 {
 	int		len;
-	
+
 	len = data->var_len;
 	if (data->width <= data->var_len)
 		return (res);
@@ -56,11 +56,7 @@ char					*handle_int_padding(t_printf *data, char *res)
 	if (data->is_negative || data->show_sign)
 		data->blank_space = FALSE;
 	if (data->width <= data->var_len)
-	{
-		if (data->blank_space)
-			res = handle_blank(data, res);
-		return (res);
-	}
+		return (data->blank_space ? handle_blank(data, res) : res);
 	len = data->var_len;
 	add_size = data->width - len;
 	res = extend_str(res, len, add_size);

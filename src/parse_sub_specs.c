@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 14:40:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 17:30:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int			parse_flags(t_printf *data, int *i)
 int			parse_width(t_printf *data, int *i)
 {
 	int			j;
-	unsigned 	var;
+	unsigned	var;
 
 	j = *i;
-	if (*i == data->spec_len - 2  && data->spec[data->spec_len - 2] == '*')
+	if (*i == data->spec_len - 2 && data->spec[data->spec_len - 2] == '*')
 	{
 		var = va_arg(data->variables, unsigned);
 		data->width = (int)var;
@@ -63,7 +63,7 @@ int			parse_width(t_printf *data, int *i)
 int			parse_precision(t_printf *data, int *i)
 {
 	int			j;
-	unsigned 	var;
+	unsigned	var;
 
 	if (data->spec[*i] != '.')
 		return (FALSE);

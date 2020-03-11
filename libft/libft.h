@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 15:41:08 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 17:27:07 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,5 @@ size_t			get_num_len(long long unsigned int nb,
 void			ft_capitalize(char *str);
 void			ft_uncapitalize(char *str);
 char			*ft_itoa_u_base(unsigned int nb, unsigned int base);
-void			ft_strrev_len(char *str, int len);
 
 #endif
