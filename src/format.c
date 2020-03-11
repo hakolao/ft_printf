@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 14:47:00 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/11 15:49:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ char					*handle_padding(t_printf *data, char *res)
 	else if (data->c == 's')
 		return (handle_string_padding(data, res));
 	else if (data->c == 'c')
-		return (handle_char_padding(data, res));
+		return (handle_string_padding(data, res));
 	else if (data->c == '%')
-		return (handle_char_padding(data, res));
+		return (handle_string_padding(data, res));
 	return (res);
 }
 
