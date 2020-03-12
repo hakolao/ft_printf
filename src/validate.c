@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 15:13:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 17:06:11 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 18:47:55 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int						is_flag(char c)
 
 int						is_sub_specifier(char c)
 {
-	return ((c == '-' || c == '+' || c == 'h' || c == 'l' || c == 'j' ||
+	return (is_flag(c) || c == 'h' || c == 'l' || c == 'j' ||
 			c == 'z' || c == 't' || c == 'L' || ft_isdigit(c) ||
-			c == '#' || c == '.' || c == '*' || c == ' '));
+			c == '.' || c == '*');
 }

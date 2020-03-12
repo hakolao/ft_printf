@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 18:31:53 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 18:49:45 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int			parse_flags(t_printf *data, int *i)
 {
+	int	j;
+
 	while (data->spec[*i] && is_flag(data->spec[*i]))
 	{
 		if (data->spec[*i] == '-')
@@ -27,6 +29,13 @@ int			parse_flags(t_printf *data, int *i)
 		else if (data->spec[*i] == '#')
 			data->zerox = TRUE;
 		(*i)++;
+	}
+	j = *i;
+	while (data->spec[j] && is_sub_specifier(data->spec[j]))
+	{
+		if (data->spec[j] == '+')
+			data->show_sign = TRUE;
+		j++;
 	}
 	return (TRUE);
 }
