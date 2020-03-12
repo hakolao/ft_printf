@@ -6,122 +6,131 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 18:49:45 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 20:16:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			parse_flags(t_printf *data, int *i)
+static int		parse_flags(t_printf *data)
 {
-	int	j;
+	int		i;
 
-	while (data->spec[*i] && is_flag(data->spec[*i]))
+	i = 0;
+	while (data->spec[i] && is_sub_specifier(data->spec[i]) &&
+		data->spec[i] != '.')
 	{
-		if (data->spec[*i] == '-')
+		if (data->spec[i] == '-')
 			data->left_justify = TRUE;
-		else if (data->spec[*i] == '+')
+		else if (data->spec[i] == '+')
 			data->show_sign = TRUE;
-		else if (data->spec[*i] == ' ')
+		else if (data->spec[i] == ' ')
 			data->blank_space = TRUE;
-		else if (data->spec[*i] == '0' && !data->left_justify)
+		else if (ft_isdigit(data->spec[i]) && data->spec[i] != '0')
+		{
+			while (ft_isdigit(data->spec[i]))
+				i++;
+			i--;
+		}
+		else if (data->spec[i] == '0' && !data->left_justify)
 			data->pad_zeros = TRUE;
-		else if (data->spec[*i] == '#')
+		else if (data->spec[i] == '#')
 			data->zerox = TRUE;
-		(*i)++;
-	}
-	j = *i;
-	while (data->spec[j] && is_sub_specifier(data->spec[j]))
-	{
-		if (data->spec[j] == '+')
-			data->show_sign = TRUE;
-		j++;
+		i++;
 	}
 	return (TRUE);
 }
 
-int			parse_width(t_printf *data, int *i)
+static int		parse_precision(t_printf *data, char *dot)
 {
-	int			j;
 	unsigned	var;
 
-	j = *i;
-	if (*i == data->spec_len - 2 && data->spec[data->spec_len - 2] == '*')
+	data->has_precision = TRUE;
+	data->precision = 0;
+	if (ft_isdigit(*(dot + 1)))
 	{
-		var = va_arg(data->variables, unsigned);
-		data->width = (int)var;
+		data->precision = ft_atoi(dot + 1);
 		return (TRUE);
 	}
-	else if (!ft_isdigit(data->spec[*i]))
-		return (FALSE);
-	while (j < data->spec_len - 1)
-	{
-		if (data->spec[j] == '.' ||
-			!ft_isdigit(data->spec[j]))
-			break ;
-		j++;
-	}
-	data->width = ft_atoi(data->spec + *i);
-	(*i) = j;
-	return (TRUE);
-}
-
-int			parse_precision(t_printf *data, int *i)
-{
-	int			j;
-	unsigned	var;
-
-	if (data->spec[*i] != '.')
-		return (FALSE);
-	data->has_precision = TRUE;
-	(*i)++;
-	if (*i == data->spec_len - 2 && data->spec[*i] == '*')
+	else if (*(dot + 1) == '*')
 	{
 		var = va_arg(data->variables, unsigned);
 		data->precision = (int)var;
-		(*i)++;
 		return (TRUE);
 	}
-	j = *i;
-	while (j < data->spec_len - 1)
-	{
-		if (!ft_isdigit(data->spec[j]))
-			return (FALSE);
-		j++;
-	}
-	data->precision = ft_atoi(data->spec + *i);
-	(*i) = j;
 	return (TRUE);
 }
 
-int			parse_lengths(t_printf *data, int *i)
+static int		parse_width_and_precision(t_printf *data)
 {
-	char	c;
+	int			i;
+	char		*dot;
+	int			diff;
+	unsigned	var;
 
-	c = data->spec[*i];
-	while (c && (c == 'h' || c == 'l' || c == 'j' || c == 'z' ||
-			c == 't' || c == 'L'))
+	i = 0;
+	dot = ft_strchr(data->spec, '.');
+	diff = dot - data->spec;
+	if (dot)
 	{
-		c = data->spec[*i];
-		if (*i - 1 >= 0 && c == 'h' && data->spec[*i - 1] == 'h')
+		if (diff > 0 && ft_isdigit(data->spec[diff - 1]))
+		{
+			i = diff;
+			while (i > 0 && ft_isdigit(data->spec[i - 1]))
+				i--;
+			data->width = ft_atoi(data->spec + i);
+			return (parse_precision(data, dot));
+		}
+		else if (diff > 0 && data->spec[diff - 1] == '*')
+		{
+			var = va_arg(data->variables, unsigned);
+			data->width = (int)var;
+			return (parse_precision(data, dot));
+		}
+		else
+			return (parse_precision(data, dot));
+	}
+	while (data->spec[i] && is_sub_specifier(data->spec[i]))
+	{
+		if (ft_isdigit(data->spec[i]) && data->spec[i] != '0')
+		{
+			data->width = ft_atoi(data->spec + i);
+			return (TRUE);
+		}
+		i++;
+	}
+	return (TRUE);
+}
+
+int			parse_lengths(t_printf *data)
+{
+	int			i;
+	char		s;
+
+	i = 0;
+	s = data->spec[i];
+	while (s && is_sub_specifier(s))
+	{
+		s = data->spec[i];
+		if (i - 1 >= 0 && s == 'h' && data->spec[i - 1] == 'h')
 			data->type = data->type > length_hh && data->type != length_h ?
 				data->type : length_hh;
-		else if (c == 'h')
+		else if (s == 'h')
 			data->type = data->type > length_h ? data->type : length_h;
-		else if (*i - 1 >= 0 && c == 'l' && data->spec[*i - 1] == 'l')
+		else if (i - 1 >= 0 && s == 'l' && data->spec[i - 1] == 'l')
 			data->type = data->type > length_ll && data->type != length_l ?
 				data->type : length_ll;
-		else if (c == 'l')
+		else if (s == 'l')
 			data->type = data->type > length_l ? data->type : length_l;
-		else if (c == 'j')
+		else if (s == 'j')
 			data->type = data->type > length_j ? data->type : length_j;
-		else if (c == 'z')
+		else if (s == 'z')
 			data->type = data->type > length_z ? data->type : length_z;
-		else if (c == 't')
+		else if (s == 't')
 			data->type = data->type > length_t ? data->type : length_t;
-		else if (c == 'L')
+		else if (s == 'L')
 			data->type = data->type > length_L ? data->type : length_L;
-		(*i)++;
+		i++;
 	}
 	return (TRUE);
 }
@@ -131,16 +140,10 @@ int			parse_sub_specifiers(t_printf *data)
 	int		i;
 
 	i = 0;
-	if (i < data->spec_len - 1)
-		parse_flags(data, &i);
-	if (i < data->spec_len - 1)
-		parse_width(data, &i);
-	if (i < data->spec_len - 1)
-		parse_precision(data, &i);
-	if (i < data->spec_len - 1)
-		parse_lengths(data, &i);
-	if (data->width > data->precision &&
-		is_int_specifier(data->spec[data->spec_len - 1]))
+	parse_flags(data);
+	parse_width_and_precision(data);
+	parse_lengths(data);
+	if (data->width > data->precision && is_int_specifier(data->c))
 		data->blank_space = FALSE;
 	return (TRUE);
 }
