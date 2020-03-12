@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 17:30:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 14:05:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,28 +92,28 @@ int			parse_lengths(t_printf *data, int *i)
 {
 	if (data->spec[*i] == 'h' && data->spec[*i + 1] == 'h')
 	{
-		data->length_type = length_hh;
+		data->type = length_hh;
 		(*i) += 2;
 		return (TRUE);
 	}
 	if (data->spec[*i] == 'l' && data->spec[*i + 1] == 'l')
 	{
-		data->length_type = length_ll;
+		data->type = length_ll;
 		(*i) += 2;
 		return (TRUE);
 	}
 	if (data->spec[*i] == 'h')
-		data->length_type = length_h;
+		data->type = length_h;
 	if (data->spec[*i] == 'l')
-		data->length_type = length_l;
+		data->type = length_l;
 	if (data->spec[*i] == 'j')
-		data->length_type = length_j;
+		data->type = length_j;
 	if (data->spec[*i] == 'z')
-		data->length_type = length_z;
+		data->type = length_z;
 	if (data->spec[*i] == 't')
-		data->length_type = length_t;
+		data->type = length_t;
 	if (data->spec[*i] == 'L')
-		data->length_type = length_L;
+		data->type = length_L;
 	return (TRUE);
 }
 

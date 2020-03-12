@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 16:27:31 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 17:27:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 14:05:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int				debug_flags(t_printf *data)
 			data->blank_space,
 			data->zerox,
 			data->width,
-			data->length_type,
+			data->type,
 			data->is_negative,
 			data->has_precision,
 			data->precision);

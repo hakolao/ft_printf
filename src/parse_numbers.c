@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 17:31:00 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 14:06:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ intmax_t				parse_type(t_printf *data)
 {
 	intmax_t		var;
 
-	if (data->length_type == length_h)
+	if (data->type == length_h)
 		var = (intmax_t)((short int)va_arg(data->variables, int));
-	else if (data->length_type == length_hh)
+	else if (data->type == length_hh)
 		var = (intmax_t)((char)va_arg(data->variables, unsigned int));
-	else if (data->length_type == length_l)
+	else if (data->type == length_l)
 		var = (intmax_t)(va_arg(data->variables, long int));
-	else if (data->length_type == length_ll)
+	else if (data->type == length_ll)
 		var = (intmax_t)(va_arg(data->variables, long long int));
-	else if (data->length_type == length_j)
+	else if (data->type == length_j)
 		var = (intmax_t)(va_arg(data->variables, long long int));
-	else if (data->length_type == length_z)
+	else if (data->type == length_z)
 		var = (intmax_t)(va_arg(data->variables, long long int));
 	else
 		var = (intmax_t)va_arg(data->variables, int);
@@ -46,16 +46,18 @@ char					*parse_int(t_printf *data)
 		res = ft_strdup("");
 	else if (data->c == 'd' || data->c == 'i')
 		res = ft_itoa_long_base(var, 10);
-	else if (data->c == 'u' && data->length_type != length_l &&
-		data->length_type != length_ll)
+	else if (data->c == 'u' && data->type != length_l &&
+		data->type != length_ll)
 		res = ft_itoa_u_base(var, 10);
-	else if (data->c == 'u' && (data->length_type == length_l ||
-		data->length_type == length_ll))
+	else if (data->c == 'u' && (data->type == length_l ||
+		data->type == length_ll))
 		res = ft_itoa_uintmax_base(var, 10);
 	else if (data->c == 'o')
 		res = var < 0 ? ft_itoa_long_base(((long int)1 << 32) + var, 8) :
 			ft_itoa_long_base(var, 8);
-	else if (data->c == 'x' || data->c == 'X')
+	else if ((data->c == 'x' || data->c == 'X') && data->type == length_j)
+		res = ft_itoa_uintmax_base(var, 16);
+	else if ((data->c == 'x' || data->c == 'X'))
 		res = var < 0 ? ft_itoa_long_base(((long int)1 << 32) + var, 16) :
 			ft_itoa_long_base(var, 16);
 	data->var_len = ft_strlen(res);

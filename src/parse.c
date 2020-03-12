@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 13:44:15 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 14:05:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int						reset_var_data(t_printf *data)
 	data->middle_len = 0;
 	data->spec_len = 0;
 	data->var_len = 0;
-	data->length_type = length_none;
+	data->type = length_none;
 	data->is_negative = FALSE;
 	return (TRUE);
 }
