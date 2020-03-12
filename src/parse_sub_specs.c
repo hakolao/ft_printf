@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 15:52:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 18:31:53 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,12 @@ int			parse_width(t_printf *data, int *i)
 		return (FALSE);
 	while (j < data->spec_len - 1)
 	{
-		if (data->spec[j] == '.')
+		if (data->spec[j] == '.' ||
+			!ft_isdigit(data->spec[j]))
 			break ;
-		if (!ft_isdigit(data->spec[j]))
-			return (FALSE);
 		j++;
 	}
 	data->width = ft_atoi(data->spec + *i);
-	if (data->spec[j - 1] == '.')
-		j--;
 	(*i) = j;
 	return (TRUE);
 }
