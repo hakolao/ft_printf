@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 14:05:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 14:11:37 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,11 @@ int			parse_lengths(t_printf *data, int *i)
 	{
 		data->type = length_hh;
 		(*i) += 2;
-		return (TRUE);
 	}
 	if (data->spec[*i] == 'l' && data->spec[*i + 1] == 'l')
 	{
 		data->type = length_ll;
 		(*i) += 2;
-		return (TRUE);
 	}
 	if (data->spec[*i] == 'h')
 		data->type = length_h;
