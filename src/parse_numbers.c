@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 15:40:54 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 15:55:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ intmax_t				parse_type(t_printf *data)
 
 int						is_conversion_up(t_printf *data)
 {
-	return ((data->type == length_l ||
-		data->type == length_ll || data->type == length_j));
+	return ((data->type == length_l || data->type == length_ll ||
+		data->type == length_j || data->type == length_z ||
+		data->type == length_t));
 }
 
 char					*parse_int(t_printf *data)
