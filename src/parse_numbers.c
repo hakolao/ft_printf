@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 15:17:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 15:40:54 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char					*parse_int(t_printf *data)
 	else if ((data->c == 'd' || data->c == 'i') && is_conversion_up(data))
 		res = ft_itoa_intmax_base(var, 10);
 	else if (data->c == 'd' || data->c == 'i')
-		res = ft_itoa_base(var, 10);
+		res = ft_itoa(var);
 	else if (data->c == 'u' && is_conversion_up(data))
 		res = ft_itoa_uintmax_base(var, 10);
 	else if (data->c == 'u')

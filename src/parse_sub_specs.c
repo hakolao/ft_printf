@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 14:11:37 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 15:52:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,28 +90,33 @@ int			parse_precision(t_printf *data, int *i)
 
 int			parse_lengths(t_printf *data, int *i)
 {
-	if (data->spec[*i] == 'h' && data->spec[*i + 1] == 'h')
+	char	c;
+
+	c = data->spec[*i];
+	while (c && (c == 'h' || c == 'l' || c == 'j' || c == 'z' ||
+			c == 't' || c == 'L'))
 	{
-		data->type = length_hh;
-		(*i) += 2;
+		c = data->spec[*i];
+		if (*i - 1 >= 0 && c == 'h' && data->spec[*i - 1] == 'h')
+			data->type = data->type > length_hh && data->type != length_h ?
+				data->type : length_hh;
+		else if (c == 'h')
+			data->type = data->type > length_h ? data->type : length_h;
+		else if (*i - 1 >= 0 && c == 'l' && data->spec[*i - 1] == 'l')
+			data->type = data->type > length_ll && data->type != length_l ?
+				data->type : length_ll;
+		else if (c == 'l')
+			data->type = data->type > length_l ? data->type : length_l;
+		else if (c == 'j')
+			data->type = data->type > length_j ? data->type : length_j;
+		else if (c == 'z')
+			data->type = data->type > length_z ? data->type : length_z;
+		else if (c == 't')
+			data->type = data->type > length_t ? data->type : length_t;
+		else if (c == 'L')
+			data->type = data->type > length_L ? data->type : length_L;
+		(*i)++;
 	}
-	if (data->spec[*i] == 'l' && data->spec[*i + 1] == 'l')
-	{
-		data->type = length_ll;
-		(*i) += 2;
-	}
-	if (data->spec[*i] == 'h')
-		data->type = length_h;
-	if (data->spec[*i] == 'l')
-		data->type = length_l;
-	if (data->spec[*i] == 'j')
-		data->type = length_j;
-	if (data->spec[*i] == 'z')
-		data->type = length_z;
-	if (data->spec[*i] == 't')
-		data->type = length_t;
-	if (data->spec[*i] == 'L')
-		data->type = length_L;
 	return (TRUE);
 }
 
