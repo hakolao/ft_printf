@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 14:43:04 by ohakola           #+#    #+#              #
-#    Updated: 2020/03/05 15:07:01 by ohakola          ###   ########.fr        #
+#    Updated: 2020/03/12 14:52:30 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,8 +54,7 @@ SOURCES = ft_atoi.c \
 		ft_itoa_base.c \
 		ft_itoa_long_base.c \
 		ft_itoa_longl_base.c \
-		ft_itoa_uintmax_base.c \
-		ft_itoa_u_base.c \
+		ft_itoa_intmax_base.c \
 		ft_itoa.c \
 		ft_putendl.c \
 		ft_putendl_fd.c \

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 14:06:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 15:07:36 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,26 @@ char					*parse_int(t_printf *data)
 	var = parse_type(data);
 	if (data->has_precision && data->precision == 0 && var == 0)
 		res = ft_strdup("");
+	else if ((data->c == 'd' || data->c == 'i') && (data->type == length_l ||
+		data->type == length_ll || data->type == length_j))
+		res = ft_itoa_intmax_base(var, 10);
 	else if (data->c == 'd' || data->c == 'i')
-		res = ft_itoa_long_base(var, 10);
-	else if (data->c == 'u' && data->type != length_l &&
-		data->type != length_ll)
-		res = ft_itoa_u_base(var, 10);
+		res = ft_itoa_base(var, 10);
 	else if (data->c == 'u' && (data->type == length_l ||
-		data->type == length_ll))
+		data->type == length_ll || data->type == length_j))
 		res = ft_itoa_uintmax_base(var, 10);
+	else if (data->c == 'u')
+		res = ft_itoa_u_base(var, 10);
+	else if (data->c == 'o' && (data->type == length_l ||
+		data->type == length_ll || data->type == length_j))
+		res = ft_itoa_uintmax_base(var, 8);
 	else if (data->c == 'o')
-		res = var < 0 ? ft_itoa_long_base(((long int)1 << 32) + var, 8) :
-			ft_itoa_long_base(var, 8);
-	else if ((data->c == 'x' || data->c == 'X') && data->type == length_j)
+		res = ft_itoa_u_base(var, 8);
+	else if ((data->c == 'x' || data->c == 'X') && (data->type == length_l ||
+		data->type == length_ll || data->type == length_j))
 		res = ft_itoa_uintmax_base(var, 16);
 	else if ((data->c == 'x' || data->c == 'X'))
-		res = var < 0 ? ft_itoa_long_base(((long int)1 << 32) + var, 16) :
-			ft_itoa_long_base(var, 16);
+		res = ft_itoa_u_base(var, 16);
 	data->var_len = ft_strlen(res);
 	return (res);
 }

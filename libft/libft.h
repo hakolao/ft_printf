@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 17:27:07 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 14:53:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,11 +149,16 @@ int				ft_match(char *s1, char *s2);
 char			*ft_itoa_long_base(long int nb, long int base);
 char			*ft_itoa_longl_base(long long int nb, long long int base);
 char			*ft_itoa_uintmax_base(uintmax_t nb, uintmax_t base);
+char			*ft_itoa_intmax_base(intmax_t nb, intmax_t base);
 void			ft_strrev(char *str);
 size_t			get_num_len(long long unsigned int nb,
 				long long unsigned int base);
 void			ft_capitalize(char *str);
 void			ft_uncapitalize(char *str);
 char			*ft_itoa_u_base(unsigned int nb, unsigned int base);
+char			*ft_itoa_long_u_base(unsigned long int nb,
+				unsigned long int base);
+char			*ft_itoa_longl_u_base(unsigned long long int nb,
+				unsigned long long int base);
 
 #endif
