@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 15:07:36 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 15:17:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ intmax_t				parse_type(t_printf *data)
 	return (var);
 }
 
+int						is_conversion_up(t_printf *data)
+{
+	return ((data->type == length_l ||
+		data->type == length_ll || data->type == length_j));
+}
+
 char					*parse_int(t_printf *data)
 {
 	char			*res;
@@ -44,23 +50,19 @@ char					*parse_int(t_printf *data)
 	var = parse_type(data);
 	if (data->has_precision && data->precision == 0 && var == 0)
 		res = ft_strdup("");
-	else if ((data->c == 'd' || data->c == 'i') && (data->type == length_l ||
-		data->type == length_ll || data->type == length_j))
+	else if ((data->c == 'd' || data->c == 'i') && is_conversion_up(data))
 		res = ft_itoa_intmax_base(var, 10);
 	else if (data->c == 'd' || data->c == 'i')
 		res = ft_itoa_base(var, 10);
-	else if (data->c == 'u' && (data->type == length_l ||
-		data->type == length_ll || data->type == length_j))
+	else if (data->c == 'u' && is_conversion_up(data))
 		res = ft_itoa_uintmax_base(var, 10);
 	else if (data->c == 'u')
 		res = ft_itoa_u_base(var, 10);
-	else if (data->c == 'o' && (data->type == length_l ||
-		data->type == length_ll || data->type == length_j))
+	else if (data->c == 'o' && is_conversion_up(data))
 		res = ft_itoa_uintmax_base(var, 8);
 	else if (data->c == 'o')
 		res = ft_itoa_u_base(var, 8);
-	else if ((data->c == 'x' || data->c == 'X') && (data->type == length_l ||
-		data->type == length_ll || data->type == length_j))
+	else if ((data->c == 'x' || data->c == 'X') && is_conversion_up(data))
 		res = ft_itoa_uintmax_base(var, 16);
 	else if ((data->c == 'x' || data->c == 'X'))
 		res = ft_itoa_u_base(var, 16);
