@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 15:55:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 17:06:19 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ intmax_t				parse_type(t_printf *data)
 {
 	intmax_t		var;
 
+	if (data->c == 'U' && (data->c = 'u'))
+		data->type = length_l;
 	if (data->type == length_h)
 		var = (intmax_t)((short int)va_arg(data->variables, int));
 	else if (data->type == length_hh)
