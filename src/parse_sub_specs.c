@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 20:16:18 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 21:28:33 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,26 @@ static int		parse_flags(t_printf *data)
 	int		i;
 
 	i = 0;
-	while (data->spec[i] && is_sub_specifier(data->spec[i]) &&
-		data->spec[i] != '.')
+	while (data->spec[i] && is_sub_specifier(data->spec[i]))
 	{
 		if (data->spec[i] == '-')
 			data->left_justify = TRUE;
 		else if (data->spec[i] == '+')
 			data->show_sign = TRUE;
-		else if (data->spec[i] == ' ')
-			data->blank_space = TRUE;
+		else if (data->spec[i] == ' ' && (data->blank_space = TRUE))
+			data->pad_zeros = FALSE;
 		else if (ft_isdigit(data->spec[i]) && data->spec[i] != '0')
 		{
 			while (ft_isdigit(data->spec[i]))
 				i++;
 			i--;
 		}
-		else if (data->spec[i] == '0' && !data->left_justify)
-			data->pad_zeros = TRUE;
+		else if (data->spec[i] == '0' && !data->left_justify &&
+			!data->blank_space && (data->pad_zeros = TRUE))
+		{
+			if (i > 0 && data->spec[i - 1] == '.')
+				data->pad_zeros = FALSE;
+		}
 		else if (data->spec[i] == '#')
 			data->zerox = TRUE;
 		i++;
