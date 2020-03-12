@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 17:44:13 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 13:44:15 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void						set_spec_len(t_fmt_specs *lengths,
 		lengths->spec_len++;
 		i++;
 	}
-	if (is_specifier(fmt[i]))
+	if (fmt[i])
 		lengths->spec_len++;
 	else
 		lengths->spec_len = 0;
@@ -64,9 +64,6 @@ static t_fmt_specs				fmt_part_lengths(char *fmt, t_fmt_specs lengths)
 		lengths.middle_len = next - fmt;
 	}
 	i++;
-	if (fmt[i] && (!is_sub_specifier(fmt[i]) &&
-		!is_specifier(fmt[i])))
-		return (lengths);
 	set_spec_len(&lengths, fmt, i);
 	return (lengths);
 }
@@ -101,7 +98,7 @@ int								parse_input(t_printf *data, char *fmt)
 	else if (l.middle_len > 0)
 		fmt += l.middle_len;
 	else if (*fmt == '%')
-		fmt += 1;
+		fmt++;
 	return (*fmt && (l.spec_len > 0 || l.middle_len > 0) ?
 			parse_input(data, fmt) : TRUE);
 }

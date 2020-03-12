@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 16:07:54 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 17:51:44 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/12 13:41:33 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static char				*parse_string(t_printf *data)
 static char				*parse_char(t_printf *data)
 {
 	char	*res;
-	void	*var;
 
 	if (!(res = ft_strnew(1)))
 		return (NULL);
@@ -38,6 +37,8 @@ static char				*parse_char(t_printf *data)
 
 static char				*parse_variable(t_printf *data)
 {
+	char	*res;
+
 	data->c = data->spec[data->spec_len - 1];
 	if (data->spec_len > 1)
 		parse_sub_specifiers(data);
@@ -53,7 +54,11 @@ static char				*parse_variable(t_printf *data)
 		return (handle_formatting(data, parse_char(data)));
 	else if (data->c == '%' && (data->var_len = 1))
 		return (handle_formatting(data, ft_strdup("%")));
-	return (ft_strnew(0));
+	if (!(res = ft_strnew(1)))
+		return (NULL);
+	res[0] = data->c;
+	data->var_len++;
+	return (res);
 }
 
 char					*parse_spec_variable_pair(t_printf *data, char *fmt)

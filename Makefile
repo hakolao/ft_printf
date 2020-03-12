@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/03/11 17:18:11 by ohakola          ###   ########.fr        #
+#    Updated: 2020/03/12 12:23:28 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT = ./libft
 DIR_SRC = src
 HEADERS = incl
 LIBFTFLAGS = -L$(LIBFT) -lft
-FLAGS = -Wall -Wextra -O2
+FLAGS = -Wall -Wextra -Werror -O2
 SOURCES = ft_printf.c \
 			parse.c \
 			parse_specs.c \
@@ -57,7 +57,7 @@ norm:
 
 test: all
 	@make -C $(LIBFT)
-	@$(CC) -o test_run test/main.c $(NAME) $(FLAGS) $(LIBFTFLAGS) -I$(HEADERS)
+	@$(CC) -o test_run test/main.c $(NAME) $(LIBFTFLAGS) -I$(HEADERS)
 	./test_run
 	@/bin/rm -f main.o
 	@/bin/rm -f test_run
