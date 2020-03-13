@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 13:47:19 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 14:42:10 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 int		main(void)
 {
-	ft_printf("%'hu'\n", (unsigned short)65535);
-	printf("%'hu'\n", (unsigned short)65535);
+	ft_printf("'%#.3x'\n", 0);
+	printf("'%#.3x'\n", 0);
 
 	return (0);
 }
