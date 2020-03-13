@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 15:20:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 18:01:36 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ enum				e_lengths
 	length_L
 };
 
+int					ft_dprintf(int fd, const char *format, ...);
+int					ft_sprintf(char *str, const char *format, ...);
 int					ft_printf(const char *format, ...);
 
 /*
