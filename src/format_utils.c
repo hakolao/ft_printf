@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:18:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 18:34:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 13:10:00 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ void				swap_sign_after_padding(t_printf *data,
 		return ;
 	if (!(data->has_precision && data->precision > 0))
 	{
-		if (data->is_negative && (res[sign_index] = '0'))
-			res[0] = '-';
-		else if (data->show_sign && (res[sign_index] = '0'))
+		if (data->show_sign && !data->is_negative &&
+			(res[sign_index] = '0'))
 			res[0] = '+';
+		else if (data->is_negative && (res[sign_index] = '0'))
+			res[0] = '-';
+		else if (data->blank_space && (res[sign_index] = '0'))
+			res[0] = ' ';
 	}
 }
 

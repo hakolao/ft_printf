@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 11:13:50 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 13:16:35 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,33 @@
 static int		parse_flags(t_printf *data)
 {
 	int		i;
+	int		found_zero;
 
 	i = 0;
+	found_zero = 0;
 	while (data->spec[i] && is_sub_specifier(data->spec[i]))
 	{
 		if (data->spec[i] == '-')
 			data->left_justify = TRUE;
 		else if (data->spec[i] == '+')
 			data->show_sign = TRUE;
-		else if (data->spec[i] == ' ' && (data->blank_space = TRUE))
-			data->pad_zeros = FALSE;
-		else if (ft_isdigit(data->spec[i]) && data->spec[i] != '0')
+		else if (data->spec[i] == ' ')
+			data->blank_space = TRUE;
+		else if (data->spec[i] == '0' &&
+			!found_zero && (data->pad_zeros = TRUE))
 		{
+			found_zero = TRUE;
+			if (data->spec[i + 1] == '0' && !(data->pad_zeros = FALSE))
+				found_zero = FALSE;
 			while (ft_isdigit(data->spec[i]))
 				i++;
 			i--;
 		}
-		else if (data->spec[i] == '0' && !data->left_justify &&
-			!data->blank_space && (data->pad_zeros = TRUE))
+		else if (ft_isdigit(data->spec[i]))
 		{
-			if (i > 0 && data->spec[i - 1] == '.')
-				data->pad_zeros = FALSE;
+			while (ft_isdigit(data->spec[i]))
+				i++;
+			i--;
 		}
 		else if (data->spec[i] == '#')
 			data->zerox = TRUE;
@@ -53,13 +59,11 @@ static int		parse_precision(t_printf *data, char *dot)
 	if (ft_isdigit(*(dot + 1)))
 	{
 		data->precision = ft_atoi(dot + 1);
-		return (TRUE);
 	}
 	else if (*(dot + 1) == '*')
 	{
 		var = va_arg(data->variables, unsigned);
 		data->precision = (int)var;
-		return (TRUE);
 	}
 	return (TRUE);
 }
@@ -82,14 +86,12 @@ static int		parse_width_and_precision(t_printf *data)
 			while (i > 0 && ft_isdigit(data->spec[i - 1]))
 				i--;
 			data->width = ft_atoi(data->spec + i);
-			data->has_width = TRUE;
 			return (parse_precision(data, dot));
 		}
 		else if (diff > 0 && data->spec[diff - 1] == '*')
 		{
 			var = va_arg(data->variables, unsigned);
 			data->width = (int)var;
-			data->has_width = TRUE;
 			return (parse_precision(data, dot));
 		}
 		else
@@ -148,8 +150,5 @@ int			parse_sub_specifiers(t_printf *data)
 	parse_flags(data);
 	parse_width_and_precision(data);
 	parse_lengths(data);
-	if (is_int_specifier(data->c) && data->has_precision &&
-		data->width > data->precision)
-		data->blank_space = FALSE;
 	return (TRUE);
 }

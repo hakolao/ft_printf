@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 11:11:15 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 12:25:56 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int						reset_var_data(t_printf *data)
 	data->show_sign = FALSE;
 	data->blank_space = FALSE;
 	data->has_precision = FALSE;
-	data->has_width = FALSE;
 	data->zerox = FALSE;
 	data->width = 0;
 	data->precision = 6;
