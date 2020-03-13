@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 21:28:33 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 09:56:16 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,8 @@ int			parse_sub_specifiers(t_printf *data)
 	parse_flags(data);
 	parse_width_and_precision(data);
 	parse_lengths(data);
-	if (data->width > data->precision && is_int_specifier(data->c))
+	if (is_int_specifier(data->c) && data->has_precision &&
+		data->width > data->precision)
 		data->blank_space = FALSE;
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/03/12 12:23:28 by ohakola          ###   ########.fr        #
+#    Updated: 2020/03/13 09:26:24 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ norm:
 
 test: all
 	@make -C $(LIBFT)
-	@$(CC) -o test_run test/main.c $(NAME) $(LIBFTFLAGS) -I$(HEADERS)
+	@$(CC) -o test_run test_main/main.c $(NAME) $(LIBFTFLAGS) -I$(HEADERS)
 	./test_run
 	@/bin/rm -f main.o
 	@/bin/rm -f test_run
