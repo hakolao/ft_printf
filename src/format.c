@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 19:31:00 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 19:49:57 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,17 @@ char					*handle_padding(t_printf *data, char *res)
 
 char					*handle_formatting(t_printf *data, char *res)
 {
-	if (is_int_specifier(data->c) || is_float_specifier(data->c))
+	if (is_int_specifier(data->c))
 	{
 		if (data->left_justify ||
-			(data->has_precision && data->precision == 0 &&
-			!is_float_specifier(data->c)))
+			(data->has_precision && data->precision == 0))
+			data->pad_zeros = FALSE;
+		if (data->show_sign || data->is_negative)
+			data->blank_space = FALSE;
+	}
+	else if (is_float_specifier(data->c))
+	{
+		if (data->left_justify)
 			data->pad_zeros = FALSE;
 		if (data->show_sign || data->is_negative)
 			data->blank_space = FALSE;

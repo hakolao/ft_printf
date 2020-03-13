@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 13:16:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 19:49:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ static int		parse_flags(t_printf *data)
 		{
 			found_zero = TRUE;
 			if (data->spec[i + 1] == '0' && !(data->pad_zeros = FALSE))
+				found_zero = FALSE;
+			else if (i - 1 > 0 && data->spec[i - 1] == '.' &&
+				!(data->pad_zeros = FALSE))
 				found_zero = FALSE;
 			while (ft_isdigit(data->spec[i]))
 				i++;
