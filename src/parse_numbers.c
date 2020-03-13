@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 17:46:05 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 19:20:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ char					*parse_float(t_printf *data)
 		var = va_arg(data->variables, long double);
 	else
 		var = va_arg(data->variables, double);
+	if (var < 0)
+		data->is_negative = TRUE;
 	if (data->c == 'f')
 		res = ft_ftoa(var, data->precision);
 	else

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 18:01:36 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 19:10:25 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ char				*handle_float_padding(t_printf *data, char *res);
 char				*handle_string_padding(t_printf *data, char *res);
 char				*handle_char_padding(t_printf *data, char *res);
 char				*handle_int_precision(t_printf *data, char *res);
+char				*handle_number_precision(t_printf *data, char *res);
 char				*handle_string_precision(t_printf *data, char *res);
 void				swap_zerox(t_printf *data, char *res, int x_index);
 void				swap_sign_after_padding(t_printf *data, char *res,

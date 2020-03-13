@@ -6,25 +6,40 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:42 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 12:05:33 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 19:18:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+
+static void				*pad_string(t_printf *data, char *res, int start)
+{
+	if (data->left_justify && data->pad_zeros)
+		res = add_chars_to_str_end(res, start, data->width, '0');
+	else if (data->left_justify && !data->pad_zeros)
+		res = add_chars_to_str_end(res, start, data->width, ' ');
+	else if (data->pad_zeros)
+		res = add_chars_to_str_begin(res, start, data->width, '0');
+	else
+		res = add_chars_to_str_begin(res, start, data->width, ' ');
+	return (res);
+}
+
 char					*handle_float_padding(t_printf *data, char *res)
 {
 	int		len;
+	int		add_size;
 
-	len = data->var_len;
 	if (data->width <= data->var_len)
 		return (res);
-	res = extend_str(res, len, data->width - len);
+	len = data->var_len;
+	add_size = data->width - len;
+	res = extend_str(res, len, add_size);
 	data->var_len = data->width;
-	if (data->left_justify && !data->pad_zeros)
-		add_chars_to_str_end(res, len, data->width, ' ');
-	else
-		add_chars_to_str_begin(res, len, data->width, ' ');
+	pad_string(data, res, len);
+	if (data->pad_zeros)
+		swap_sign_after_padding(data, res, add_size);
 	return (res);
 }
 
@@ -37,14 +52,7 @@ char					*handle_string_padding(t_printf *data, char *res)
 		return (res);
 	res = extend_str(res, len, data->width - len);
 	data->var_len = data->width;
-	if (data->left_justify && data->pad_zeros)
-		add_chars_to_str_end(res, len, data->width, '0');
-	else if (data->left_justify && !data->pad_zeros)
-		add_chars_to_str_end(res, len, data->width, ' ');
-	else if (data->pad_zeros)
-		add_chars_to_str_begin(res, len, data->width, '0');
-	else
-		add_chars_to_str_begin(res, len, data->width, ' ');
+	pad_string(data, res, len);
 	return (res);
 }
 
@@ -59,14 +67,7 @@ char					*handle_int_padding(t_printf *data, char *res)
 	add_size = data->width - len;
 	res = extend_str(res, len, add_size);
 	data->var_len = data->width;
-	if (data->left_justify && data->pad_zeros)
-		add_chars_to_str_end(res, len, data->width, '0');
-	else if (data->left_justify && !data->pad_zeros)
-		add_chars_to_str_end(res, len, data->width, ' ');
-	else if (data->pad_zeros)
-		add_chars_to_str_begin(res, len, data->width, '0');
-	else
-		add_chars_to_str_begin(res, len, data->width, ' ');
+	pad_string(data, res, len);
 	if (data->pad_zeros)
 	{
 		swap_zerox(data, res, add_size + 1);
@@ -87,12 +88,12 @@ char					*handle_char_padding(t_printf *data, char *res)
 	res = extend_str(res, len, data->width - len);
 	data->var_len = data->width;
 	if (data->left_justify && data->pad_zeros)
-		add_chars_to_str_end(res, len, data->width, '0');
+		res = add_chars_to_str_end(res, len, data->width, '0');
 	else if (data->left_justify && !data->pad_zeros)
-		add_chars_to_str_end(res, len, data->width, ' ');
+		res = add_chars_to_str_end(res, len, data->width, ' ');
 	else if (data->pad_zeros)
-		add_chars_to_null_str_begin(res, len, data->width, '0');
+		res = add_chars_to_null_str_begin(res, len, data->width, '0');
 	else
-		add_chars_to_null_str_begin(res, len, data->width, ' ');
+		res = add_chars_to_null_str_begin(res, len, data->width, ' ');
 	return (res);
 }

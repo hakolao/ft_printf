@@ -6,11 +6,36 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 09:45:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 19:12:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static char				*handle_zerox(t_printf *data, char *res)
+{
+	if (data->c == 'o')
+	{
+		if (res[0] == '0')
+			return (res);
+		res = add_str_to_beg(res, "0");
+		data->var_len += 1;
+	}
+	else if (data->c == 'x' || data->c == 'X')
+	{
+		if (data->is_zero_res)
+			return (res);
+		res = add_str_to_beg(res, "0x");
+		data->var_len += 2;
+	}
+	else if (data->c == 'f' && data->precision == 0)
+	{
+		res = extend_str(res, data->var_len, 1);
+		res[data->var_len] = '.';
+		data->var_len += 1;
+	}
+	return (res);
+}
 
 char					*handle_int_precision(t_printf *data, char *res)
 {
@@ -33,6 +58,24 @@ char					*handle_int_precision(t_printf *data, char *res)
 			swap_sign_after_precision(data, res, add_size);
 		}
 	}
+	return (res);
+}
+
+char					*handle_number_precision(t_printf *data, char *res)
+{
+	if (data->show_sign && !data->is_negative)
+	{
+		res = add_str_to_beg(res, "+");
+		data->var_len += 1;
+	}
+	if (is_int_specifier(data->c))
+		res = handle_int_precision(data, res);
+	if (data->blank_space)
+		res = handle_blank(data, res);
+	if (data->zerox)
+		res = handle_zerox(data, res);
+	if (data->c == 'X')
+		ft_capitalize(res);
 	return (res);
 }
 

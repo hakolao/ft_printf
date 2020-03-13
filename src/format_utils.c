@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:18:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 15:24:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 19:19:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void				swap_zerox(t_printf *data, char *res, int x_index)
 void				swap_sign_after_padding(t_printf *data,
 					char *res, int sign_index)
 {
-	if (!(data->c == 'i' || data->c == 'd'))
+	if (!(data->c == 'i' || data->c == 'd' || data->c == 'f'))
 		return ;
 	if (!(data->has_precision && data->precision > 0))
 	{
