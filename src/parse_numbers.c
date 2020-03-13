@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 14:37:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 15:23:10 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,14 @@ static char				*printf_itoa(t_printf *data, intmax_t var,
 
 char					*parse_int(t_printf *data)
 {
+	int				i;
+	int				is_zero;
 	char			*res;
 	intmax_t		var;
 
 	var = parse_type(data);
 	res = NULL;
+	is_zero = TRUE;
 	if (data->has_precision && data->precision == 0 && var == 0)
 		res = ft_strdup("");
 	else if ((data->c == 'd' || data->c == 'i'))
@@ -82,6 +85,11 @@ char					*parse_int(t_printf *data)
 	else if ((data->c == 'x' || data->c == 'X'))
 		res = printf_itoa(data, var, 16, FALSE);
 	data->var_len = ft_strlen(res);
+	i = -1;
+	while (res[++i])
+		if (res[i] != '0' && !(is_zero = FALSE))
+			break ;
+	data->is_zero_res = is_zero;
 	return (res);
 }
 
