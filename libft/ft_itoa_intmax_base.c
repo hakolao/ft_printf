@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 15:35:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/12 15:14:17 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 15:40:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ char				*ft_itoa_intmax_base(intmax_t nb, intmax_t base)
 	if (base > 16 || base < 1)
 		return (NULL);
 	bases = "0123456789abcdef";
-	if (!(arr = (char*)ft_memalloc(get_num_len(ABS(nb), base) +
-		(sign < 0 ? 1 : 0) + 1)))
+	if (!(arr = ft_strnew(get_num_len(nb, base) + (sign < 0 ? 1 : 0))))
 		return (NULL);
 	if (nb == FALSE)
 		arr[0] = '0';
@@ -44,21 +43,19 @@ char				*ft_itoa_uintmax_base(uintmax_t nb, uintmax_t base)
 {
 	int		i;
 	char	*arr;
-	int		sign;
 	char	*bases;
 
-	sign = 1;
 	if (base > 16 || base < 1)
 		return (NULL);
 	bases = "0123456789abcdef";
-	if (!(arr = (char*)ft_memalloc(get_num_len(nb, 10) + 1)))
+	if (!(arr = ft_strnew(get_num_len(nb, base))))
 		return (NULL);
 	if (nb == FALSE)
 		arr[0] = '0';
 	i = 0;
 	while (nb != 0)
 	{
-		arr[i++] = bases[sign * (nb % base)];
+		arr[i++] = bases[nb % base];
 		nb = nb / base;
 	}
 	ft_strrev(arr);
