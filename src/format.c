@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 15:01:37 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 15:10:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 char					*handle_zerox(t_printf *data, char *res)
 {
+	int		i;
+	int		is_zero;
+
+	is_zero = TRUE;
 	if (data->c == 'o')
 	{
 		res = add_str_to_beg(res, "0");
@@ -21,7 +25,11 @@ char					*handle_zerox(t_printf *data, char *res)
 	}
 	else if (data->c == 'x' || data->c == 'X')
 	{
-		if (ft_atoi(res) == 0)
+		i = -1;
+		while (res[++i])
+			if (res[i] != '0' && !(is_zero = FALSE))
+				break ;
+		if (is_zero)
 			return (res);
 		res = add_str_to_beg(res, "0x");
 		data->var_len += 2;
