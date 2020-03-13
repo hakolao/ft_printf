@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 18:16:06 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 18:57:53 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,8 @@ int		main(void)
 
 	ft_printf("'this %f float'\n", 1.5);
 	printf("'this %f float'\n", 1.5);
+
+	ft_printf("'%.7f'\n", -875.000001);
+	printf("'%.7f'\n", -875.000001);
 	return (0);
 }

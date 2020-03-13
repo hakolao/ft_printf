@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 18:47:16 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 18:57:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char			*ft_ftoa(long double nb, int precision)
 		return (NULL);
 	ft_strdel(&result);
 	fpart = fpart * ft_powl(10, precision);
-	if (!(tmp1 = add_zeros(fpart, precision, tmp1)) ||
+	if (!(tmp1 = add_zeros(fpart + 0.5, precision, tmp1)) ||
 		!(tmp2 = ft_itoa_intmax_base(fpart + 0.5, 10)) ||
 		!(result = ft_strjoin(tmp1, tmp2)))
 		return (NULL);
