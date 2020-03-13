@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 16:27:31 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 12:26:05 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 16:44:58 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int				debug_flags(t_printf *data)
 			"length type: %d "
 			"is_negative: %d\n"
 			"has_precision: %d\n"
+			"var_len: %d\n"
 			"precision: %d\n",
 			data->spec_len,
 			data->left_justify,
@@ -45,6 +46,7 @@ int				debug_flags(t_printf *data)
 			data->type,
 			data->is_negative,
 			data->has_precision,
+			data->var_len,
 			data->precision);
 	return (TRUE);
 }
