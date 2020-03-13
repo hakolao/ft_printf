@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 09:56:16 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 11:13:50 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,14 @@ static int		parse_width_and_precision(t_printf *data)
 			while (i > 0 && ft_isdigit(data->spec[i - 1]))
 				i--;
 			data->width = ft_atoi(data->spec + i);
+			data->has_width = TRUE;
 			return (parse_precision(data, dot));
 		}
 		else if (diff > 0 && data->spec[diff - 1] == '*')
 		{
 			var = va_arg(data->variables, unsigned);
 			data->width = (int)var;
+			data->has_width = TRUE;
 			return (parse_precision(data, dot));
 		}
 		else
