@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 17:12:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 17:38:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,10 @@ char					*parse_float(t_printf *data)
 
 char					*parse_address(t_printf *data)
 {
-	return (add_str_to_beg(ft_itoa_uintmax_base(va_arg(data->variables,
-		long long int), 16), "0x"));
+	char		*res;
+
+	res = ft_itoa_uintmax_base(va_arg(data->variables, long long int), 16);
+	data->var_len = ft_strlen(res);
+	data->var_len += 2;
+	return (add_str_to_beg(res, "0x"));
 }

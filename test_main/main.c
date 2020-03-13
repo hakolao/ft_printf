@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 17:24:00 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 17:31:28 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,7 @@
 
 int		main(void)
 {
-	ft_printf("'this %#o number'\n", 0);
-	printf("'this %#o number'\n", 0);
-
-	ft_printf("'@moulitest: %#.o %#.0o'\n", 0, 0);
-	printf("'@moulitest: %#.o %#.0o'\n", 0, 0);
-
-	ft_printf("'@moulitest: %#.o %#.0o'\n", 1, 1);
-	printf("'@moulitest: %#.o %#.0o'\n", 1, 1);
-
-	ft_printf("'@moulitest: %#.d %#.0d'\n", 1, 1);
-	printf("'@moulitest: %#.d %#.0d'\n", 1, 1);
-
-	ft_printf("'@moulitest: %#.x %#.0x'\n", 0, 0);
-	printf("'@moulitest: %#.x %#.0x'\n", 0, 0);
-
-	ft_printf("'@moulitest: %5.o %5.0o'\n", 0, 0);
-	printf("'@moulitest: %5.o %5.0o'\n", 0, 0);
-
-	ft_printf("'%#.3o'\n", 938862);
-	printf("'%#.3o'\n", 938862);
-
-	ft_printf("'@moulitest: %#.o %#.0o'\n", 0, 0);
-	printf("'@moulitest: %#.o %#.0o'\n", 0, 0);
-
-	ft_printf("'%#.3o'\n", 0);
-	printf("'%#.3o'\n", 0);
-
-	ft_printf("'@moulitest: %#.o %#.0o'\n", 0, 0);
-	printf("'@moulitest: %#.o %#.0o'\n", 0, 0);
-
-	ft_printf("'%#.5o'\n", 5263);
-	printf("'%#.5o'\n", 5263);
-
-	ft_printf("'%#.5o'\n", 21);
-	printf("'%#.5o'\n", 21);
+	ft_printf("'%p'\n", NULL);
+	printf("'%p'\n", NULL);
 	return (0);
 }
