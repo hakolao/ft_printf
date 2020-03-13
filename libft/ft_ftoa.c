@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 18:42:09 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 18:47:16 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ char			*ft_ftoa(long double nb, int precision)
 	char			*tmp1;
 	char			*tmp2;
 
-	ipart = (long long int)(nb + 0.5 / ft_powl(10, precision));
+	ipart = (long long int)(nb +
+		(nb >= 0 ? 1 : -1) * 0.5 / ft_powl(10, precision));
 	fpart = ft_abs_long_double(nb) - ft_abs_long_double((long double)ipart);
 	if (!(result = ft_itoa_intmax_base(ipart, 10)) ||
 		!(result = handle_negative_zero(nb, result)))
