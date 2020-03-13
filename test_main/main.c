@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 17:31:28 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 17:42:13 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		main(void)
 {
-	ft_printf("'%p'\n", NULL);
-	printf("'%p'\n", NULL);
+	ft_printf("'%f'\n", -3.85);
+	printf("'%f'\n", -3.85);
 	return (0);
 }

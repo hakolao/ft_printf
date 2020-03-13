@@ -6,13 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 17:26:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/13 17:49:30 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*add_zeros(long int fpart, int precision, char *str)
+static char		*add_zeros(long long int fpart, int precision, char *str)
 {
 	int		i;
 	int		j;
@@ -69,7 +69,7 @@ char			*ft_ftoa(long double nb, int precision)
 
 	ipart = (long long int)nb;
 	fpart = ft_abs_long_double(nb) - ft_abs_long_double((long double)ipart);
-	if (!(result = ft_itoa_long(ipart)) ||
+	if (!(result = ft_itoa_longl_base(ipart, 10)) ||
 		!(result = handle_negative_zero(nb, result)))
 		return (NULL);
 	if (precision <= 0)
@@ -79,7 +79,7 @@ char			*ft_ftoa(long double nb, int precision)
 	ft_strdel(&result);
 	fpart = fpart * ft_powl(10, precision);
 	if (!(tmp1 = add_zeros(fpart, precision, tmp1)) ||
-		!(tmp2 = ft_itoa_long(fpart + 0.5)) ||
+		!(tmp2 = ft_itoa_longl_base(fpart + 0.5, 10)) ||
 		!(result = ft_strjoin(tmp1, tmp2)))
 		return (NULL);
 	ft_strdel(&tmp1);
