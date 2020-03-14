@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 19:49:38 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 16:49:13 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,43 +71,31 @@ static int		parse_precision(t_printf *data, char *dot)
 	return (TRUE);
 }
 
-static int		parse_width_and_precision(t_printf *data)
+static int		parse_width(t_printf *data, int	start)
 {
 	int			i;
-	char		*dot;
-	int			diff;
-	unsigned	var;
+	int			has_width;
+	int			var;
 
-	i = 0;
-	dot = ft_strchr(data->spec, '.');
-	diff = dot - data->spec;
-	if (dot)
+	i = start;
+	has_width = FALSE;
+	while (i >= 0 && is_sub_specifier(data->spec[i]))
 	{
-		if (diff > 0 && ft_isdigit(data->spec[diff - 1]))
+		if (ft_isdigit(data->spec[i]) && !has_width)
 		{
-			i = diff;
-			while (i > 0 && ft_isdigit(data->spec[i - 1]))
+			while (i >= 0 && ft_isdigit(data->spec[i]))
 				i--;
-			data->width = ft_atoi(data->spec + i);
-			return (parse_precision(data, dot));
+			data->width = ft_atoi(data->spec + i + 1);
+			has_width = TRUE;
 		}
-		else if (diff > 0 && data->spec[diff - 1] == '*')
+		if (data->spec[i] == '*')
 		{
-			var = va_arg(data->variables, unsigned);
-			data->width = (int)var;
-			return (parse_precision(data, dot));
+			var = va_arg(data->variables, int);
+			if (var < 0)
+				data->left_justify = TRUE;
+			data->width = !has_width ? ABS(var) : data->width;
 		}
-		else
-			return (parse_precision(data, dot));
-	}
-	while (data->spec[i] && is_sub_specifier(data->spec[i]))
-	{
-		if (ft_isdigit(data->spec[i]) && data->spec[i] != '0')
-		{
-			data->width = ft_atoi(data->spec + i);
-			return (TRUE);
-		}
-		i++;
+		i--;
 	}
 	return (TRUE);
 }
@@ -147,11 +135,19 @@ int			parse_lengths(t_printf *data)
 
 int			parse_sub_specifiers(t_printf *data)
 {
-	int		i;
+	char		*dot;
+	int			diff;
 
-	i = 0;
 	parse_flags(data);
-	parse_width_and_precision(data);
+	dot = ft_strchr(data->spec, '.');
+	diff = dot - data->spec;
+	if (dot)
+	{
+		parse_width(data, diff - 1);
+		parse_precision(data, dot);
+	}
+	else
+		parse_width(data, data->spec_len - 2);
 	parse_lengths(data);
 	return (TRUE);
 }
