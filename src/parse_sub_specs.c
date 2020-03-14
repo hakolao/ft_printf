@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 16:52:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 18:34:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,10 @@ static int		parse_flags(t_printf *data)
 	int		found_zero;
 
 	i = 0;
-	found_zero = 0;
+	found_zero = FALSE;
 	while (data->spec[i] && is_sub_specifier(data->spec[i]))
 	{
-		if (data->spec[i] == '-')
-			data->left_justify = TRUE;
-		else if (data->spec[i] == '+')
-			data->show_sign = TRUE;
-		else if (data->spec[i] == ' ')
-			data->blank_space = TRUE;
-		else if (data->spec[i] == '0' &&
-			!found_zero && (data->pad_zeros = TRUE))
-		{
-			found_zero = TRUE;
-			if (data->spec[i + 1] == '0' && !(data->pad_zeros = FALSE))
-				found_zero = FALSE;
-			else if (i - 1 > 0 && data->spec[i - 1] == '.' &&
-				!(data->pad_zeros = FALSE))
-				found_zero = FALSE;
-			while (ft_isdigit(data->spec[i]))
-				i++;
-			i--;
-		}
-		else if (ft_isdigit(data->spec[i]))
-		{
-			while (ft_isdigit(data->spec[i]))
-				i++;
-			i--;
-		}
-		else if (data->spec[i] == '#')
-			data->zerox = TRUE;
+		check_flag(data, &i, &found_zero);
 		i++;
 	}
 	return (TRUE);
@@ -100,34 +74,14 @@ static int		parse_width(t_printf *data, int	start)
 	return (TRUE);
 }
 
-int			parse_lengths(t_printf *data)
+static int		parse_lengths(t_printf *data)
 {
 	int			i;
-	char		s;
 
 	i = 0;
-	s = data->spec[i];
-	while (s && is_sub_specifier(s))
+	while (data->spec[i] && is_sub_specifier(data->spec[i]))
 	{
-		s = data->spec[i];
-		if (i - 1 >= 0 && s == 'h' && data->spec[i - 1] == 'h')
-			data->type = data->type > length_hh && data->type != length_h ?
-				data->type : length_hh;
-		else if (s == 'h')
-			data->type = data->type > length_h ? data->type : length_h;
-		else if (i - 1 >= 0 && s == 'l' && data->spec[i - 1] == 'l')
-			data->type = data->type > length_ll && data->type != length_l ?
-				data->type : length_ll;
-		else if (s == 'l')
-			data->type = data->type > length_l ? data->type : length_l;
-		else if (s == 'j')
-			data->type = data->type > length_j ? data->type : length_j;
-		else if (s == 'z')
-			data->type = data->type > length_z ? data->type : length_z;
-		else if (s == 't')
-			data->type = data->type > length_t ? data->type : length_t;
-		else if (s == 'L')
-			data->type = data->type > length_L ? data->type : length_L;
+		check_length(data, &i, data->spec[i]);
 		i++;
 	}
 	return (TRUE);
