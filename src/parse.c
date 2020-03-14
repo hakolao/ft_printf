@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 15:20:52 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 17:20:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,15 @@ int								parse_input(t_printf *data, char *fmt)
 	l = fmt_part_lengths(fmt, (t_fmt_specs){0, 0});
 	data->middle_len = l.middle_len;
 	data->spec_len = l.spec_len;
-	if (l.middle_len > 0 &&
-		!(data->buffer = parse_middle(data, fmt)))
-		return (FALSE);
+	if (l.middle_len > 0)
+		data->buffer = parse_middle(data, fmt);
 	if (l.spec_len > 0 &&
 		parse_spec_variable_pair(data, fmt + l.middle_len + 1))
 		fmt += l.middle_len + 1 + l.spec_len;
 	else if (l.middle_len > 0)
 		fmt += l.middle_len;
 	else if (*fmt == '%')
-		fmt++;
+		fmt += 1;
 	return (*fmt && (l.spec_len > 0 || l.middle_len > 0) ?
 			parse_input(data, fmt) : TRUE);
 }

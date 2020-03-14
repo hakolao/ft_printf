@@ -6,43 +6,25 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 16:56:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 17:22:28 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int		main(void)
 {
-	ft_printf("'{%*3.3d}'\n", 2, 0);
-	printf("'{%*3.3d}'\n", 2, 0);
+	char	*str;
+	int		len;
 
-	ft_printf("'{%3.-3d}'\n", 2);
-	printf("'{%3.-3d}'\n", 2);
-
-	ft_printf("'{%*33d}'\n", 2, 0);
-	printf("'{%*33d}'\n", 2, 0);
-
-	ft_printf("'{%33d}'\n", 2, 0);
-	printf("'{%33d}'\n", 2, 0);
-
-	ft_printf("'{%**33d}'\n", 2, 4, 5);
-	printf("'{%**33d}'\n", 2, 4, 5);
-
-	ft_printf("'{%*d}'\n", -5, 42);
-	printf("'{%*d}'\n", -5, 42);
-
-	ft_printf("'%0+5d'\n", 42);
-	printf("'%0+5d'\n", 42);
-
-	ft_printf("'%-10x'\n", 42);
-	printf("'%-10x'\n", 42);
-
-	ft_printf("'{%.*s}'\n", -5, "42");
-	printf("'{%.*s}'\n", -5, "42");
-
-	ft_printf("'{%066.*s}'\n", 5, "42");
-	printf("'{%066.*s}'\n", 5, "42");
+	if (!(str = ft_strnew(50)))
+		return (0);
+	len = ft_sprintf(str, "%lld", 9223372036854775807);
+	ft_printf("stdout: str: %s\n", str);
+	ft_printf("stdout: str len: %d\n", len);
+	len = ft_dprintf(2, "stderr: %lld\n", 9223372036854775807);
+	ft_dprintf(2, "stderr: print len: %d\n", len);
+	len = ft_printf("stdout: %lld\n", 9223372036854775807);
+	ft_printf("stdout: print len: %d\n", len);
 	return (0);
 }
