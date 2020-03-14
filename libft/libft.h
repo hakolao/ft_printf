@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 19:40:50 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 22:03:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define ABS(nb) (nb < 0  ? -nb : nb)
 
 # define LN10 2.3025850929940456840179914546844
+# define FT_MATH_E 2.71828182845905
 
 # include <string.h>
 # include <fcntl.h>
@@ -145,7 +146,7 @@ void			ft_pixel_foreach(t_pixel_bounds *limits,
 char			*ft_itoa_long(long int nb);
 void			ft_sort_int_tab(int *tab, unsigned int size, int dir);
 long double		ft_abs_long_double(long double nb);
-long double		ft_powl(long double nb, int pow);
+long double		ft_powl(long double nb, long double pow);
 char			*ft_ftoa(long double nb, int precision);
 int				ft_match(char *s1, char *s2);
 char			*ft_itoa_long_base(long int nb, long int base);
@@ -164,5 +165,7 @@ char			*ft_itoa_longl_u_base(unsigned long long int nb,
 				unsigned long long int base);
 long double		ft_ln(long double x);
 long double		ft_log10(long double x);
+long double		ft_exp(long double exp);
+long double		ft_log(double nb, double base);
 
 #endif
