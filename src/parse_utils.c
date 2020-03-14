@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 18:21:16 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 19:02:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 20:04:02 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,27 @@ int				check_parsed_zero(t_printf *data, char *res)
 			break ;
 	data->is_zero_res = is_zero;
 	return (TRUE);
+}
+
+char			*scientific_double(t_printf *data, long double var)
+{
+	char			*res;
+	char			*tmp;
+	char			*expstr;
+	int				exp;
+	long double		mantissa;
+
+	res = ft_ftoa(var, data->precision);
+	exp = (int)ft_log10(ft_abs_long_double(var));
+	mantissa = var / ft_powl(10, exp);
+	res = ft_ftoa(mantissa, data->precision);
+	tmp = ft_strjoin(res, "e+");
+	ft_strdel(&res);
+	expstr = ft_itoa_base(exp, 10);
+	if (exp < 10)
+		expstr = add_str_to_beg(expstr, "0");
+	res = ft_strjoin(tmp, expstr);
+	ft_strdel(&expstr);
+	ft_strdel(&tmp);
+	return (res);
 }

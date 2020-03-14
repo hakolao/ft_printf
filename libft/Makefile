@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 14:43:04 by ohakola           #+#    #+#              #
-#    Updated: 2020/03/12 14:52:30 by ohakola          ###   ########.fr        #
+#    Updated: 2020/03/14 19:39:38 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,6 +97,7 @@ SOURCES = ft_atoi.c \
 		ft_match.c \
 		ft_strrev.c \
 		ft_capitalize.c \
+		ft_log.c \
 		ft_bzero.c
 SRCS = $(addprefix $(DIR_SRC)/,$(SOURCES))
 OBJS = $(addprefix $(DIR_OBJ)/,$(SOURCES:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 19:03:00 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 20:02:48 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,21 @@ char					*parse_float(t_printf *data)
 	char			*res;
 	long double		var;
 
+
+	res = NULL;
 	if (data->type == length_L)
 		var = va_arg(data->variables, long double);
 	else
 		var = va_arg(data->variables, double);
 	if (var < 0)
 		data->is_negative = TRUE;
-	if (data->c == 'f')
+	if (data->c == 'f' || data->c == 'F')
 		res = ft_ftoa(var, data->precision);
-	else
-		res = ft_ftoa(var, data->precision);
+	else if (data->c == 'e' || data->c == 'E')
+		res = scientific_double(data, var);
 	data->var_len = ft_strlen(res);
+	if (data->c == 'E' || data->c == 'G')
+		ft_capitalize(res);
 	return (res);
 }
 

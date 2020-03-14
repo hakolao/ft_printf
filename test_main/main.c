@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 18:53:04 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 20:09:46 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 int		main(void)
 {
-	char	*str;
-	int		len;
+	ft_printf("%5.4e\n", 19250501.2566);
+	printf("%5.4e\n", 19250501.2566);
 
-	if (!(str = ft_strnew(50)))
-		return (0);
-	len = ft_printf("stdout: %b\n", -19250501);
-	ft_printf("stdout: print len: %d\n", len);
+	ft_printf("%5.4e\n", 15.2566);
+	printf("%5.4e\n", 15.2566);
+
+	ft_printf("%+050.4E\n", 15.2566);
+	printf("%+050.4E\n", 15.2566);
+
+	ft_printf("%+050.4f\n", 15.2566);
+	printf("%+050.4f\n", 15.2566);
 	return (0);
 }

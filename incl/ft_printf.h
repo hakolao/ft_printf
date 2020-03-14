@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 19:02:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 20:02:09 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int					check_parsed_zero(t_printf *data, char *res);
 char				*parse_int(t_printf *data);
 char				*parse_float(t_printf *data);
 char				*parse_address(t_printf *data);
+char				*scientific_double(t_printf *data, long double var);
 
 /*
 ** String utils
