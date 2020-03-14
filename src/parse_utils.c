@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 18:21:16 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 20:04:02 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 22:04:53 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ char			*scientific_double(t_printf *data, long double var)
 	int				exp;
 	long double		mantissa;
 
-	res = ft_ftoa(var, data->precision);
 	exp = (int)ft_log10(ft_abs_long_double(var));
 	mantissa = var / ft_powl(10, exp);
 	res = ft_ftoa(mantissa, data->precision);
