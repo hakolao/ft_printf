@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 22:49:09 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 23:56:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,25 @@
 
 int		main(void)
 {
-	ft_printf("'this %.7Lf float'\n", 1.5l);
-	printf("'this %.7Lf float'\n", 1.5l);
+	ft_printf("%-20.7Le  %e\n", 0.004567l, 55);
+	printf("%-20.7Le  %e\n", 0.004567l, 55);
 
-	ft_printf("'%.7Lf'\n", -3.85l);
-	printf("'%.7Lf'\n", -3.85l);
+	ft_printf("%-20.7Le  %e\n", 0.0, 0);
+	printf("%-20.7Le  %e\n", 0.0, 0);
+
+	// ft_printf("%-20.7e,  %Le  %e\n", 0.004567, 55, 55);
+	// printf("%-20.7e,  %Le  %e\n", 0.004567, 55, 55);
+
+	// ft_printf("%-20.7e\n", 0.004567);
+	// printf("%-20.7e\n", 0.004567);
+
+	// ft_printf("'%5.4Le'\n", 0l);
+	// printf("'%5.4Le'\n", 0l);
+
+	// ft_printf("%5.7Le\n", 0.004567l);
+	// printf("%5.7Le\n", 0.004567l);
+
+	// ft_printf("%5.7Le\n", 125125.004567l);
+	// printf("%5.7Le\n", 125125.004567l);
 	return (0);
 }
