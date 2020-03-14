@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 19:49:57 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 15:50:23 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char					*handle_precision(t_printf *data, char *res)
 	else if (is_float_specifier(data->c))
 		res = handle_number_precision(data, res);
 	else if (data->c == 'p')
-		return (handle_int_precision(data, res));
+		return (handle_number_precision(data, res));
 	else if (data->c == 's')
 		return (handle_string_precision(data, res));
 	return (res);

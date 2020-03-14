@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 19:12:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 15:51:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char				*handle_zerox(t_printf *data, char *res)
 		res = add_str_to_beg(res, "0");
 		data->var_len += 1;
 	}
-	else if (data->c == 'x' || data->c == 'X')
+	else if (data->c == 'x' || data->c == 'X' || data->c == 'p')
 	{
 		if (data->is_zero_res)
 			return (res);
@@ -68,11 +68,11 @@ char					*handle_number_precision(t_printf *data, char *res)
 		res = add_str_to_beg(res, "+");
 		data->var_len += 1;
 	}
-	if (is_int_specifier(data->c))
+	if (is_int_specifier(data->c) || data->c == 'p')
 		res = handle_int_precision(data, res);
 	if (data->blank_space)
 		res = handle_blank(data, res);
-	if (data->zerox)
+	if (data->zerox || data->c == 'p')
 		res = handle_zerox(data, res);
 	if (data->c == 'X')
 		ft_capitalize(res);
