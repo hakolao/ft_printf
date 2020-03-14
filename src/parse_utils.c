@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 18:21:16 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 18:32:44 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 19:02:26 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,19 @@ int				check_length(t_printf *data, int *index, char s)
 		data->type = data->type > length_t ? data->type : length_t;
 	else if (s == 'L')
 		data->type = data->type > length_L ? data->type : length_L;
+	return (TRUE);
+}
+
+int				check_parsed_zero(t_printf *data, char *res)
+{
+	int				i;
+	int				is_zero;
+
+	is_zero = TRUE;
+	i = -1;
+	while (res[++i])
+		if (res[i] != '0' && !(is_zero = FALSE))
+			break ;
+	data->is_zero_res = is_zero;
 	return (TRUE);
 }

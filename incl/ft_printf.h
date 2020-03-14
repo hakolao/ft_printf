@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 18:32:23 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 19:02:35 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int					parse_sub_specifiers(t_printf *data);
 char				*parse_spec_variable_pair(t_printf *data, char *fmt);
 int					check_flag(t_printf *data, int *index, int *found_zero);
 int					check_length(t_printf *data, int *index, char s);
+int					check_parsed_zero(t_printf *data, char *res);
+
 /*
 ** Number parsing
 */

@@ -6,13 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 15:57:11 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/14 19:03:00 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-intmax_t				parse_type(t_printf *data)
+static intmax_t			parse_type(t_printf *data)
 {
 	intmax_t		var;
 
@@ -66,14 +66,11 @@ static char				*printf_itoa(t_printf *data, intmax_t var,
 
 char					*parse_int(t_printf *data)
 {
-	int				i;
-	int				is_zero;
 	char			*res;
 	intmax_t		var;
 
 	var = parse_type(data);
 	res = NULL;
-	is_zero = TRUE;
 	if (data->has_precision && data->precision == 0 && var == 0)
 		res = ft_strdup("");
 	else if ((data->c == 'd' || data->c == 'i'))
@@ -84,12 +81,12 @@ char					*parse_int(t_printf *data)
 		res = printf_itoa(data, var, 8, FALSE);
 	else if ((data->c == 'x' || data->c == 'X'))
 		res = printf_itoa(data, var, 16, FALSE);
+	else if (data->c == 'b')
+		res = data->is_negative ?
+			add_str_to_beg(printf_itoa(data, ft_abs(var), 2, TRUE), "1") :
+			add_str_to_beg(printf_itoa(data, ft_abs(var), 2, TRUE), "0") ;
 	data->var_len = ft_strlen(res);
-	i = -1;
-	while (res[++i])
-		if (res[i] != '0' && !(is_zero = FALSE))
-			break ;
-	data->is_zero_res = is_zero;
+	check_parsed_zero(data, res);
 	return (res);
 }
 
