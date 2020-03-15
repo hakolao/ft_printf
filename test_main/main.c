@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 18:23:47 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 20:24:29 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		test_leaks(void)
 	ft_printf("% d\\n", 3);
 	ft_printf("%+d\\n", 3);
 	ft_printf("%010d\\n", 1);
+	ft_printf("%-20.7Le  %-20.7Le\n", 100.00l, 100000.00l);
 	run_the_rest();
 	while (1);
 	return (TRUE);

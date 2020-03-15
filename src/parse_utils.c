@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 18:21:16 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 18:57:30 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 20:23:50 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,8 @@ char			*scientific_double(t_printf *data, long double var)
 	res = ft_strjoin(tmp, expstr);
 	ft_strdel(&expstr);
 	ft_strdel(&tmp);
+	if (data->c == 'E')
+		ft_capitalize(res);
+	data->var_len = ft_strlen(res);
 	return (res);
 }
