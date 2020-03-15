@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 20:02:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 18:52:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char					*parse_int(t_printf *data)
 	var = parse_type(data);
 	res = NULL;
 	if (data->has_precision && data->precision == 0 && var == 0)
-		res = ft_strdup("");
+		res = ft_strnew(0);
 	else if ((data->c == 'd' || data->c == 'i'))
 		res = printf_itoa(data, var, 10, TRUE);
 	else if (data->c == 'u')
@@ -82,9 +82,15 @@ char					*parse_int(t_printf *data)
 	else if ((data->c == 'x' || data->c == 'X'))
 		res = printf_itoa(data, var, 16, FALSE);
 	else if (data->c == 'b')
-		res = data->is_negative ?
-			add_str_to_beg(printf_itoa(data, ft_abs(var), 2, TRUE), "1") :
-			add_str_to_beg(printf_itoa(data, ft_abs(var), 2, TRUE), "0") ;
+	{
+		res = printf_itoa(data, ft_abs(var), 2, TRUE);
+		data->var_len = ft_strlen(res);
+		res = add_str_to_beg(res,
+			data->is_negative ? "1" : "0", 1, data->var_len);
+		data->var_len += 1;
+		check_parsed_zero(data, res);
+		return (res);
+	}
 	data->var_len = ft_strlen(res);
 	check_parsed_zero(data, res);
 	return (res);
@@ -104,9 +110,9 @@ char					*parse_float(t_printf *data)
 	if (var < 0)
 		data->is_negative = TRUE;
 	if (data->c == 'f' || data->c == 'F')
-		res = ft_ftoa(var, data->precision);
+		res = ft_ftoa(var, data->precision); //ToDo: Optimize ftoa
 	else if (data->c == 'e' || data->c == 'E')
-		res = scientific_double(data, var);
+		res = scientific_double(data, var);  //ToDo: Optimize sci double
 	data->var_len = ft_strlen(res);
 	if (data->c == 'E' || data->c == 'G')
 		ft_capitalize(res);
@@ -122,9 +128,12 @@ char					*parse_address(t_printf *data)
 	if (var != 0)
 		res = ft_itoa_uintmax_base(var, 16);
 	else if (var == 0 && data->precision > 0)
-		res = ft_strdup("0");
+	{
+		res = ft_strnew(1);
+		res[0] = '0';
+	}
 	else
-		res = ft_strdup("");
+		res = ft_strnew(0);
 	data->var_len = ft_strlen(res);
 	return (res);
 }

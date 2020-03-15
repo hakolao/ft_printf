@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 13:33:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 18:54:30 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ char				*scientific_double(t_printf *data, long double var);
 /*
 ** String utils
 */
-char				*add_str_to_beg(char *str, char *add);
+char				*add_str_to_beg(char *str, char *add,
+					int len2, int len1);
 char				*extend_str(char *str, int size_in, int add_size);
 char				*add_chars_to_str_begin(char *res, int start,
 					int end, char c);

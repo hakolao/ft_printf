@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 17:22:10 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 18:45:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,5 +164,7 @@ char			*ft_itoa_longl_u_base(unsigned long long int nb,
 				unsigned long long int base);
 long double		ft_powl(long double nb, int pow);
 int				ft_exp_base(long double nb, int base);
+char			*ft_strnjoin(char const *s1, char const *s2,
+				size_t len1, size_t len2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 18:21:16 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 18:31:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 18:57:30 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char			*scientific_double(t_printf *data, long double var)
 	tmp = exp >= 0 ? ft_strjoin(res, "e+") : ft_strjoin(res, "e-");
 	expstr = ft_itoa_base(ft_abs(exp), 10);
 	if (ft_abs(exp) < 10)
-		expstr = add_str_to_beg(expstr, "0");
+		expstr = add_str_to_beg(expstr, "0", ft_strlen(expstr), 1);
 	ft_strdel(&res);
 	res = ft_strjoin(tmp, expstr);
 	ft_strdel(&expstr);

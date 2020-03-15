@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 16:56:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 18:53:29 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static char				*handle_zerox(t_printf *data, char *res)
 	{
 		if (res[0] == '0')
 			return (res);
-		res = add_str_to_beg(res, "0");
+		res = add_str_to_beg(res, "0", data->var_len, 1);
 		data->var_len += 1;
 	}
 	else if (data->c == 'x' || data->c == 'X' || data->c == 'p')
 	{
 		if (data->is_zero_res)
 			return (res);
-		res = add_str_to_beg(res, "0x");
+		res = add_str_to_beg(res, "0x", data->var_len, 2);
 		data->var_len += 2;
 	}
 	else if (data->c == 'f' && data->precision == 0)
@@ -65,7 +65,7 @@ char					*handle_number_precision(t_printf *data, char *res)
 {
 	if (data->show_sign && !data->is_negative)
 	{
-		res = add_str_to_beg(res, "+");
+		res = add_str_to_beg(res, "+", 1, data->var_len);
 		data->var_len += 1;
 	}
 	if (is_int_specifier(data->c) || data->c == 'p')

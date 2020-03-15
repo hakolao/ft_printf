@@ -6,17 +6,18 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:26:26 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/11 17:49:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 18:54:49 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char					*add_str_to_beg(char *str, char *add)
+char					*add_str_to_beg(char *str, char *add,
+						int len2, int len1)
 {
 	char					*res;
 
-	res = ft_strjoin(add, str);
+	res = ft_strnjoin(add, str, len1, len2);
 	ft_strdel(&str);
 	return (res);
 }
