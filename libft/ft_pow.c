@@ -6,12 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:25:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 23:41:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 13:41:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
+
+/*
+** https://www.codeproject.com/Tips/311714/Natural-Logarithms-and-Exponent
+*/
 
 long double		ft_exp(long double exp)
 {
@@ -24,14 +27,17 @@ long double		ft_exp(long double exp)
 	x = exp;
 	frac = x;
 	p = (1.0 + x);
-	i = 1.0;
-	do
+	i = 2.0;
+	frac *= (x / i);
+	l = p;
+	p += frac;
+	while (l != p)
 	{
 		i++;
 		frac *= (x / i);
 		l = p;
 		p += frac;
-	}while(l != p);
+	}
 	return (p);
 }
 

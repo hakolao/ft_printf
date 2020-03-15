@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 20:02:09 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 13:33:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../libft/libft.h"
 # include <stdarg.h>
-# include <stdio.h>
 
 typedef struct		s_printf
 {
@@ -74,12 +73,6 @@ int					is_sub_specifier(char c);
 int					is_float_specifier(char c);
 int					is_int_specifier(char c);
 int					is_flag(char c);
-
-/*
-** Log
-*/
-int					log_err(char *str, char *strerror);
-int					debug_flags(t_printf *data);
 
 /*
 **  Parsing

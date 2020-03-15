@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/03/14 18:39:45 by ohakola          ###   ########.fr        #
+#    Updated: 2020/03/15 13:33:58 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ SOURCES = ft_printf.c \
 			parse_sub_specs.c \
 			parse_numbers.c \
 			parse_utils.c \
-			log.c \
 			string_utils.c \
 			format.c \
 			format_precision.c \
@@ -55,7 +54,7 @@ fclean: clean
 
 test: all
 	@make -C $(LIBFT)
-	@$(CC) -o test_run test_main/main.c $(NAME) $(LIBFTFLAGS) -I$(HEADERS)
+	@$(CC) -o test_run test_main/main.c $(FLAGS) $(NAME) $(LIBFTFLAGS) -I$(HEADERS)
 	./test_run
 	@/bin/rm -f main.o
 	@/bin/rm -f test_run
