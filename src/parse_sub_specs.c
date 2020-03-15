@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 23:56:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 18:12:23 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,14 @@ int			parse_sub_specifiers(t_printf *data)
 {
 	char		*dot;
 	int			diff;
+	int			i;
 
 	parse_flags(data);
-	dot = ft_strchr(data->spec, '.');
+	i = -1;
+	dot = NULL;
+	while (data->spec[++i])
+		if (data->spec[i] == '.' && (dot = data->spec + i))
+			break ;
 	diff = dot - data->spec;
 	if (dot)
 	{
