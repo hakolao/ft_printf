@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 23:13:57 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 23:33:00 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		run_the_rest(void)
 	ft_printf("%C\n", 15000);
 	return (TRUE);
 }
-
+#include <stdio.h>
 int		run_first(void)
 {
 	ft_printf("\n");
