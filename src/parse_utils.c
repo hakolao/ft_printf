@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 18:21:16 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 17:04:57 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 17:25:26 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,27 +107,16 @@ char			*scientific_double(t_printf *data, long double var)
 	char			*res;
 	char			*tmp;
 	char			*expstr;
-	int				exp;
+	long double		exp;
 	long double		mantissa;
 
-	if (var == 0)
-	{
-		res = ft_ftoa(0.0, data->precision);
-		exp = 0;
-		tmp = ft_strjoin(res, "e+");
-		expstr = ft_itoa_base(exp, 10);
+	exp = ft_exp_base(var, 10);
+	mantissa = var / ft_powl(10, exp);
+	res = ft_ftoa(mantissa, data->precision);
+	tmp = exp >= 0 ? ft_strjoin(res, "e+") : ft_strjoin(res, "e-");
+	expstr = ft_itoa_base(ft_abs(exp), 10);
+	if (ft_abs(exp) < 10)
 		expstr = add_str_to_beg(expstr, "0");
-	}
-	else
-	{
-		exp = ft_exp_base(var, 10);
-		mantissa = var / ft_powl(10, exp);
-		res = ft_ftoa(mantissa, data->precision);
-		tmp = exp >= 0 ? ft_strjoin(res, "e+") : ft_strjoin(res, "e-");
-		expstr = ft_itoa_base(ft_abs(exp), 10);
-		if (exp < 10)
-			expstr = add_str_to_beg(expstr, "0");
-	}
 	ft_strdel(&res);
 	res = ft_strjoin(tmp, expstr);
 	ft_strdel(&expstr);

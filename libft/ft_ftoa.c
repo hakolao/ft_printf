@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 22:53:40 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 17:21:37 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char			*ft_ftoa(long double nb, int precision)
 	char			*tmp2;
 
 	ipart = (long long int)(nb +
-		(nb >= 0 ? 1 : -1) * 0.5 / ft_powl_int(10, precision));
+		(nb >= 0 ? 1 : -1) * 0.5 / ft_powl(10, precision));
 	fpart = ft_abs_long_double(nb) - ft_abs_long_double((long double)ipart);
 	if (!(result = ft_itoa_intmax_base(ipart, 10)) ||
 		!(result = handle_negative_zero(nb, result)))
@@ -78,7 +78,7 @@ char			*ft_ftoa(long double nb, int precision)
 	if (!(tmp1 = ft_strjoin(result, ".")))
 		return (NULL);
 	ft_strdel(&result);
-	fpart = fpart * ft_powl_int(10, precision);
+	fpart = fpart * ft_powl(10, precision);
 	if (!(tmp1 = add_zeros(fpart + 0.5, precision, tmp1)) ||
 		!(tmp2 = ft_itoa_intmax_base(fpart + 0.5, 10)) ||
 		!(result = ft_strjoin(tmp1, tmp2)))
