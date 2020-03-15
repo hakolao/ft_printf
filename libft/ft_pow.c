@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:25:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 13:41:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 17:03:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,29 @@ long double		ft_powl_int(long double nb, int pow)
 		i++;
 	}
 	return (res);
+}
+
+int				ft_exp_base(long double nb, int base)
+{
+	int				i;
+	long long int	nb_int;
+
+	i = 0;
+	nb = ft_abs_long_double(nb);
+	if (nb > 1)
+	{
+		nb_int = (long long int)nb;
+		while (nb_int >= base)
+		{
+			nb_int = nb_int / base;
+			i++;
+		}
+		return (i);
+	}
+	while (nb < 1 && nb > 0)
+	{
+		nb = nb * (long double)base;
+		i++;
+	}
+	return (-i);
 }

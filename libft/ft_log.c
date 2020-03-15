@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 19:25:49 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 13:41:16 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 16:41:52 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static long double	iterate_ln(long double nb, long double *count)
 	l = (p / (ft_exp(n - 1.0)));
 	r = ((n - 1.0) * FT_MATH_E);
 	n = ((l + r) / FT_MATH_E);
-	while ((n != a && *count < 30))
+	while ((n != a && *count < 500))
 	{
 		a = n;
 		l = (p / (ft_exp(n - 1.0)));

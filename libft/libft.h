@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 22:52:58 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 17:03:49 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,5 +168,6 @@ long double		ft_log10(long double x);
 long double		ft_exp(long double exp);
 long double		ft_log(double nb, double base);
 long double		ft_powl_int(long double nb, int pow);
+int				ft_exp_base(long double nb, int base);
 
 #endif
