@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 13:32:12 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 17:43:07 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,11 @@ static t_fmt_specs				fmt_part_lengths(char *fmt, t_fmt_specs lengths)
 	int					i;
 	char				*next;
 
-	i = 0;
-	next = ft_strchr(fmt, '%');
+	i = -1;
+	next = NULL;
+	while (fmt[++i])
+		if (fmt[i] == '%' && (next = fmt + i))
+			break ;
 	if (!next)
 	{
 		i = -1;
