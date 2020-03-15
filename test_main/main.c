@@ -6,12 +6,11 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 23:08:12 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 23:13:57 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int		run_the_rest(void)
 {
@@ -62,7 +61,7 @@ int		main(void)
 
 	debug_leaks = FALSE;
 	run_first();
-	// run_the_rest();
+	run_the_rest();
 	if (debug_leaks)
 		while (1);
 	return (0);
