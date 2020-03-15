@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 18:21:16 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 17:25:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 18:31:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int		check_zero_flag(t_printf *data,
 		data->pad_zeros = FALSE;
 		*found_zero = FALSE;
 	}
-	while (ft_isdigit(data->spec[i]))
+	while (i < data->spec_len && ft_isdigit(data->spec[i]))
 		i++;
 	i--;
 	*index = i;
@@ -52,7 +52,7 @@ int				check_flag(t_printf *data, int *index, int *found_zero)
 		check_zero_flag(data, &i, found_zero);
 	else if (ft_isdigit(data->spec[i]))
 	{
-		while (ft_isdigit(data->spec[i]))
+		while (i < data->spec_len && ft_isdigit(data->spec[i]))
 			i++;
 		i--;
 	}

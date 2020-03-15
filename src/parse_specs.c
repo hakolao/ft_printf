@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 16:07:54 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 17:21:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 18:29:08 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,12 @@ static char				*parse_variable(t_printf *data)
 
 char					*parse_spec_variable_pair(t_printf *data, char *fmt)
 {
-	char	*spec;
 	char	*variable;
 	int		i;
 
-	if (!(spec = ft_strnew(data->spec_len)))
-		return (NULL);
-	spec = ft_strncpy(spec, fmt, data->spec_len);
-	data->spec = spec;
+	data->spec = fmt;
 	if (!(variable = parse_variable(data)))
 		return (NULL);
-	ft_strdel(&spec);
 	data->buffer = extend_str(data->buffer, data->len, data->var_len);
 	i = -1;
 	while (++i < data->var_len)

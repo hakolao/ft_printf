@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 18:12:23 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/15 18:32:09 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		parse_flags(t_printf *data)
 
 	i = 0;
 	found_zero = FALSE;
-	while (data->spec[i] && is_sub_specifier(data->spec[i]))
+	while (i < data->spec_len && is_sub_specifier(data->spec[i]))
 	{
 		check_flag(data, &i, &found_zero);
 		i++;
@@ -79,7 +79,7 @@ static int		parse_lengths(t_printf *data)
 	int			i;
 
 	i = 0;
-	while (data->spec[i] && is_sub_specifier(data->spec[i]))
+	while (i < data->spec_len && is_sub_specifier(data->spec[i]))
 	{
 		check_length(data, &i, data->spec[i]);
 		i++;
@@ -96,7 +96,7 @@ int			parse_sub_specifiers(t_printf *data)
 	parse_flags(data);
 	i = -1;
 	dot = NULL;
-	while (data->spec[++i])
+	while (++i < data->spec_len)
 		if (data->spec[i] == '.' && (dot = data->spec + i))
 			break ;
 	diff = dot - data->spec;
