@@ -7,6 +7,12 @@ Only following library functions allowed, the rest is from scratch.
 - `exit`
 - The functions of man 3 `stdarg`
 
+## Usage
+See e.g: [printf reference](http://www.cplusplus.com/reference/cstdio/printf/)
+```
+ft_printf("%[sub_specs][spec]", [variable_per_spec],+);
+```
+
 ## Handles
 
 ### Specs:
