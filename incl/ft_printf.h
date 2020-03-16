@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 18:54:30 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/16 16:13:01 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int					is_flag(char c);
 */
 int					parse_input(t_printf *data, char *fmt);
 int					parse_sub_specifiers(t_printf *data);
-char				*parse_spec_variable_pair(t_printf *data, char *fmt);
+int					parse_spec_variable_pair(t_printf *data, char *fmt);
 int					check_flag(t_printf *data, int *index, int *found_zero);
 int					check_length(t_printf *data, int *index, char s);
 int					check_parsed_zero(t_printf *data, char *res);

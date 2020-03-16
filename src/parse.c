@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/16 15:27:57 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/16 16:20:19 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,18 @@ static t_fmt_specs				fmt_part_lengths(char *fmt, t_fmt_specs lengths)
 	return (lengths);
 }
 
-static char						*parse_middle(t_printf *data, char *fmt)
+static int						parse_middle(t_printf *data, char *fmt)
 {
 	int		i;
 
-	data->buffer = extend_str(data->buffer, data->len, data->middle_len);
+	if (!(data->buffer = extend_str(data->buffer, data->len, data->middle_len)))
+		return (FALSE);
 	i = -1;
 	while (++i < data->middle_len)
 		data->buffer[data->len + i] = fmt[i];
 	data->len += data->middle_len;
 	data->buffer[data->len] = '\0';
-	return (data->buffer);
+	return (TRUE);
 }
 
 int								parse_input(t_printf *data, char *fmt)
@@ -94,15 +95,19 @@ int								parse_input(t_printf *data, char *fmt)
 	data->middle_len = l.middle_len;
 	data->spec_len = l.spec_len;
 	if (l.middle_len > 0)
-		data->buffer = parse_middle(data, fmt);
-	if (l.spec_len > 0 &&
-		parse_spec_variable_pair(data, fmt + l.middle_len + 1))
-		fmt += l.middle_len + 1 + l.spec_len;
-	else if (l.middle_len > 0)
+	{
+		if (!parse_middle(data, fmt))
+			return (FALSE);
 		fmt += l.middle_len;
+	}
+	if (l.spec_len > 0)
+	{
+		if (!parse_spec_variable_pair(data, fmt + 1))
+			return (FALSE);
+		fmt += l.spec_len + 1;
+	}
 	else if (*fmt == '%')
 		fmt += 1;
-	if (!(*fmt && (l.spec_len > 0 || l.middle_len > 0)))
-		return (TRUE);
-	return (parse_input(data, fmt));
+	return (*fmt && (l.spec_len > 0 || l.middle_len > 0) ?
+			parse_input(data, fmt) : TRUE);
 }

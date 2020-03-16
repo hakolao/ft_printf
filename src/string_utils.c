@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:26:26 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 18:54:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/16 16:15:04 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ char					*extend_str(char *str, int size_in, int add_size)
 	char	*res;
 	int		i;
 
-	res = malloc(sizeof(char) * (size_in + add_size + 1));
+	if (!(res = malloc(sizeof(char) * (size_in + add_size + 1))))
+		return (NULL);
 	i = -1;
 	while (++i < size_in)
 		res[i] = str[i];

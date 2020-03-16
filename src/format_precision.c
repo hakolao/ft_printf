@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 18:53:29 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/16 16:17:50 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static char				*handle_zerox(t_printf *data, char *res)
 	}
 	else if (data->c == 'f' && data->precision == 0)
 	{
-		res = extend_str(res, data->var_len, 1);
+		if (!(res = extend_str(res, data->var_len, 1)))
+			return (NULL);
 		res[data->var_len] = '.';
 		data->var_len += 1;
 	}
@@ -53,7 +54,8 @@ char					*handle_int_precision(t_printf *data, char *res)
 		{
 			data->var_len = new_var_len;
 			add_size = data->var_len - len;
-			res = extend_str(res, len, add_size);
+			if (!(res = extend_str(res, len, add_size)))
+				return (NULL);
 			res = add_chars_to_str_begin(res, len, data->var_len, '0');
 			swap_sign_after_precision(data, res, add_size);
 		}

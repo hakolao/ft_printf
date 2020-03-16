@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:42 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 18:54:09 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/16 16:18:55 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ char					*handle_float_padding(t_printf *data, char *res)
 		return (res);
 	len = data->var_len;
 	add_size = data->width - len;
-	res = extend_str(res, len, add_size);
+	if (!(res = extend_str(res, len, add_size)))
+		return (NULL);
 	data->var_len = data->width;
 	pad_string(data, res, len);
 	if (data->pad_zeros)
@@ -50,7 +51,8 @@ char					*handle_string_padding(t_printf *data, char *res)
 	len = data->var_len;
 	if (data->width <= data->var_len)
 		return (res);
-	res = extend_str(res, len, data->width - len);
+	if (!(res = extend_str(res, len, data->width - len)))
+		return (NULL);
 	data->var_len = data->width;
 	pad_string(data, res, len);
 	return (res);
@@ -65,7 +67,8 @@ char					*handle_int_padding(t_printf *data, char *res)
 		return (res);
 	len = data->var_len;
 	add_size = data->width - len;
-	res = extend_str(res, len, add_size);
+	if (!(res = extend_str(res, len, add_size)))
+		return (NULL);
 	data->var_len = data->width;
 	pad_string(data, res, len);
 	if (data->pad_zeros)
@@ -85,7 +88,8 @@ char					*handle_char_padding(t_printf *data, char *res)
 	len = data->var_len;
 	if (data->width <= data->var_len)
 		return (res);
-	res = extend_str(res, len, data->width - len);
+	if (!(res = extend_str(res, len, data->width - len)))
+		return (NULL);
 	data->var_len = data->width;
 	if (data->left_justify && data->pad_zeros)
 		res = add_chars_to_str_end(res, len, data->width, '0');

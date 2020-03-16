@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 15:50:23 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/16 16:19:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ char					*handle_formatting(t_printf *data, char *res)
 		if (data->blank_space || data->left_justify)
 			data->pad_zeros = FALSE;
 	}
-	res = handle_precision(data, res);
+	if (!(res = handle_precision(data, res)))
+		return (NULL);
 	res = handle_padding(data, res);
 	return (res);
 }

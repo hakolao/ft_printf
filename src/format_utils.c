@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:18:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/14 20:11:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/16 16:15:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void				swap_sign_after_precision(t_printf *data,
 
 char				*handle_blank(t_printf *data, char *res)
 {
-	res = extend_str(res, data->var_len, 1);
+	if (!(res = extend_str(res, data->var_len, 1)))
+		return (NULL);
 	add_chars_to_str_begin(res, data->var_len, data->var_len + 1, ' ');
 	data->var_len += 1;
 	return (res);
