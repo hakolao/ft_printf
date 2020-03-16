@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 18:19:58 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/16 15:27:57 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int								parse_input(t_printf *data, char *fmt)
 		fmt += l.middle_len;
 	else if (*fmt == '%')
 		fmt += 1;
-	return (*fmt && (l.spec_len > 0 || l.middle_len > 0) ?
-			parse_input(data, fmt) : TRUE);
+	if (!(*fmt && (l.spec_len > 0 || l.middle_len > 0)))
+		return (TRUE);
+	return (parse_input(data, fmt));
 }

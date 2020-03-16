@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 16:07:54 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 18:29:08 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/16 15:26:33 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 static char				*parse_string(t_printf *data)
 {
 	char	*res;
-	void	*var;
+	char	*var;
 
-	var = (void*)va_arg(data->variables, char*);
-	if (!(res = var ? ft_strdup((char*)var) : ft_strdup("(null)")))
-		return (NULL);
-	data->var_len = ft_strlen(res);
+	if ((var = va_arg(data->variables, char*)))
+	{
+		res = ft_strdup(var);
+		data->var_len = ft_strlen(res);
+		return (res);
+	}
+	res = ft_strdup("(null)");
+	data->var_len = 6;
 	return (res);
 }
 
