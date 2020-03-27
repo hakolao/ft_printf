@@ -20,6 +20,7 @@ ft_printf("%[sub_specs][spec]", [variable_per_spec],+);
 diuUoxX
 fFeE
 csp%
+b for binary where first bit = sign
 ```
 
 ### Sub specs:
