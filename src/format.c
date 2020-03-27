@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/16 16:19:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/27 20:33:06 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ char					*handle_formatting(t_printf *data, char *res)
 	if (is_int_specifier(data->c))
 	{
 		if (data->left_justify ||
-			(data->has_precision && data->precision == 0))
+			(data->has_precision && data->precision == 0) ||
+			data->c == 'b')
 			data->pad_zeros = FALSE;
 		if (data->show_sign || data->is_negative)
 			data->blank_space = FALSE;

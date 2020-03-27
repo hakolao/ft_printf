@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/16 16:17:50 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/27 20:43:07 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,19 @@ char					*handle_int_precision(t_printf *data, char *res)
 
 char					*handle_number_precision(t_printf *data, char *res)
 {
-	if (data->show_sign && !data->is_negative)
+	if (data->show_sign && !data->is_negative && data->c != 'b')
 	{
 		res = add_str_to_beg(res, "+", 1, data->var_len);
 		data->var_len += 1;
 	}
-	if (is_int_specifier(data->c) || data->c == 'p')
+	if ((is_int_specifier(data->c) || data->c == 'p') && data->c != 'b')
 		res = handle_int_precision(data, res);
+	if (data->c == 'b' && !data->is_zero_res)
+	{
+		res = add_str_to_beg(res,
+			data->is_negative ? "1" : "0", 1, data->var_len);
+		data->var_len += 1;
+	}
 	if (data->blank_space)
 		res = handle_blank(data, res);
 	if (data->zerox || data->c == 'p')

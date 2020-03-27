@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 23:33:00 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/27 20:44:23 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ int		run_the_rest(void)
 	ft_printf("%s%s\n", "test", "test");
 	ft_printf("%s%s%s\n", "test", "test", "test");
 	ft_printf("%C\n", 15000);
+	ft_printf("%b\n", 0);
+	ft_printf("%+016.10b\n", 55);
+	ft_printf("%+016.10b\n", -55);
 	return (TRUE);
 }
-#include <stdio.h>
+
 int		run_first(void)
 {
 	ft_printf("\n");
@@ -63,6 +66,7 @@ int		main(void)
 	run_first();
 	run_the_rest();
 	if (debug_leaks)
-		while (1);
+		while (1)
+			;
 	return (0);
 }

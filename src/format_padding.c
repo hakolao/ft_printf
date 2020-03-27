@@ -6,12 +6,11 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:42 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/16 16:18:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/27 20:13:45 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 static void				*pad_string(t_printf *data, char *res, int start)
 {

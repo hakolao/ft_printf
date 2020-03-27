@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 20:24:40 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/27 20:25:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,24 +73,16 @@ char					*parse_int(t_printf *data)
 	res = NULL;
 	if (data->has_precision && data->precision == 0 && var == 0)
 		res = ft_strnew(0);
-	else if ((data->c == 'd' || data->c == 'i'))
+	else if (data->c == 'd' || data->c == 'i')
 		res = printf_itoa(data, var, 10, TRUE);
 	else if (data->c == 'u')
 		res = printf_itoa(data, var, 10, FALSE);
 	else if (data->c == 'o')
 		res = printf_itoa(data, var, 8, FALSE);
-	else if ((data->c == 'x' || data->c == 'X'))
+	else if (data->c == 'x' || data->c == 'X')
 		res = printf_itoa(data, var, 16, FALSE);
 	else if (data->c == 'b')
-	{
 		res = printf_itoa(data, ft_abs(var), 2, TRUE);
-		data->var_len = ft_strlen(res);
-		res = add_str_to_beg(res,
-			data->is_negative ? "1" : "0", 1, data->var_len);
-		data->var_len += 1;
-		check_parsed_zero(data, res);
-		return (res);
-	}
 	data->var_len = ft_strlen(res);
 	check_parsed_zero(data, res);
 	return (res);
@@ -100,7 +92,6 @@ char					*parse_float(t_printf *data)
 {
 	char			*res;
 	long double		var;
-
 
 	res = NULL;
 	if (data->type == length_L)

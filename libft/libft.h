@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 18:45:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/27 20:46:00 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@
 
 # define TRUE 1
 # define FALSE 0
-
-# define ABS(nb) (nb < 0  ? -nb : nb)
-
-# define LN10 2.3025850929940456840179914546844
-# define FT_MATH_E 2.71828182845905
 
 # include <string.h>
 # include <fcntl.h>

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 18:32:09 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/27 20:45:35 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int		parse_precision(t_printf *data, char *dot)
 	return (TRUE);
 }
 
-static int		parse_width(t_printf *data, int	start)
+static int		parse_width(t_printf *data, int start)
 {
 	int			i;
 	int			has_width;
@@ -67,7 +67,7 @@ static int		parse_width(t_printf *data, int	start)
 			var = va_arg(data->variables, int);
 			if (var < 0)
 				data->left_justify = TRUE;
-			data->width = !has_width ? ABS(var) : data->width;
+			data->width = !has_width ? ft_abs(var) : data->width;
 		}
 		i--;
 	}
@@ -87,7 +87,7 @@ static int		parse_lengths(t_printf *data)
 	return (TRUE);
 }
 
-int			parse_sub_specifiers(t_printf *data)
+int				parse_sub_specifiers(t_printf *data)
 {
 	char		*dot;
 	int			diff;
