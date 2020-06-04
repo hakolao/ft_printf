@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/27 20:45:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/06/04 14:39:50 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,11 @@ static int		parse_precision(t_printf *data, char *dot)
 	return (TRUE);
 }
 
-static int		parse_width(t_printf *data, int start)
+static int		parse_width(t_printf *data, int i)
 {
-	int			i;
 	int			has_width;
 	int			var;
 
-	i = start;
 	has_width = FALSE;
 	while (i >= 0 && is_sub_specifier(data->spec[i]))
 	{
@@ -68,6 +66,7 @@ static int		parse_width(t_printf *data, int start)
 			if (var < 0)
 				data->left_justify = TRUE;
 			data->width = !has_width ? ft_abs(var) : data->width;
+			has_width = TRUE;
 		}
 		i--;
 	}
