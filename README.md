@@ -30,6 +30,9 @@ hhhllljztL
 *0-9+.*0-9+
 ```
 
+### Note:
+Max float precision is 19. After that, extra precision pads zeros like with integers.
+
 This library includes:
 - `ft_printf`
 - `ft_sprintf`
