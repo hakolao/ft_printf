@@ -6,13 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/06/25 17:08:45 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/06/25 17:29:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char					*handle_precision(t_printf *data, char *res)
+static char				*handle_precision(t_printf *data, char *res)
 {
 	if (is_int_specifier(data->c))
 		res = handle_number_precision(data, res);
@@ -25,7 +25,7 @@ char					*handle_precision(t_printf *data, char *res)
 	return (res);
 }
 
-char					*handle_padding(t_printf *data, char *res)
+static char				*handle_padding(t_printf *data, char *res)
 {
 	if (is_int_specifier(data->c))
 		return (handle_int_padding(data, res));
@@ -42,23 +42,26 @@ char					*handle_padding(t_printf *data, char *res)
 	return (res);
 }
 
+static void				handle_int_flag_specials(t_printf *data)
+{
+	if (data->left_justify ||
+		(data->has_precision && data->precision == 0) ||
+		data->c == 'b')
+		data->pad_zeros = FALSE;
+	if (data->show_sign || data->is_negative)
+		data->blank_space = FALSE;
+	if (data->c == 'u')
+	{
+		data->show_sign = FALSE;
+		data->is_negative = FALSE;
+		data->blank_space = FALSE;
+	}
+}
+
 char					*handle_formatting(t_printf *data, char *res)
 {
 	if (is_int_specifier(data->c))
-	{
-		if (data->left_justify ||
-			(data->has_precision && data->precision == 0) ||
-			data->c == 'b')
-			data->pad_zeros = FALSE;
-		if (data->show_sign || data->is_negative)
-			data->blank_space = FALSE;
-		if (data->c == 'u')
-		{
-			data->show_sign = FALSE;
-			data->is_negative = FALSE;
-			data->blank_space = FALSE;
-		}
-	}
+		handle_int_flag_specials(data);
 	else if (is_float_specifier(data->c))
 	{
 		if (data->left_justify)
