@@ -6,19 +6,18 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:00:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 18:20:09 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/06/25 16:55:39 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int				init_printf(t_printf *data, const char *format, int fd)
+static int				init_printf(t_printf *data, int fd)
 {
 	data->fd = fd;
 	data->len = 0;
 	if (!(data->buffer = ft_strnew(0)))
 		return (FALSE);
-	data->format = (char*)format;
 	return (TRUE);
 }
 
@@ -26,7 +25,7 @@ int						ft_dprintf(int fd, const char *format, ...)
 {
 	t_printf	data;
 
-	if (!(init_printf(&data, format, fd)))
+	if (!(init_printf(&data, fd)))
 		return (FALSE);
 	va_start(data.variables, format);
 	if (!parse_input(&data, (char*)format))
@@ -41,7 +40,7 @@ int						ft_sprintf(char *str, const char *format, ...)
 {
 	t_printf	data;
 
-	if (!(init_printf(&data, format, 1)))
+	if (!(init_printf(&data, 1)))
 		return (FALSE);
 	va_start(data.variables, format);
 	if (!parse_input(&data, (char*)format))
@@ -56,7 +55,7 @@ int						ft_printf(const char *format, ...)
 {
 	t_printf	data;
 
-	if (!(init_printf(&data, format, 1)))
+	if (!(init_printf(&data, 1)))
 		return (FALSE);
 	va_start(data.variables, format);
 	if (!parse_input(&data, (char*)format))

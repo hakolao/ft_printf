@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/16 16:13:01 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/06/25 15:59:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 typedef struct		s_printf
 {
 	va_list		variables;
-	char		*format;
 	char		*spec;
 	char		c;
 	int			spec_len;

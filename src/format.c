@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/27 20:33:06 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/06/25 17:08:45 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ char					*handle_formatting(t_printf *data, char *res)
 			data->pad_zeros = FALSE;
 		if (data->show_sign || data->is_negative)
 			data->blank_space = FALSE;
+		if (data->c == 'u')
+		{
+			data->show_sign = FALSE;
+			data->is_negative = FALSE;
+			data->blank_space = FALSE;
+		}
 	}
 	else if (is_float_specifier(data->c))
 	{

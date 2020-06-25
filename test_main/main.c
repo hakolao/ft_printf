@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/27 20:44:23 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/06/25 17:27:24 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,18 @@ int		run_first(void)
 	ft_printf("%p\n", &ft_printf);
 	ft_printf("%20.15d\n", 54321);
 	ft_printf("%-10d\n", 3);
-	ft_printf("% d\n", 3);
-	ft_printf("%+d\n", 3);
 	ft_printf("%010d\n", 1);
 	ft_printf("%-20.7Le  %-20.7Le\n", 100.00l, 100000.00l);
 	ft_printf("%.5d Hello jen, '%-25.2e' '%20.26s\n", 25, 0.555, "asdf!");
 	ft_printf("%.5d Hello jen, '%-25.5e' '%20.26s\n", 25, 0.01525, "asdf!");
+	ft_printf("%+042u\n", 56);
+	ft_printf("%+052.42u\n", -56);
+	ft_printf("%+14.2u\n", 56);
+	ft_printf("%+14.3u\n", 56);
+	ft_printf("%0 42u\n", 56);
+	ft_printf("%0 42hhu\n", 5656);
+	ft_printf("%+052.20f\n", 55.0999995);
+	ft_printf("%#42.25f\n", 55.0999995);
 	return (TRUE);
 }
 

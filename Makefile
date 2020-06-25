@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/03/27 20:47:54 by ohakola          ###   ########.fr        #
+#    Updated: 2020/06/25 16:59:29 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ fclean: clean
 
 test: all
 	@make -C $(LIBFT)
-	@$(CC) -o test_run test_main/main.c $(FLAGS) $(NAME) $(LIBFTFLAGS) -I$(HEADERS)
+	@$(CC) -o test_run test_main/main.c $(NAME) $(LIBFTFLAGS) -I$(HEADERS)
 	./test_run
 	@/bin/rm -f main.o
 	@/bin/rm -f test_run

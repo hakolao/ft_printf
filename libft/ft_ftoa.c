@@ -6,13 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/15 21:27:04 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/06/25 17:25:13 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*add_zeros(long long int fpart, int precision, char *str)
+static char		*add_zeros(long long int fpart, int prec, char *str)
 {
 	int		i;
 	int		j;
@@ -21,7 +21,7 @@ static char		*add_zeros(long long int fpart, int precision, char *str)
 	char	*res;
 
 	len = get_num_len(fpart, 10);
-	zeros = precision - len;
+	zeros = prec - len;
 	if (zeros <= 0)
 		return (str);
 	if (!(res = ft_strnew(ft_strlen(str) + zeros)))
@@ -59,7 +59,7 @@ static char		*handle_negative_zero(long double nb, char *str)
 	return (str);
 }
 
-char			*ft_ftoa(long double nb, int precision)
+char			*ft_ftoa(long double nb, int prec)
 {
 	long long int	ipart;
 	long double		fpart;
@@ -68,18 +68,18 @@ char			*ft_ftoa(long double nb, int precision)
 	char			*tmp2;
 
 	ipart = (long long int)(nb +
-		(nb >= 0 ? 1 : -1) * 0.5 / ft_powl(10, precision));
+		(nb >= 0 ? 1 : -1) * 0.5 / ft_powl(10, prec > 19 ? 19 : prec));
 	fpart = ft_abs_long_double(nb) - ft_abs_long_double((long double)ipart);
 	if (!(result = ft_itoa_intmax_base(ipart, 10)) ||
 		!(result = handle_negative_zero(nb, result)))
 		return (NULL);
-	if (precision <= 0)
+	if (prec <= 0)
 		return (result);
 	if (!(tmp1 = ft_strjoin(result, ".")))
 		return (NULL);
 	ft_strdel(&result);
-	fpart = fpart * ft_powl(10, precision);
-	if (!(tmp1 = add_zeros(fpart + 0.5, precision, tmp1)) ||
+	fpart = fpart * ft_powl(10, prec > 19 ? 19 : prec);
+	if (!(tmp1 = add_zeros(fpart + 0.5, prec > 19 ? 19 : prec, tmp1)) ||
 		!(tmp2 = ft_itoa_intmax_base(fpart + 0.5, 10)) ||
 		!(result = ft_strjoin(tmp1, tmp2)))
 		return (NULL);
