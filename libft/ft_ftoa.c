@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/07/10 15:14:52 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/07/10 15:43:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ static char		*add_zeros(long long int fpart, int prec, char *str)
 {
 	int		i;
 	int		j;
-	int		len;
+	int		str_len;
 	int		zeros;
 	char	*res;
 
-	len = get_num_len(fpart, 10);
-	zeros = prec - len;
+	str_len = ft_strlen(str);
+	zeros = prec - get_num_len(fpart, 10);
 	if (zeros <= 0)
 		return (str);
-	if (!(res = ft_strnew(ft_strlen(str) + zeros)))
+	if (!(res = ft_strnew(str_len + zeros)))
 		return (NULL);
 	res = ft_strcpy(res, str);
-	i = ft_strlen(str);
+	i = str_len;
 	j = 0;
 	while (j < zeros)
 	{
