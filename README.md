@@ -39,4 +39,4 @@ This library includes:
 - `ft_dprintf`
 
 Since others have written such extensive tests, I've just ensured this passes all
-[42FileChecker](https://github.com/jgigault/42FileChecker) checks, and then some.
+[42FileChecker](https://github.com/jgigault/42FileChecker) and [PFT](https://github.com/gavinfielder/pft) checks, and then some.
