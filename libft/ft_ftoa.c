@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/06/25 17:25:13 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/07/10 15:14:52 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ static char		*add_zeros(long long int fpart, int prec, char *str)
 
 static char		*handle_negative_zero(long double nb, char *str)
 {
-	char	*res;
-	int		len;
+	char				*res;
+	int					len;
+	t_float_dissector	fds;
 
-	if (nb < 0 && nb > -1)
+	fds.f = nb;
+	if (nb <= 0 && nb > -1 && fds.b.sign)
 	{
 		len = ft_strlen(str);
 		if (!(res = ft_strnew(len + 1)))

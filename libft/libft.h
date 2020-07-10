@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/27 20:46:00 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/07/10 15:11:24 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,17 @@ typedef struct	s_pixel_bounds
 	int			y_start;
 	int			y_end;
 }				t_pixel_bounds;
+
+typedef struct	s_float_bits {
+	unsigned int	fraction:23;
+	unsigned int	exp:8;
+	unsigned int	sign:1;
+}				t_float_bits;
+
+typedef union	u_float_dissector {
+	float			f;
+	t_float_bits	b;
+}				t_float_dissector;
 
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);

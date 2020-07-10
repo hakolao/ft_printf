@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/07/10 14:04:07 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/07/10 15:16:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,17 @@ char					*parse_int(t_printf *data)
 
 char					*parse_float(t_printf *data)
 {
-	char			*res;
-	long double		var;
+	char				*res;
+	long double			var;
+	t_float_dissector	fds;
 
 	res = NULL;
 	if (data->type == length_L)
 		var = va_arg(data->variables, long double);
 	else
 		var = va_arg(data->variables, double);
-	if (var < 0)
+	fds.f = (float)var;
+	if (fds.b.sign)
 		data->is_negative = TRUE;
 	if (data->c == 'f' || data->c == 'F')
 	{
