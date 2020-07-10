@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/27 20:25:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/07/10 14:04:07 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char					*parse_address(t_printf *data)
 	var = va_arg(data->variables, long long int);
 	if (var != 0)
 		res = ft_itoa_uintmax_base(var, 16);
-	else if (var == 0 && data->precision > 0)
+	else if (var == 0 && ft_abs(data->precision) > 0)
 	{
 		res = ft_strnew(1);
 		res[0] = '0';
