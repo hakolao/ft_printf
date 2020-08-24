@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 15:35:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/13 15:40:18 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/24 20:16:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char				*ft_itoa_intmax_base(intmax_t nb, intmax_t base)
 	bases = "0123456789abcdef";
 	if (!(arr = ft_strnew(get_num_len(nb, base) + (sign < 0 ? 1 : 0))))
 		return (NULL);
-	if (nb == FALSE)
+	if (nb == false)
 		arr[0] = '0';
 	i = 0;
 	while (nb != 0)
@@ -50,7 +50,7 @@ char				*ft_itoa_uintmax_base(uintmax_t nb, uintmax_t base)
 	bases = "0123456789abcdef";
 	if (!(arr = ft_strnew(get_num_len(nb, base))))
 		return (NULL);
-	if (nb == FALSE)
+	if (nb == false)
 		arr[0] = '0';
 	i = 0;
 	while (nb != 0)

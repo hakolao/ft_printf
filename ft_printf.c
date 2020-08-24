@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:00:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/06/25 16:55:39 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/24 20:16:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int				init_printf(t_printf *data, int fd)
 	data->fd = fd;
 	data->len = 0;
 	if (!(data->buffer = ft_strnew(0)))
-		return (FALSE);
-	return (TRUE);
+		return (false);
+	return (true);
 }
 
 int						ft_dprintf(int fd, const char *format, ...)
@@ -26,10 +26,10 @@ int						ft_dprintf(int fd, const char *format, ...)
 	t_printf	data;
 
 	if (!(init_printf(&data, fd)))
-		return (FALSE);
+		return (false);
 	va_start(data.variables, format);
 	if (!parse_input(&data, (char*)format))
-		return (FALSE);
+		return (false);
 	va_end(data.variables);
 	write(data.fd, data.buffer, data.len);
 	ft_strdel(&data.buffer);
@@ -41,10 +41,10 @@ int						ft_sprintf(char *str, const char *format, ...)
 	t_printf	data;
 
 	if (!(init_printf(&data, 1)))
-		return (FALSE);
+		return (false);
 	va_start(data.variables, format);
 	if (!parse_input(&data, (char*)format))
-		return (FALSE);
+		return (false);
 	va_end(data.variables);
 	ft_strncpy(str, data.buffer, data.len);
 	ft_strdel(&data.buffer);
@@ -56,10 +56,10 @@ int						ft_printf(const char *format, ...)
 	t_printf	data;
 
 	if (!(init_printf(&data, 1)))
-		return (FALSE);
+		return (false);
 	va_start(data.variables, format);
 	if (!parse_input(&data, (char*)format))
-		return (FALSE);
+		return (false);
 	va_end(data.variables);
 	write(data.fd, data.buffer, data.len);
 	ft_strdel(&data.buffer);

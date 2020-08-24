@@ -6,13 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/07/10 15:16:01 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/24 22:16:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		run_the_rest(void)
+static int		run_the_rest(void)
 {
 	ft_printf("%hhd\n", 0);
 	ft_printf("%jd\n", 9223372036854775807);
@@ -37,10 +37,10 @@ int		run_the_rest(void)
 	ft_printf("%.0f\n", -0.0);
 	ft_printf("%.0f\n", 0.0);
 	ft_printf("%.0f\n", 0.0);
-	return (TRUE);
+	return (true);
 }
 
-int		run_first(void)
+static int		run_first(void)
 {
 	ft_printf("\n");
 	ft_printf("%%\n");
@@ -66,14 +66,14 @@ int		run_first(void)
 	ft_printf("%0 42hhu\n", 5656);
 	ft_printf("%+052.20f\n", 55.0999995);
 	ft_printf("%#42.25f\n", 55.0999995);
-	return (TRUE);
+	return (true);
 }
 
-int		main(void)
+int				main(void)
 {
 	int		debug_leaks;
 
-	debug_leaks = FALSE;
+	debug_leaks = false;
 	run_first();
 	run_the_rest();
 	if (debug_leaks)

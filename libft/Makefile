@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 14:43:04 by ohakola           #+#    #+#              #
-#    Updated: 2020/03/15 17:20:49 by ohakola          ###   ########.fr        #
+#    Updated: 2020/08/19 13:34:32 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,11 +93,12 @@ SOURCES = ft_atoi.c \
 		ft_pixel_foreach.c \
 		ft_sort_int_tab.c \
 		ft_pow.c \
-		ft_ftoa.c \
 		ft_match.c \
 		ft_strrev.c \
 		ft_capitalize.c \
-		ft_bzero.c
+		ft_bzero.c \
+		ft_round.c
+
 SRCS = $(addprefix $(DIR_SRC)/,$(SOURCES))
 OBJS = $(addprefix $(DIR_OBJ)/,$(SOURCES:.c=.o))
 HEADERS = ./

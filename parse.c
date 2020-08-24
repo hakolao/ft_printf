@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/03/16 16:20:19 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/24 20:16:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 static int						reset_var_data(t_printf *data)
 {
-	data->left_justify = FALSE;
-	data->pad_zeros = FALSE;
-	data->show_sign = FALSE;
-	data->blank_space = FALSE;
-	data->has_precision = FALSE;
-	data->zerox = FALSE;
+	data->left_justify = false;
+	data->pad_zeros = false;
+	data->show_sign = false;
+	data->blank_space = false;
+	data->has_precision = false;
+	data->zerox = false;
 	data->width = 0;
 	data->precision = 6;
 	data->middle_len = 0;
 	data->spec_len = 0;
 	data->var_len = 0;
 	data->type = length_none;
-	data->is_negative = FALSE;
-	data->is_zero_res = FALSE;
-	return (TRUE);
+	data->is_negative = false;
+	data->is_zero_res = false;
+	return (true);
 }
 
 static void						set_spec_len(t_fmt_specs *lengths,
@@ -77,13 +77,13 @@ static int						parse_middle(t_printf *data, char *fmt)
 	int		i;
 
 	if (!(data->buffer = extend_str(data->buffer, data->len, data->middle_len)))
-		return (FALSE);
+		return (false);
 	i = -1;
 	while (++i < data->middle_len)
 		data->buffer[data->len + i] = fmt[i];
 	data->len += data->middle_len;
 	data->buffer[data->len] = '\0';
-	return (TRUE);
+	return (true);
 }
 
 int								parse_input(t_printf *data, char *fmt)
@@ -97,17 +97,17 @@ int								parse_input(t_printf *data, char *fmt)
 	if (l.middle_len > 0)
 	{
 		if (!parse_middle(data, fmt))
-			return (FALSE);
+			return (false);
 		fmt += l.middle_len;
 	}
 	if (l.spec_len > 0)
 	{
 		if (!parse_spec_variable_pair(data, fmt + 1))
-			return (FALSE);
+			return (false);
 		fmt += l.spec_len + 1;
 	}
 	else if (*fmt == '%')
 		fmt += 1;
 	return (*fmt && (l.spec_len > 0 || l.middle_len > 0) ?
-			parse_input(data, fmt) : TRUE);
+			parse_input(data, fmt) : true);
 }

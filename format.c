@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/06/25 17:29:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/24 20:16:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ static void				handle_int_flag_specials(t_printf *data)
 	if (data->left_justify ||
 		(data->has_precision && data->precision == 0) ||
 		data->c == 'b')
-		data->pad_zeros = FALSE;
+		data->pad_zeros = false;
 	if (data->show_sign || data->is_negative)
-		data->blank_space = FALSE;
+		data->blank_space = false;
 	if (data->c == 'u')
 	{
-		data->show_sign = FALSE;
-		data->is_negative = FALSE;
-		data->blank_space = FALSE;
+		data->show_sign = false;
+		data->is_negative = false;
+		data->blank_space = false;
 	}
 }
 
@@ -65,14 +65,14 @@ char					*handle_formatting(t_printf *data, char *res)
 	else if (is_float_specifier(data->c))
 	{
 		if (data->left_justify)
-			data->pad_zeros = FALSE;
+			data->pad_zeros = false;
 		if (data->show_sign || data->is_negative)
-			data->blank_space = FALSE;
+			data->blank_space = false;
 	}
 	else if (!is_int_specifier(data->c))
 	{
 		if (data->blank_space || data->left_justify)
-			data->pad_zeros = FALSE;
+			data->pad_zeros = false;
 	}
 	if (!(res = handle_precision(data, res)))
 		return (NULL);

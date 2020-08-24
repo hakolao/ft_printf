@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/18 13:06:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/24 20:37:16 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@
 # define BUFF_SIZE 50
 # define MAX_FD 65536
 
-# define TRUE 1
-# define FALSE 0
-
 # include <string.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
+
+typedef enum	e_bool
+{
+	false,
+	true
+}				t_bool;
 
 typedef struct	s_list
 {
@@ -105,6 +108,7 @@ size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 void			ft_putnbr(int nb);
+void			ft_putnbr_unsigned(unsigned int nb);
 void			ft_putnbr_fd(int nb, int fd);
 char			*ft_itoa_base(int nb, int base);
 char			*ft_itoa(int n);
@@ -172,5 +176,7 @@ long double		ft_powl(long double nb, int pow);
 int				ft_exp_base(long double nb, int base);
 char			*ft_strnjoin(char const *s1, char const *s2,
 				size_t len1, size_t len2);
+double			ft_ceil(double num);
+double			ft_floor(double num);
 
 #endif

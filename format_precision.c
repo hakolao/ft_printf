@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/06/25 17:02:27 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/24 20:16:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char					*handle_int_precision(t_printf *data, char *res)
 	len = data->var_len;
 	if (data->has_precision && data->precision > 0)
 	{
-		data->pad_zeros = FALSE;
+		data->pad_zeros = false;
 		new_var_len = data->is_negative || data->show_sign ?
 				data->precision + 1 : data->precision;
 		if (new_var_len > len)

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 16:07:54 by ohakola           #+#    #+#             */
-/*   Updated: 2020/06/25 15:57:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/24 20:16:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ int						parse_spec_variable_pair(t_printf *data, char *fmt)
 	data->spec = fmt;
 	if (!(variable = parse_variable(data)) ||
 		!(data->buffer = extend_str(data->buffer, data->len, data->var_len)))
-		return (FALSE);
+		return (false);
 	i = -1;
 	while (++i < data->var_len)
 		data->buffer[data->len + i] = variable[i];
 	data->len += data->var_len;
 	data->buffer[data->len] = '\0';
 	ft_strdel(&variable);
-	return (TRUE);
+	return (true);
 }
