@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/08/24 21:59:43 by ohakola          ###   ########.fr        #
+#    Updated: 2020/08/24 22:28:59 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ fclean: clean
 	@make -C $(LIBDTOA) fclean
 
 test: all
+	@make -C $(LIBDTOA) test
 	$(CC) -o test_run test_main/main.c \
 		$(LIBFTFLAGS) \
 		$(LIBDTOAFLAGS) \
