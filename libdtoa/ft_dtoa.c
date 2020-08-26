@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/26 23:30:47 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 23:48:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,11 @@ static void		set_cutoffs(t_dragon4_params *dragon, t_dtoa_params dtoa)
 ** Float is dissected into mantissa, sign and exponent.
 ** See: http://www.ryanjuckett.com/programming/printing-floating-point-numbers/
 ** part-3/
-** Mantissa becomes (2^52 + float mantissa)
-** Exponent becomes (exponent - 1023 - 52)
-** Sign is 1 when negative, 0 when positive thus bufffer length is increased by
+** Mantissa becomes (2^63 + float mantissa)
+** Exponent becomes (exponent - 16383 - 63)
+** Sign is 1 when negative, 0 when positive thus buffer length is increased by
 ** sign bit.
 */
-
-#include <stdio.h>
 
 static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 				char *buf, uint32_t buf_size)
@@ -65,7 +63,6 @@ static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 	fd.f = dtoa.value;
 	if (fd.b.sign == 1)
 		*buf = '-';
-	printf("mantissa: %lld, exp: %d, sign: %d\n", fd.b.fraction, fd.b.exp, fd.b.sign);
 	if (fd.b.exp != 0)
 	{
 		dragon->buf = buf + fd.b.sign;
