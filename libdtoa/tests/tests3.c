@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 17:30:47 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 19:34:37 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 21:58:55 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ const char	*test_dtoa_normal(void)
 	d1 = 8.12345676;
 	res = ft_dtoa((t_dtoa_params){.format = FORMAT_NORM,
 		.precision = 5, .value = d1});
+	ft_putendl(res);
 	OH_ASSERT("dtoa wrong 1", ft_strequ(res, "8.12346"));
 	ft_strdel(&res);
 	d1 = -8.12345676;

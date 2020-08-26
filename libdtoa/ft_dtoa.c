@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/26 15:08:52 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 21:57:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 	{
 		dragon->buf = buf + fd.b.sign;
 		dragon->buf_size = buf_size - fd.b.sign - (dtoa.format == FORMAT_NORM);
-		dragon->mantissa = (1ULL << 52) | fd.b.fraction;
-		dragon->exponent = fd.b.exp - 1023 - 52;
-		dragon->mantissa_high_bit_index = 52;
+		dragon->mantissa = (1ULL << 63) | fd.b.fraction;
+		dragon->exponent = fd.b.exp - 16383 - 63;
+		dragon->mantissa_high_bit_index = 63;
 		dragon->has_unequal_margins = (fd.b.exp != 1) && (fd.b.fraction == 0);
 	}
 	else
@@ -77,8 +77,8 @@ static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 		dragon->buf = buf + fd.b.sign;
 		dragon->buf_size = buf_size - fd.b.sign - (dtoa.format == FORMAT_NORM);
 		dragon->mantissa = fd.b.fraction;
-		dragon->exponent = 1 - 1023 - 52;
-		dragon->mantissa_high_bit_index = log_base2_32(fd.b.fraction);
+		dragon->exponent = 1 - 1023 - 63;
+		dragon->mantissa_high_bit_index = log_base2_64(fd.b.fraction);
 		dragon->has_unequal_margins = false;
 	}
 	set_cutoffs(dragon, dtoa);
