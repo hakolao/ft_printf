@@ -6,11 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:41:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 19:30:14 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 14:28:21 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_dtoa.h"
+
+/*
+** Fraction digits are moved by one to give space for the decimal dot.
+*/
 
 static void				move_fraction_digits(t_dragon4_params params,
 						uint32_t *fraction_digits, uint32_t *digit_i)
@@ -26,6 +30,11 @@ static void				move_fraction_digits(t_dragon4_params params,
 	*digit_i += (1 + *fraction_digits);
 	params.buf_size -= (1 + *fraction_digits);
 }
+
+/*
+** After fraction digits, as many zeros as there are remaining after subtracting
+** number of fraction digits from precision, are added.
+*/
 
 static void				add_trailing_zeros(t_dragon4_params params,
 						uint32_t fraction_digits, int32_t precision,
@@ -47,6 +56,12 @@ static void				add_trailing_zeros(t_dragon4_params params,
 		params.buf[zeros_i++] = '0';
 	*digit_i = zeros_i;
 }
+
+/*
+** Based on the exponent value either + or - is placed after the e in exp buf
+** array. tens, hundreds and thousand digits are added in their corresponding
+** place. Exp buf is memcopied after the digits.
+*/
 
 static void				add_exp_notation(t_dragon4_params params,
 						int32_t exp, uint32_t *digit_i)
@@ -74,6 +89,14 @@ static void				add_exp_notation(t_dragon4_params params,
 	*digit_i += exp_size;
 	params.buf_size -= exp_size;
 }
+
+/*
+** Formats the digit in buffer in scientific format, e.g.:
+** 1.123e001
+** After first digit, fraction digits are moved onwards and a dot is added.
+** Trailing zeros are added.
+** Lastly the exponent is placed at the end of buffer.
+*/
 
 uint32_t				format_scientific(t_dragon4_params params,
 						int32_t precision)
