@@ -6,11 +6,21 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 21:12:00 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 14:20:54 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_dtoa.h"
+
+/*
+** Sets cutoff modes based on the inputted formats and precision
+** If precision is negative, use no cutoff and output as many decimals
+** as possible.
+** With scientific, cutoff includes the total length of the digit array
+** because there is always just one digit ahead of the dot. Precision (cutoff
+** num is incremented by one to account for that).
+** With normal mode the precision defines the cutoff num.
+*/
 
 static void		set_cutoffs(t_dragon4_params *dragon, t_dtoa_params dtoa)
 {
@@ -33,6 +43,17 @@ static void		set_cutoffs(t_dragon4_params *dragon, t_dtoa_params dtoa)
 		}
 	}
 }
+
+/*
+** Presets dragon4 algorithm related parameters before calling the algorithm.
+** Float is dissected into mantissa, sign and exponent.
+** See: http://www.ryanjuckett.com/programming/printing-floating-point-numbers/
+** part-3/
+** Mantissa becomes (2^52 + fraction)
+** Exponent becomes (exponent - 1023 - 52)
+** Sign is 1 when negative, 0 when positive thus bufffer length is increased by
+** sign bit.
+*/
 
 static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 				char *buf, uint32_t buf_size)
@@ -63,6 +84,11 @@ static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 	set_cutoffs(dragon, dtoa);
 }
 
+/*
+** Dtoa returns an allocated double value as a char* in either scientific
+** or normal format.
+*/
+
 char			*ft_dtoa(t_dtoa_params params)
 {
 	char				*res;
@@ -82,6 +108,11 @@ char			*ft_dtoa(t_dtoa_params params)
 	ft_strcpy(res, buf);
 	return (res);
 }
+
+/*
+** Dtoa version where the caller can input buffer to prevent memory allocation
+** costs. The length of the resulting char array is returned.
+*/
 
 int				ft_dtoa_buf(t_dtoa_params params, char *buf, int buf_size)
 {
