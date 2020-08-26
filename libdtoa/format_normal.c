@@ -6,11 +6,18 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:40:28 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 19:51:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 14:54:16 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_dtoa.h"
+
+/*
+** When double value is larger than one, buffer is first appended with zeros
+** by the amount of whole digits - digits returned by dragon4. Until whole digit
+** is covered. Then fraction digits are moved by whole digits + 1 to account for
+** the decimal dot.
+*/
 
 static void		format_gte_one(t_dragon4_params params, int32_t print_exponent,
 				uint32_t *digits, uint32_t *fraction_digits)
@@ -39,6 +46,11 @@ static void		format_gte_one(t_dragon4_params params, int32_t print_exponent,
 	}
 }
 
+/*
+** Zeros before the digit are filled based on inputted digit start index.
+** And after 0. (this function is only used when double value is less than 1.0)
+*/
+
 static void		fill_zeros_before_digit(t_dragon4_params params,
 				uint32_t digits_start_i)
 {
@@ -48,6 +60,12 @@ static void		fill_zeros_before_digit(t_dragon4_params params,
 	while (i < digits_start_i)
 		params.buf[i++] = '0';
 }
+
+/*
+** When number is less than one, e.g. 0.12335, digits are moved by where
+** digits start index starts (2: 0.) + (fraction zeros). Zeros before digit
+** are filled. 0 and . are placed to the beginning of buffer.
+*/
 
 static void		format_lt_one(t_dragon4_params params, int32_t print_exponent,
 				uint32_t *digits, uint32_t *fraction_digits)
@@ -76,6 +94,14 @@ static void		format_lt_one(t_dragon4_params params, int32_t print_exponent,
 	if (params.buf_size > 0 && (params.buf[0] = '0'))
 		*digits += 1;
 }
+
+/*
+** Formats the digit in buffer in positional (normal) format, e.g.:
+** 123.123456
+** Fraction parts are first moved and decimal dot is placed based on where
+** whole digits and fraction digits are cut.
+** Trailing zeros are added if precision is larger than fraction digits.
+*/
 
 uint32_t		format_normal(t_dragon4_params params, int32_t precision)
 {
