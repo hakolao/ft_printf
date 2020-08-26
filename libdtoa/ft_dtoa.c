@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/26 14:20:54 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 15:08:52 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void		set_cutoffs(t_dragon4_params *dragon, t_dtoa_params dtoa)
 ** Float is dissected into mantissa, sign and exponent.
 ** See: http://www.ryanjuckett.com/programming/printing-floating-point-numbers/
 ** part-3/
-** Mantissa becomes (2^52 + fraction)
+** Mantissa becomes (2^52 + float mantissa)
 ** Exponent becomes (exponent - 1023 - 52)
 ** Sign is 1 when negative, 0 when positive thus bufffer length is increased by
 ** sign bit.

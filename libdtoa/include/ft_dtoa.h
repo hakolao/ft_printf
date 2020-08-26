@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 21:11:01 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 15:12:41 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,34 @@
 
 # include "libft.h"
 
-# define MAX_DIGITS 256
+/*
+** Max length of big int array (blocks)
+*/
+
 # define MAX_BI_BLOCKS 35
 # define DTOA_BUF_SIZE 2048
+
+/*
+** Log base 10 of 2 as long double.
+*/
+
 # define LOG10_2 0.30102999566398119521373889472449
+
+/*
+** Format type, whether value is to be formatted like: 123.123 or 1.23123e002
+*/
 
 typedef enum			e_dtoa_format
 {
 	FORMAT_NORM,
 	FORMAT_SCI
 }						t_dtoa_format;
+
+/*
+** Dtoa's cutoff mode, None: no cutoff at all, all decimals are printed,
+** total length uses cutoff number to account for count of all digits in the
+** output. Fraction length cuts the number by counting number of decimal digits.
+*/
 
 typedef enum			e_cutoff_mode
 {
@@ -35,6 +53,10 @@ typedef enum			e_cutoff_mode
 	CUTOFF_FRACTION_LENGTH
 }						t_cutoff_mode;
 
+/*
+** Input parameters to dtoa.
+*/
+
 typedef struct			s_dtoa_params
 {
 	double			value;
@@ -42,11 +64,25 @@ typedef struct			s_dtoa_params
 	int32_t			precision;
 }						t_dtoa_params;
 
+/*
+** Big integer struct where integer is represented in base 2^32. Each block
+** is a bit of 32 bit integer. So e.g. [123, 456, 789] =
+** 123 * (2^32)^0 + 456 * (2^32)^1 + 789 * (2^32)^2 = 1.455448108E22
+*/
+
 typedef struct			s_big_int
 {
 	uint32_t		length;
 	uint32_t		blocks[MAX_BI_BLOCKS];
 }						t_big_int;
+
+/*
+** Mantissa: 2^52 + float mantissa
+** Exponent: float exponent in base 2 ((exponent - 1023 - 52))
+** mantissa_high_bit_index: Index of the highest mantissa bit
+** Cutoff num: Where digit array is cut off (e.g. by precision)
+** Out exponent: Base 10 exponent of the first digit (e.g. used in sci format)
+*/
 
 typedef struct			s_dragon4_params
 {
