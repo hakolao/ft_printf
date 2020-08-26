@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/26 15:12:41 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 15:23:45 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,10 @@ uint32_t				output_without_cutoff(t_dragon4_params params,
 						t_big_int scaled_margins[2]);
 uint32_t				output_with_cutoff(t_dragon4_params params,
 						t_big_int *scale, t_big_int *scaled_value);
-void					initial_whole_number_integers(t_dragon4_params params,
+void					normalized_initial_state(t_dragon4_params params,
 						t_big_int *scale, t_big_int *scaled_value,
 						t_big_int scaled_margins[2]);
-void					initial_fractional_number_integers(t_dragon4_params
+void					denormalized_initial_state(t_dragon4_params
 						params, t_big_int *scale, t_big_int *scaled_value,
 						t_big_int scaled_margins[2]);
 void					scale_values_by_digit_exponent(t_big_int *scale,

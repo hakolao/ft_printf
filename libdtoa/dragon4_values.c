@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 18:57:09 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 20:13:56 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 15:23:45 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			scale_values_by_digit_exponent(t_big_int *scale,
 	}
 }
 
-void			initial_whole_number_integers(t_dragon4_params params,
+void			normalized_initial_state(t_dragon4_params params,
 				t_big_int *scale, t_big_int *scaled_value,
 				t_big_int scaled_margins[2])
 {
@@ -63,7 +63,7 @@ void			initial_whole_number_integers(t_dragon4_params params,
 	}
 }
 
-void			initial_fractional_number_integers(t_dragon4_params params,
+void			denormalized_initial_state(t_dragon4_params params,
 				t_big_int *scale, t_big_int *scaled_value,
 				t_big_int scaled_margins[2])
 {
