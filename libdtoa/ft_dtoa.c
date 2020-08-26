@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/26 21:57:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 22:12:26 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static void		set_cutoffs(t_dragon4_params *dragon, t_dtoa_params dtoa)
 ** sign bit.
 */
 
+#include <stdio.h>
+
 static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 				char *buf, uint32_t buf_size)
 {
@@ -63,6 +65,7 @@ static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 	fd.f = dtoa.value;
 	if (fd.b.sign == 1)
 		*buf = '-';
+	printf("mantissa: %lld, exp: %d, sign: %d\n", fd.b.fraction, fd.b.exp, fd.b.sign);
 	if (fd.b.exp != 0)
 	{
 		dragon->buf = buf + fd.b.sign;
