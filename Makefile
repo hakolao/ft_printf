@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/08/25 00:19:01 by ohakola          ###   ########.fr        #
+#    Updated: 2020/08/26 23:23:28 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ OBJS = $(SOURCES:.c=.o)
 all: $(DIR_OBJ) $(NAME)
 
 $(NAME): $(OBJS)
+	@rm -rf temp
 	@mkdir temp
 	@make -C $(LIBFT)
 	@make -C $(LIBDTOA)
