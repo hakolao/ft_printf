@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 20:24:15 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 14:57:05 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include "libft.h"
 # include "ft_dtoa.h"
 # include <stdarg.h>
+
+/*
+** A data struct containing all flag & fmt token related information
+*/
 
 typedef struct		s_printf
 {
@@ -41,11 +45,20 @@ typedef struct		s_printf
 	int			is_zero_res;
 }					t_printf;
 
+/*
+** A data struct used as a helper when looping through ft_printf specs and
+** non-token characters (e.g. %u)
+*/
+
 typedef struct		s_fmt_specs
 {
 	int			middle_len;
 	int			spec_len;
 }					t_fmt_specs;
+
+/*
+** Enums for variable length type options in ft_printf spec fmt.
+*/
 
 enum				e_lengths
 {
