@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 19:23:49 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 22:23:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 22:09:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void			print_result(t_bool success, int failures)
 		ft_putnbr(failures);
 		ft_putstr(" out of ");
 		ft_putnbr(g_tests_run);
-		ft_putstr("TESTS FAILED\n");
+		ft_putstr(" TESTS FAILED\n");
 	}
 	else
 	{
