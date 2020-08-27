@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/26 15:23:45 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/26 23:22:56 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** Max length of big int array (blocks)
 */
 
-# define MAX_BI_BLOCKS 35
+# define MAX_BI_BLOCKS 1023
 # define DTOA_BUF_SIZE 2048
 
 /*
@@ -59,7 +59,7 @@ typedef enum			e_cutoff_mode
 
 typedef struct			s_dtoa_params
 {
-	double			value;
+	long double		value;
 	t_dtoa_format	format;
 	int32_t			precision;
 }						t_dtoa_params;
