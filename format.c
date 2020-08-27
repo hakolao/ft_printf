@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 20:16:47 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 15:11:09 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,14 @@ char					*handle_formatting(t_printf *data, char *res)
 		handle_int_flag_specials(data);
 	else if (is_float_specifier(data->c))
 	{
-		if (data->left_justify)
+		if (data->pad_zeros && (data->left_justify ||
+			ft_match(res, "*nan") || ft_match(res, "*inf")))
 			data->pad_zeros = false;
-		if (data->show_sign || data->is_negative)
+		if (data->blank_space &&
+			(data->show_sign || data->is_negative || ft_match(res, "*nan")))
 			data->blank_space = false;
+		if (data->show_sign && ft_match(res, "*nan"))
+			data->show_sign = false;
 	}
 	else if (!is_int_specifier(data->c))
 	{

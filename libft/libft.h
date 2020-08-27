@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 13:59:01 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 15:16:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,6 @@ typedef struct	s_pixel_bounds
 	int			y_start;
 	int			y_end;
 }				t_pixel_bounds;
-
-// typedef struct	s_float_bits {
-// 	unsigned long long int		fraction:63;
-// 	unsigned long long int		intbit:1;
-// 	unsigned long long int		exp:15;
-// 	unsigned long long int		sign:1;
-// }				t_float_bits;
 
 typedef struct	s_float_bits {
 	unsigned long long int		fraction:52;

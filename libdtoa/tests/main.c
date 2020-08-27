@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 19:23:49 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/26 22:09:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 15:15:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void			all_tests(void)
 	OH_RUN_TEST(test_dtoa_normal);
 	OH_RUN_TEST(test_dtoa_scientific1);
 	OH_RUN_TEST(test_dtoa_scientific2);
-	OH_RUN_TEST(just_another_test);
+	OH_RUN_TEST(just_another_test1);
+	OH_RUN_TEST(just_another_test2);
 }
 
 static void			print_result(t_bool success, int failures)

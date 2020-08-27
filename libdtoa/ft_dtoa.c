@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 14:22:07 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 15:15:50 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,12 @@ static void		set_cutoffs(t_dragon4_params *dragon, t_dtoa_params dtoa)
 ** sign bit.
 */
 
-#include <stdio.h>
-
 static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 				char *buf, uint32_t buf_size)
 {
 	t_float_dissector	fd;
 
 	fd.f = dtoa.value;
-	if (fd.b.sign == 1)
-		*buf = '-';
-	// printf("exp: %u, mantissa: %llu\n", fd.b.exp, fd.b.fraction);
-
 	if (fd.b.exp != 0)
 	{
 		dragon->buf = buf + fd.b.sign;
@@ -102,11 +96,13 @@ char			*ft_dtoa(t_dtoa_params params)
 	t_float_dissector	fd;
 
 	fd.f = params.value;
-	set_dragon4_params(&dragon, params, buf, DTOA_BUF_SIZE);
+	if (fd.b.sign == 1)
+		*buf = '-';
 	if (fd.b.exp == 0x7FF)
-		print_len = format_inf_nan(dragon, fd.b.fraction, 13) + fd.b.sign;
+		print_len = format_inf_nan(buf + fd.b.sign, fd.b.fraction) + fd.b.sign;
 	else
 	{
+		set_dragon4_params(&dragon, params, buf, DTOA_BUF_SIZE);
 		if (params.format == FORMAT_SCI)
 			print_len = format_scientific(dragon, params.precision) + fd.b.sign;
 		else
@@ -130,11 +126,13 @@ int				ft_dtoa_buf(t_dtoa_params params, char *buf, int buf_size)
 	t_float_dissector	fd;
 
 	fd.f = params.value;
-	set_dragon4_params(&dragon, params, buf, buf_size);
+	if (fd.b.sign == 1)
+		*buf = '-';
 	if (fd.b.exp == 0x7FF)
-		print_len = format_inf_nan(dragon, fd.b.fraction, 13) + fd.b.sign;
+		print_len = format_inf_nan(buf + fd.b.sign, fd.b.fraction) + fd.b.sign;
 	else
 	{
+		set_dragon4_params(&dragon, params, buf, buf_size);
 		if (params.format == FORMAT_SCI)
 			print_len = format_scientific(dragon, params.precision) + fd.b.sign;
 		else

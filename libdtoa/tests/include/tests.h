@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 19:23:54 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 22:22:07 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 15:15:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ const char	*test_new_ceil_and_floor(void);
 const char	*test_dtoa_normal(void);
 const char	*test_dtoa_scientific1(void);
 const char	*test_dtoa_scientific2(void);
-const char	*just_another_test(void);
+const char	*just_another_test1(void);
+const char	*just_another_test2(void);
 
 #endif
