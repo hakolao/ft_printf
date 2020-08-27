@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/08/24 21:01:47 by ohakola          ###   ########.fr        #
+#    Updated: 2020/08/27 13:51:05 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ LIBFTFLAGS = -L$(LIBFT) -lft
 FLAGS = -Wall -Wextra -Werror -O2
 SOURCES = ft_dtoa.c \
 			format_normal.c \
+			format_inf_nan.c \
 			format_scientific.c \
 			math_utils.c \
 			dragon4.c \
