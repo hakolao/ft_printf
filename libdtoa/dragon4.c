@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 19:27:50 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/26 15:38:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 12:59:39 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ uint32_t			dragon4(t_dragon4_params params)
 		scaled_margins, &digit_exponent);
 	*(params.out_exponent) = digit_exponent - 1;
 	prepare_values_for_division(&scale, &scaled_value, scaled_margins);
-	if (CUTOFF_NONE)
+	if (params.cutoff_mode == CUTOFF_NONE)
 		return (output_without_cutoff(params, &scale, &scaled_value,
 			scaled_margins));
 	else
