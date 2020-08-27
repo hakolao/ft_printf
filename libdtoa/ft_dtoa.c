@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 17:09:53 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 17:54:06 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		set_cutoffs(t_dragon4_params *dragon, t_dtoa_params dtoa)
 			dragon->cutoff_mode = CUTOFF_FRACTION_LENGTH;
 			dragon->cutoff_num = dtoa.precision;
 		}
-		else if (dtoa.format == FORMAT_SCI)
+		else if (dtoa.format == FORMAT_SCI || dtoa.g_mode)
 		{
 			dragon->cutoff_mode = CUTOFF_TOTAL_LENGTH;
 			dragon->cutoff_num = dtoa.precision + 1;
@@ -61,6 +61,7 @@ static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 	t_float_dissector	fd;
 
 	fd.f = dtoa.value;
+	dragon->no_trailing_zeros = dtoa.g_mode;
 	if (fd.b.exp != 0)
 	{
 		dragon->buf = buf + fd.b.sign;

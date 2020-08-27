@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:40:28 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 17:09:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 18:17:34 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,13 +120,14 @@ uint32_t		format_normal(t_dragon4_params params, int32_t precision)
 		format_lt_one(params, exp, &digits, &fraction_digits);
 	if (precision > (int32_t)fraction_digits && digits < params.buf_size)
 	{
-		if (fraction_digits == 0)
+		if (fraction_digits == 0 && !params.no_trailing_zeros)
 			params.buf[digits++] = '.';
 		total_digits = digits + (precision - fraction_digits);
 		if (total_digits > params.buf_size)
 			total_digits = params.buf_size;
-		while (digits < total_digits)
-			params.buf[digits++] = '0';
+		if (!params.no_trailing_zeros)
+			while (digits < total_digits)
+				params.buf[digits++] = '0';
 	}
 	params.buf[digits] = '\0';
 	return (digits);

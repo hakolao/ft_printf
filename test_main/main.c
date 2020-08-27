@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 17:08:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 18:05:24 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static int		run_more(void)
 	ft_printf("pft%*.*ntest%d\n", 5, 5, "asdf", 123);
 	ft_printf("%.18e\n",  -DBL_MIN);
 	ft_printf("%#.0f\n", -7.4);
+	ft_printf("%g\n", -958.125);
+	ft_printf("%g\n", 0.000001);
 	return (true);
 }
 

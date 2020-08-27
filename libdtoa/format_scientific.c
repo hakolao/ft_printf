@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:41:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 17:15:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 17:48:08 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ uint32_t				format_scientific(t_dragon4_params params,
 	fraction_digits = digits - 1;
 	if (fraction_digits > 0 && params.buf_size > 1)
 		move_fraction_digits(params, &fraction_digits, &digit_i);
-	if (precision > (int32_t)fraction_digits && params.buf_size > 1)
+	if (precision > (int32_t)fraction_digits && params.buf_size > 1 &&
+		!params.no_trailing_zeros)
 		add_trailing_zeros(params, fraction_digits, precision, &digit_i);
 	if (precision == 0 && hashtag && fraction_digits == 0)
 		params.buf[digit_i++] = '.';
