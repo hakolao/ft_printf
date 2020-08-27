@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 21:35:22 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 13:05:16 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ char					*parse_float(t_printf *data)
 	fds.f = var;
 	if (fds.b.sign)
 		data->is_negative = true;
+	data->precision = data->precision >= 0 ? data->precision : 6;
 	data->var_len = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
 		.value = var, .format = data->c == 'f' || data->c == 'F' ?
 			FORMAT_NORM : FORMAT_SCI},

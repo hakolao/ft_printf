@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 18:52:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 20:01:57 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 13:00:23 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ uint32_t		output_without_cutoff(t_dragon4_params params, t_big_int *scale,
 		digit_exp = digit_exp - 1;
 		output_digit = big_int_divide_to_output_digit(scaled_value, scale);
 		big_int_add(scaled_value, &scaled_margins[1], &scaled_value_high);
-		lo_hi[0] = big_int_cmp(&scaled_value_high, scale) < 0;
+		lo_hi[0] = big_int_cmp(scaled_value, &scaled_margins[0]) < 0;
 		lo_hi[1] = big_int_cmp(&scaled_value_high, scale) > 0;
 		if (lo_hi[0] | lo_hi[1] | (digit_exp == cutoff(params, digit_exp)))
 			break ;
