@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 15:15:50 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 17:09:53 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ char			*ft_dtoa(t_dtoa_params params)
 	{
 		set_dragon4_params(&dragon, params, buf, DTOA_BUF_SIZE);
 		if (params.format == FORMAT_SCI)
-			print_len = format_scientific(dragon, params.precision) + fd.b.sign;
+			print_len = format_scientific(dragon, params.precision,
+				params.hashtag) + fd.b.sign;
 		else
 			print_len = format_normal(dragon, params.precision) + fd.b.sign;
 	}
@@ -134,7 +135,8 @@ int				ft_dtoa_buf(t_dtoa_params params, char *buf, int buf_size)
 	{
 		set_dragon4_params(&dragon, params, buf, buf_size);
 		if (params.format == FORMAT_SCI)
-			print_len = format_scientific(dragon, params.precision) + fd.b.sign;
+			print_len = format_scientific(dragon, params.precision,
+				params.hashtag) + fd.b.sign;
 		else
 			print_len = format_normal(dragon, params.precision) + fd.b.sign;
 	}

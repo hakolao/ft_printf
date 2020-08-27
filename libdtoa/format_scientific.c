@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:41:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/26 14:28:21 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 17:15:55 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,29 @@ static void				add_trailing_zeros(t_dragon4_params params,
 	*digit_i = zeros_i;
 }
 
+static void				set_exp_buf(t_dragon4_params params, int32_t exp,
+						char *exp_buf, uint32_t *exp_size)
+{
+	uint32_t	tens;
+	uint32_t	hundreds;
+
+	hundreds = (exp / 100);
+	tens = (exp - hundreds * 100) / 10;
+	if (hundreds == 0)
+	{
+		exp_buf[2] = (char)('0' + tens);
+		exp_buf[3] = (char)('0' + (exp - hundreds * 100 - tens * 10));
+		*exp_size = (params.buf_size - 1) > 4 ? 4 : params.buf_size - 1;
+	}
+	else
+	{
+		exp_buf[2] = (char)('0' + hundreds);
+		exp_buf[3] = (char)('0' + tens);
+		exp_buf[4] = (char)('0' + (exp - hundreds * 100 - tens * 10));
+		*exp_size = (params.buf_size - 1) > 5 ? 5 : params.buf_size - 1;
+	}
+}
+
 /*
 ** Based on the exponent value either + or - is placed after the e in exp buf
 ** array. tens, hundreds and thousand digits are added in their corresponding
@@ -68,8 +91,6 @@ static void				add_exp_notation(t_dragon4_params params,
 {
 	char		exp_buf[5];
 	uint32_t	exp_size;
-	uint32_t	tens;
-	uint32_t	hundreds;
 
 	exp_buf[0] = 'e';
 	if (exp >= 0)
@@ -79,12 +100,7 @@ static void				add_exp_notation(t_dragon4_params params,
 		exp_buf[1] = '-';
 		exp = -exp;
 	}
-	tens = (exp / 100);
-	hundreds = (exp - tens * 100) / 10;
-	exp_buf[2] = (char)('0' + tens);
-	exp_buf[3] = (char)('0' + hundreds);
-	exp_buf[4] = (char)('0' + (exp - hundreds * 100 - tens * 10));
-	exp_size = (params.buf_size - 1) > 5 ? 5 : params.buf_size - 1;
+	set_exp_buf(params, exp, exp_buf, &exp_size);
 	ft_memcpy(params.buf + *digit_i, exp_buf, exp_size);
 	*digit_i += exp_size;
 	params.buf_size -= exp_size;
@@ -99,7 +115,7 @@ static void				add_exp_notation(t_dragon4_params params,
 */
 
 uint32_t				format_scientific(t_dragon4_params params,
-						int32_t precision)
+						int32_t precision, t_bool hashtag)
 {
 	int32_t		exp;
 	uint32_t	digits;
@@ -120,6 +136,8 @@ uint32_t				format_scientific(t_dragon4_params params,
 		move_fraction_digits(params, &fraction_digits, &digit_i);
 	if (precision > (int32_t)fraction_digits && params.buf_size > 1)
 		add_trailing_zeros(params, fraction_digits, precision, &digit_i);
+	if (precision == 0 && hashtag && fraction_digits == 0)
+		params.buf[digit_i++] = '.';
 	if (params.buf_size > 1)
 		add_exp_notation(params, exp, &digit_i);
 	params.buf[digit_i] = '\0';

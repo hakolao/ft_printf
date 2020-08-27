@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 15:13:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 15:30:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 16:36:25 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ int						is_int_specifier(char c)
 int						is_float_specifier(char c)
 {
 	return (c == 'f' || c == 'F' || c == 'e' || c == 'E');
-}
-
-int						is_specifier(char c)
-{
-	return (is_int_specifier(c) || is_float_specifier(c) ||
-			c == 'n' || c == 'c' || c == 's' || c == 'p' || c == '%');
 }
 
 int						is_flag(char c)

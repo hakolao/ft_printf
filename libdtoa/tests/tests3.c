@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 17:30:47 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/26 23:48:15 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 16:26:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,17 @@ const char	*test_dtoa_scientific1(void)
 	d1 = 8.12345676;
 	res = ft_dtoa((t_dtoa_params){.format = FORMAT_SCI,
 		.precision = 5, .value = d1});
-	OH_ASSERT("dtoa sci wrong 1", ft_strequ(res, "8.12346e+000"));
+	OH_ASSERT("dtoa sci wrong 1", ft_strequ(res, "8.12346e+00"));
 	ft_strdel(&res);
 	d1 = -8.12345676;
 	res = ft_dtoa((t_dtoa_params){.format = FORMAT_SCI,
 		.precision = 15, .value = d1});
-	OH_ASSERT("dtoa sci wrong 2", ft_strequ(res, "-8.123456760000000e+000"));
+	OH_ASSERT("dtoa sci wrong 2", ft_strequ(res, "-8.123456760000000e+00"));
 	ft_strdel(&res);
 	d1 = -0.0;
 	res = ft_dtoa((t_dtoa_params){.format = FORMAT_SCI,
 		.precision = 15, .value = d1});
-	OH_ASSERT("dtoa sci wrong 3", ft_strequ(res, "-0.000000000000000e+000"));
+	OH_ASSERT("dtoa sci wrong 3", ft_strequ(res, "-0.000000000000000e+00"));
 	ft_strdel(&res);
 	return (0);
 }
@@ -112,12 +112,12 @@ const char	*test_dtoa_scientific2(void)
 	d1 = -0.0922042000;
 	res = ft_dtoa((t_dtoa_params){.format = FORMAT_SCI,
 		.precision = 4, .value = d1});
-	OH_ASSERT("dtoa sci wrong 4", ft_strequ(res, "-9.2204e-002"));
+	OH_ASSERT("dtoa sci wrong 4", ft_strequ(res, "-9.2204e-02"));
 	ft_strdel(&res);
 	d1 = 922042.282592;
 	res = ft_dtoa((t_dtoa_params){.format = FORMAT_SCI,
 		.precision = 11, .value = d1});
-	OH_ASSERT("dtoa sci wrong 4", ft_strequ(res, "9.22042282592e+005"));
+	OH_ASSERT("dtoa sci wrong 4", ft_strequ(res, "9.22042282592e+05"));
 	ft_strdel(&res);
 	return (0);
 }

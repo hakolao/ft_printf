@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 14:43:05 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 17:09:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct			s_dtoa_params
 	double			value;
 	t_dtoa_format	format;
 	int32_t			precision;
+	t_bool			hashtag;
 }						t_dtoa_params;
 
 /*
@@ -110,7 +111,7 @@ int						ft_dtoa_buf(t_dtoa_params params, char *buf,
 uint32_t				format_normal(t_dragon4_params params,
 						int32_t precision);
 uint32_t				format_scientific(t_dragon4_params params,
-						int32_t precision);
+						int32_t precision, t_bool hashtag);
 uint32_t				format_inf_nan(char *buf, uint64_t mantissa);
 
 /*

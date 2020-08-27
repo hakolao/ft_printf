@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/26 14:57:05 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 16:36:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int					ft_printf(const char *format, ...);
 ** Validation
 */
 
-int					is_specifier(char c);
 int					is_sub_specifier(char c);
 int					is_float_specifier(char c);
 int					is_int_specifier(char c);

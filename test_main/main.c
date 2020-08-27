@@ -6,13 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 15:30:08 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 17:08:48 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		run_the_rest(void)
+static int		run_some(void)
 {
 	double special;
 
@@ -41,7 +41,10 @@ static int		run_the_rest(void)
 	return (true);
 }
 
-static int		run_first(void)
+#include <float.h>
+#include <stdio.h>
+
+static int		run_more(void)
 {
 	ft_printf("%d%d\n", 42, 41);
 	ft_printf("%d%d%d\n", 42, 43, 44);
@@ -67,6 +70,8 @@ static int		run_first(void)
 	ft_printf("{%f}{%lf}{%Lf}\n", -1444565444646.6465424242242454654,
 	-1444565444646.6465424242242454654, -1444565444646.6465424242242454654l);
 	ft_printf("pft%*.*ntest%d\n", 5, 5, "asdf", 123);
+	ft_printf("%.18e\n",  -DBL_MIN);
+	ft_printf("%#.0f\n", -7.4);
 	return (true);
 }
 
@@ -75,8 +80,8 @@ int				main(void)
 	int		debug_leaks;
 
 	debug_leaks = false;
-	run_first();
-	run_the_rest();
+	run_some();
+	run_more();
 	if (debug_leaks)
 		while (1)
 			;
