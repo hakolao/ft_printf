@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 22:08:52 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/26 20:28:25 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/27 13:21:33 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ void			big_int_retard_print(t_big_int *b)
 	while (++i < b->length)
 	{
 		ft_putnbr_unsigned(b->blocks[i]);
-		ft_putstr("*(2^32-1)^");
-		ft_putnbr_unsigned(i);
 		if (i < b->length - 1)
-			ft_putstr(" + ");
+			ft_putstr(", ");
 	}
 	ft_putstr("\n");
 }
