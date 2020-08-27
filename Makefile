@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/08/27 13:10:26 by ohakola          ###   ########.fr        #
+#    Updated: 2020/08/27 17:30:25 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SOURCES = ft_printf.c \
 			parse.c \
 			parse_specs.c \
 			parse_sub_specs.c \
-			parse_numbers.c \
+			parse_int.c \
+			parse_float.c \
 			parse_utils.c \
 			string_utils.c \
 			format.c \
