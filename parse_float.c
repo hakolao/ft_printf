@@ -6,39 +6,19 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 17:29:40 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 15:05:03 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 17:20:46 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char				*parse_g_gloat(t_printf *data)
+static char				*choose_g_output(t_printf *data, int *print_lens,
+						char *norm_buf, char *sci_buf)
 {
 	char				*res;
-	char				norm_buf[DTOA_BUF_SIZE];
-	char				sci_buf[DTOA_BUF_SIZE];
-	long double			var;
-	t_float_dissector	fds;
-	int					print_lens[2];
-	int					i;
 	int					exp;
+	int					i;
 
-	res = NULL;
-	if (data->type == length_L)
-		var = va_arg(data->variables, long double);
-	else
-		var = va_arg(data->variables, double);
-	fds.f = var;
-	if (fds.b.sign)
-		data->is_negative = true;
-	data->precision = data->precision >= 0 ? data->precision : 6;
-	data->precision = data->precision == 0 ? 1 : data->precision;
-	print_lens[0] = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
-		.value = var, .format = FORMAT_SCI, .hashtag = data->zerox,
-		.g_mode = true}, sci_buf, DTOA_BUF_SIZE);
-	print_lens[1] = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
-		.value = var, .format = FORMAT_NORM, .hashtag = data->zerox,
-		.g_mode = true}, norm_buf, DTOA_BUF_SIZE);
 	i = print_lens[0];
 	while (sci_buf[i] != 'e')
 		i--;
@@ -62,6 +42,31 @@ static char				*parse_g_gloat(t_printf *data)
 	return (res);
 }
 
+static char				*parse_g_gloat(t_printf *data)
+{
+	char				norm_buf[DTOA_BUF_SIZE];
+	char				sci_buf[DTOA_BUF_SIZE];
+	long double			var;
+	t_float_dissector	fds;
+	int					print_lens[2];
+
+	if (data->type == length_L)
+		var = va_arg(data->variables, long double);
+	else
+		var = va_arg(data->variables, double);
+	fds.f = var;
+	if (fds.b.sign)
+		data->is_negative = true;
+	data->precision = data->precision >= 0 ? data->precision : 6;
+	data->precision = data->precision == 0 ? 1 : data->precision;
+	print_lens[0] = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
+		.value = var, .format = FORMAT_SCI, .hashtag = data->zerox,
+		.g_mode = true}, sci_buf, DTOA_BUF_SIZE);
+	print_lens[1] = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
+		.value = var, .format = FORMAT_NORM, .hashtag = data->zerox,
+		.g_mode = true}, norm_buf, DTOA_BUF_SIZE);
+	return (choose_g_output(data, print_lens, norm_buf, sci_buf));
+}
 
 static char				*parse_f_float(t_printf *data)
 {

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 17:07:15 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 17:23:13 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,17 @@ static int		run_more(void)
 	ft_printf("%0 42hhu\n", 5656);
 	ft_printf("%+052.20f\n", 55.0999995);
 	ft_printf("%#42.25f\n", 55.0999995);
-	ft_printf("{%f}{%lf}{%Lf}\n",  1444565444646.6465424242242,
+	ft_printf("{%f}{%lf}{%Lf}\n", 1444565444646.6465424242242,
 		1444565444646.6465424242242, 1444565444646.6465424242242l);
 	ft_printf("{%f}{%lf}{%Lf}\n", -1444565444646.6465424242242454654,
 	-1444565444646.6465424242242454654, -1444565444646.6465424242242454654l);
+	return (true);
+}
+
+static int		sci_tests(void)
+{
 	ft_printf("pft%*.*ntest%d\n", 5, 5, "asdf", 123);
-	ft_printf("%.18e\n",  -DBL_MIN);
+	ft_printf("%.18e\n", -DBL_MIN);
 	ft_printf("%#.0f\n", -7.4);
 	ft_printf("%g\n", -958.125);
 	ft_printf("%g\n", 0.000001);
@@ -85,7 +90,6 @@ static int		run_more(void)
 	ft_printf("%g\n", -0.00032);
 	ft_printf("%.3g\n", -0.00032);
 	ft_printf("%.9g", 0.0894255);
-	return (true);
 }
 
 int				main(void)
@@ -95,6 +99,7 @@ int				main(void)
 	debug_leaks = false;
 	run_some();
 	run_more();
+	sci_tests();
 	if (debug_leaks)
 		while (1)
 			;
