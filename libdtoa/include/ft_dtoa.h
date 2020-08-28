@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 17:53:44 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 12:20:01 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct			s_dragon4_params
 	char			*buf;
 	uint32_t		buf_size;
 	int32_t			*out_exponent;
+	t_bool			force_dot;
 	t_bool			no_trailing_zeros;
 }						t_dragon4_params;
 
@@ -113,7 +114,7 @@ int						ft_dtoa_buf(t_dtoa_params params, char *buf,
 uint32_t				format_normal(t_dragon4_params params,
 						int32_t precision);
 uint32_t				format_scientific(t_dragon4_params params,
-						int32_t precision, t_bool hashtag);
+						int32_t precision);
 uint32_t				format_inf_nan(char *buf, uint64_t mantissa);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:41:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 17:48:08 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 12:32:30 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 */
 
 static void				move_fraction_digits(t_dragon4_params params,
-						uint32_t *fraction_digits, uint32_t *digit_i)
+						uint32_t *fraction_digits, uint32_t *pos)
 {
 	uint32_t	max_fraction_digits;
 
 	max_fraction_digits = params.buf_size - 2;
 	if (*fraction_digits > max_fraction_digits)
 		*fraction_digits = max_fraction_digits;
-	ft_memmove(params.buf + *digit_i + 1,
-		params.buf + *digit_i, *fraction_digits);
-	params.buf[*digit_i] = '.';
-	*digit_i += (1 + *fraction_digits);
+	ft_memmove(params.buf + *pos + 1,
+		params.buf + *pos, *fraction_digits);
+	params.buf[*pos] = '.';
+	*pos += (1 + *fraction_digits);
 	params.buf_size -= (1 + *fraction_digits);
 }
 
@@ -38,23 +38,23 @@ static void				move_fraction_digits(t_dragon4_params params,
 
 static void				add_trailing_zeros(t_dragon4_params params,
 						uint32_t fraction_digits, int32_t precision,
-						uint32_t *digit_i)
+						uint32_t *pos)
 {
 	uint32_t	zeros;
 	uint32_t	zeros_i;
 
 	if (fraction_digits == 0)
 	{
-		params.buf[(*digit_i)++] = '.';
+		params.buf[(*pos)++] = '.';
 		params.buf_size--;
 	}
 	zeros = (precision - fraction_digits);
 	if (zeros > params.buf_size - 1)
 		zeros = params.buf_size - 1;
-	zeros_i = *digit_i;
-	while (zeros_i < *digit_i + zeros)
+	zeros_i = *pos;
+	while (zeros_i < *pos + zeros)
 		params.buf[zeros_i++] = '0';
-	*digit_i = zeros_i;
+	*pos = zeros_i;
 }
 
 static void				set_exp_buf(t_dragon4_params params, int32_t exp,
@@ -87,7 +87,7 @@ static void				set_exp_buf(t_dragon4_params params, int32_t exp,
 */
 
 static void				add_exp_notation(t_dragon4_params params,
-						int32_t exp, uint32_t *digit_i)
+						int32_t exp, uint32_t *pos)
 {
 	char		exp_buf[5];
 	uint32_t	exp_size;
@@ -101,8 +101,8 @@ static void				add_exp_notation(t_dragon4_params params,
 		exp = -exp;
 	}
 	set_exp_buf(params, exp, exp_buf, &exp_size);
-	ft_memcpy(params.buf + *digit_i, exp_buf, exp_size);
-	*digit_i += exp_size;
+	ft_memcpy(params.buf + *pos, exp_buf, exp_size);
+	*pos += exp_size;
 	params.buf_size -= exp_size;
 }
 
@@ -115,32 +115,30 @@ static void				add_exp_notation(t_dragon4_params params,
 */
 
 uint32_t				format_scientific(t_dragon4_params params,
-						int32_t precision, t_bool hashtag)
+						int32_t precision)
 {
 	int32_t		exp;
 	uint32_t	digits;
 	uint32_t	fraction_digits;
-	uint32_t	digit_i;
+	uint32_t	pos;
 
 	exp = 0;
-	digit_i = 0;
+	pos = 0;
 	params.out_exponent = &exp;
 	digits = dragon4(params);
 	if (params.buf_size > 1)
 	{
-		digit_i++;
+		pos++;
 		params.buf_size -= 1;
 	}
 	fraction_digits = digits - 1;
 	if (fraction_digits > 0 && params.buf_size > 1)
-		move_fraction_digits(params, &fraction_digits, &digit_i);
+		move_fraction_digits(params, &fraction_digits, &pos);
 	if (precision > (int32_t)fraction_digits && params.buf_size > 1 &&
 		!params.no_trailing_zeros)
-		add_trailing_zeros(params, fraction_digits, precision, &digit_i);
-	if (precision == 0 && hashtag && fraction_digits == 0)
-		params.buf[digit_i++] = '.';
+		add_trailing_zeros(params, fraction_digits, precision, &pos);
 	if (params.buf_size > 1)
-		add_exp_notation(params, exp, &digit_i);
-	params.buf[digit_i] = '\0';
-	return (digit_i);
+		add_exp_notation(params, exp, &pos);
+	params.buf[pos] = '\0';
+	return (pos);
 }
