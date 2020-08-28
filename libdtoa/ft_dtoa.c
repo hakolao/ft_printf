@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 17:09:53 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 18:17:07 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ static void		set_cutoffs(t_dragon4_params *dragon, t_dtoa_params dtoa)
 	{
 		if (dtoa.format == FORMAT_NORM)
 		{
-			dragon->cutoff_mode = CUTOFF_FRACTION_LENGTH;
+			dragon->cutoff_mode = dtoa.g_mode ? CUTOFF_TOTAL_LENGTH :
+				CUTOFF_FRACTION_LENGTH;
 			dragon->cutoff_num = dtoa.precision;
 		}
 		else if (dtoa.format == FORMAT_SCI)
 		{
 			dragon->cutoff_mode = CUTOFF_TOTAL_LENGTH;
-			dragon->cutoff_num = dtoa.precision + 1;
+			dragon->cutoff_num = dtoa.precision + 1 - dtoa.g_mode;
 		}
 	}
 }
@@ -61,6 +62,8 @@ static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 	t_float_dissector	fd;
 
 	fd.f = dtoa.value;
+	dragon->no_trailing_zeros = dtoa.g_mode;
+	dragon->hashtag = dtoa.hashtag;
 	if (fd.b.exp != 0)
 	{
 		dragon->buf = buf + fd.b.sign;
@@ -104,10 +107,10 @@ char			*ft_dtoa(t_dtoa_params params)
 	{
 		set_dragon4_params(&dragon, params, buf, DTOA_BUF_SIZE);
 		if (params.format == FORMAT_SCI)
-			print_len = format_scientific(dragon, params.precision,
-				params.hashtag) + fd.b.sign;
+			print_len = format_scientific(dragon, params.precision) + fd.b.sign;
 		else
-			print_len = format_normal(dragon, params.precision) + fd.b.sign;
+			print_len = format_normal(dragon, params.precision -
+				(params.g_mode && params.hashtag)) + fd.b.sign;
 	}
 	if (!(res = ft_strnew(print_len)))
 		return (NULL);
@@ -135,10 +138,10 @@ int				ft_dtoa_buf(t_dtoa_params params, char *buf, int buf_size)
 	{
 		set_dragon4_params(&dragon, params, buf, buf_size);
 		if (params.format == FORMAT_SCI)
-			print_len = format_scientific(dragon, params.precision,
-				params.hashtag) + fd.b.sign;
+			print_len = format_scientific(dragon, params.precision) + fd.b.sign;
 		else
-			print_len = format_normal(dragon, params.precision) + fd.b.sign;
+			print_len = format_normal(dragon, params.precision -
+				(params.g_mode && params.hashtag)) + fd.b.sign;
 	}
 	return (print_len);
 }

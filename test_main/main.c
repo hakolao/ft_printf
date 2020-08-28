@@ -6,11 +6,12 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 17:08:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 18:38:01 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <float.h>
 
 static int		run_some(void)
 {
@@ -41,9 +42,6 @@ static int		run_some(void)
 	return (true);
 }
 
-#include <float.h>
-#include <stdio.h>
-
 static int		run_more(void)
 {
 	ft_printf("%d%d\n", 42, 41);
@@ -65,14 +63,38 @@ static int		run_more(void)
 	ft_printf("%0 42hhu\n", 5656);
 	ft_printf("%+052.20f\n", 55.0999995);
 	ft_printf("%#42.25f\n", 55.0999995);
-	ft_printf("{%f}{%lf}{%Lf}\n",  1444565444646.6465424242242,
+	ft_printf("{%f}{%lf}{%Lf}\n", 1444565444646.6465424242242,
 		1444565444646.6465424242242, 1444565444646.6465424242242l);
 	ft_printf("{%f}{%lf}{%Lf}\n", -1444565444646.6465424242242454654,
 	-1444565444646.6465424242242454654, -1444565444646.6465424242242454654l);
-	ft_printf("pft%*.*ntest%d\n", 5, 5, "asdf", 123);
-	ft_printf("%.18e\n",  -DBL_MIN);
-	ft_printf("%#.0f\n", -7.4);
 	return (true);
+}
+
+static int		sci_tests(void)
+{
+	ft_printf("pft%*.*ntest%d\n", 5, 5, "asdf", 123);
+	ft_printf("%.18e\n", -DBL_MIN);
+	ft_printf("%#.0f\n", -7.4);
+	ft_printf("%g\n", -958.125);
+	ft_printf("%g\n", 0.000001);
+	ft_printf("%g\n", -3.85);
+	ft_printf("%.10g\n", -312515125.85);
+	ft_printf("%.0g\n", -0.00032);
+	ft_printf("%.0g\n", 573.924);
+	ft_printf("%.1g\n", -9.999);
+	ft_printf("%+#-5.0g\n", -7.3);
+	ft_printf("%.7g\n", -3.85);
+	ft_printf("% #-5.1g\n", -7.3);
+	ft_printf("%.10g\n", -0.000000032);
+	ft_printf("%#-5.6g\n", 7.3);
+	ft_printf("%.9g\n", 0.89);
+	ft_printf("%#.9g\n", 0.89);
+	ft_printf("%.1g\n", -0.00032);
+	ft_printf("%g\n", -0.00032);
+	ft_printf("%.3g\n", -0.00032);
+	ft_printf("%#.1f\n", 0.0);
+	ft_printf("%#-5.3f\n", 0.0);
+	ft_printf("% #-5.0e\n", -7.3);
 }
 
 int				main(void)
@@ -82,6 +104,7 @@ int				main(void)
 	debug_leaks = false;
 	run_some();
 	run_more();
+	sci_tests();
 	if (debug_leaks)
 		while (1)
 			;

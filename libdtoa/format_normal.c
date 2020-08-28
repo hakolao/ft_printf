@@ -6,43 +6,42 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:40:28 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 17:09:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 18:40:48 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_dtoa.h"
 
 /*
-** When double value is larger than one, buffer is first appended with zeros
-** by the amount of whole digits - digits returned by dragon4. Until whole digit
-** is covered. Then fraction digits are moved by whole digits + 1 to account for
+** When double value is larger than one, zeros are added to the end.
+** Then fraction digits are moved by whole digits + 1 to account for
 ** the decimal dot.
 */
 
 static void		format_gte_one(t_dragon4_params params, int32_t print_exponent,
-				uint32_t *digits, uint32_t *fraction_digits)
+				uint32_t *pos, uint32_t *fraction_digits)
 {
 	uint32_t	whole_digits;
 	uint32_t	max_fraction_digits;
 
 	whole_digits = print_exponent + 1;
-	if (*digits < whole_digits)
+	if (*pos < whole_digits)
 	{
 		if (whole_digits > params.buf_size)
 			whole_digits = params.buf_size;
-		while (*digits < whole_digits)
-			params.buf[(*digits)++] = '0';
+		while (*pos < whole_digits)
+			params.buf[(*pos)++] = '0';
 	}
-	else if (*digits > whole_digits)
+	else if (*pos > whole_digits)
 	{
-		*fraction_digits = *digits - whole_digits;
+		*fraction_digits = *pos - whole_digits;
 		max_fraction_digits = params.buf_size - whole_digits - 1;
 		if (*fraction_digits > max_fraction_digits)
 			*fraction_digits = max_fraction_digits;
 		ft_memmove(params.buf + whole_digits + 1,
 			params.buf + whole_digits, *fraction_digits);
 		params.buf[whole_digits] = '.';
-		*digits = whole_digits + 1 + *fraction_digits;
+		*pos = whole_digits + 1 + *fraction_digits;
 	}
 }
 
@@ -51,14 +50,14 @@ static void		format_gte_one(t_dragon4_params params, int32_t print_exponent,
 ** And after 0. (this function is only used when double value is less than 1.0)
 */
 
-static void		fill_zeros_before_digit(t_dragon4_params params,
+static void		fill_zeros_before_fraction(t_dragon4_params params,
 				uint32_t digits_start_i)
 {
-	size_t		i;
+	size_t		pos;
 
-	i = 2;
-	while (i < digits_start_i)
-		params.buf[i++] = '0';
+	pos = 2;
+	while (pos < digits_start_i)
+		params.buf[pos++] = '0';
 }
 
 /*
@@ -68,7 +67,7 @@ static void		fill_zeros_before_digit(t_dragon4_params params,
 */
 
 static void		format_lt_one(t_dragon4_params params, int32_t print_exponent,
-				uint32_t *digits, uint32_t *fraction_digits)
+				uint32_t *pos, uint32_t *fraction_digits)
 {
 	uint32_t	fraction_zeros;
 	uint32_t	digits_start_i;
@@ -80,19 +79,48 @@ static void		format_lt_one(t_dragon4_params params, int32_t print_exponent,
 		if (fraction_zeros > params.buf_size - 2)
 			fraction_zeros = params.buf_size - 2;
 		digits_start_i = 2 + fraction_zeros;
-		*fraction_digits = *digits;
+		*fraction_digits = *pos;
 		max_fraction_digits = params.buf_size - digits_start_i;
 		if (*fraction_digits > max_fraction_digits)
 			*fraction_digits = max_fraction_digits;
 		ft_memmove(params.buf + digits_start_i, params.buf, *fraction_digits);
-		fill_zeros_before_digit(params, digits_start_i);
+		fill_zeros_before_fraction(params, digits_start_i);
 		*fraction_digits += fraction_zeros;
-		*digits = *fraction_digits;
+		*pos = *fraction_digits;
 	}
 	if (params.buf_size > 1 && (params.buf[1] = '.'))
-		*digits += 1;
+		*pos += 1;
 	if (params.buf_size > 0 && (params.buf[0] = '0'))
-		*digits += 1;
+		*pos += 1;
+}
+
+void			add_trailing_zeros(t_dragon4_params params, int32_t precision,
+				uint32_t *pos, uint32_t fraction_digits)
+{
+	uint32_t	total_digits;
+
+	if (*pos >= params.buf_size)
+		return ;
+	if (fraction_digits == 0)
+	{
+		if ((precision > (int32_t)fraction_digits &&
+			!params.no_trailing_zeros && !params.hashtag) ||
+					((params.no_trailing_zeros && params.hashtag) ||
+					(params.hashtag && precision > (int32_t)fraction_digits)))
+		{
+			params.buf[(*pos)++] = '.';
+			params.buf_size--;
+		}
+	}
+	if (precision > (int32_t)fraction_digits &&
+		(!params.no_trailing_zeros || params.hashtag))
+	{
+		total_digits = *pos + (precision - fraction_digits);
+		if (total_digits > params.buf_size)
+			total_digits = params.buf_size;
+		while (*pos < total_digits)
+			params.buf[(*pos)++] = '0';
+	}
 }
 
 /*
@@ -106,28 +134,28 @@ static void		format_lt_one(t_dragon4_params params, int32_t print_exponent,
 uint32_t		format_normal(t_dragon4_params params, int32_t precision)
 {
 	int32_t		exp;
-	uint32_t	digits;
+	uint32_t	pos;
 	uint32_t	fraction_digits;
-	uint32_t	total_digits;
+	int32_t		trim_to;
+	int32_t		negative_trim_to;
 
 	exp = 0;
-	params.out_exponent = &exp;
-	digits = dragon4(params);
+	params.exp = &exp;
+	pos = dragon4(params);
+	if (params.no_trailing_zeros)
+	{
+		negative_trim_to = params.hashtag ? precision + exp + 2 : 1;
+		trim_to = ((exp >= 0 ? exp + 1 : negative_trim_to));
+		while (params.buf[pos - 1] == '0' &&
+			pos > 0 && (int32_t)pos > trim_to)
+			pos--;
+	}
 	fraction_digits = 0;
 	if (exp >= 0)
-		format_gte_one(params, exp, &digits, &fraction_digits);
+		format_gte_one(params, exp, &pos, &fraction_digits);
 	else
-		format_lt_one(params, exp, &digits, &fraction_digits);
-	if (precision > (int32_t)fraction_digits && digits < params.buf_size)
-	{
-		if (fraction_digits == 0)
-			params.buf[digits++] = '.';
-		total_digits = digits + (precision - fraction_digits);
-		if (total_digits > params.buf_size)
-			total_digits = params.buf_size;
-		while (digits < total_digits)
-			params.buf[digits++] = '0';
-	}
-	params.buf[digits] = '\0';
-	return (digits);
+		format_lt_one(params, exp, &pos, &fraction_digits);
+	add_trailing_zeros(params, precision, &pos, fraction_digits);
+	params.buf[pos] = '\0';
+	return (pos);
 }

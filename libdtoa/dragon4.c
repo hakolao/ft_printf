@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 19:27:50 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 14:12:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 18:00:15 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int32_t		zero_if_zero(t_dragon4_params params)
 {
 	if (params.mantissa == 0)
 	{
-		*(params.out_exponent) = 0;
+		*(params.exp) = 0;
 		params.buf[0] = '0';
 		return (1);
 	}
@@ -71,6 +71,7 @@ uint32_t			dragon4(t_dragon4_params params)
 	t_big_int	scaled_value;
 	t_big_int	scaled_margins[2];
 	int32_t		digit_exponent;
+	uint32_t	print_len;
 
 	if (zero_if_zero(params))
 		return (1);
@@ -83,11 +84,12 @@ uint32_t			dragon4(t_dragon4_params params)
 	digit_exponent = get_digit_exponent(params);
 	scale_values_by_digit_exponent(&scale, &scaled_value,
 		scaled_margins, &digit_exponent);
-	*(params.out_exponent) = digit_exponent - 1;
+	*(params.exp) = digit_exponent - 1;
 	prepare_values_for_division(&scale, &scaled_value, scaled_margins);
 	if (params.cutoff_mode == CUTOFF_NONE)
-		return (output_without_cutoff(params, &scale, &scaled_value,
+		print_len = (output_without_cutoff(params, &scale, &scaled_value,
 			scaled_margins));
 	else
-		return (output_with_cutoff(params, &scale, &scaled_value));
+		print_len = (output_with_cutoff(params, &scale, &scaled_value));
+	return (print_len);
 }
