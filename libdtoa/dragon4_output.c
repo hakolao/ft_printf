@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 18:52:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 13:14:38 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 18:00:17 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static uint32_t	round_if_needed(t_dragon4_params params, t_bool round_down,
 				if (&(params.buf[pos]) == params.buf)
 				{
 					params.buf[pos++] = '1';
-					*(params.out_exponent) += 1;
+					*(params.exp) += 1;
 					break ;
 				}
 				if (params.buf[--pos] != '9')
@@ -85,23 +85,22 @@ static uint32_t	round_if_needed(t_dragon4_params params, t_bool round_down,
 uint32_t		output_without_cutoff(t_dragon4_params params, t_big_int *scale,
 				t_big_int *scaled_value, t_big_int scaled_margins[2])
 {
-	int32_t		digit_exp;
+	int32_t		exp;
 	uint32_t	output_digit;
 	t_bool		lo_hi[2];
 	t_big_int	scaled_value_high;
 	uint32_t	pos;
 
-	digit_exp = *(params.out_exponent) + 1;
+	exp = *(params.exp) + 1;
 	pos = 0;
 	while (1)
 	{
-		digit_exp = digit_exp - 1;
+		exp = exp - 1;
 		output_digit = big_int_divide_to_output_digit(scaled_value, scale);
 		big_int_add(scaled_value, &scaled_margins[1], &scaled_value_high);
 		lo_hi[0] = big_int_cmp(scaled_value, &scaled_margins[0]) < 0;
 		lo_hi[1] = big_int_cmp(&scaled_value_high, scale) > 0;
-		if (lo_hi[0] | lo_hi[1] |
-			(digit_exp == cutoff(params, *(params.out_exponent) + 1)))
+		if (lo_hi[0] | lo_hi[1] | (exp == cutoff(params, *(params.exp) + 1)))
 			break ;
 		params.buf[pos++] = (char)('0' + output_digit);
 		big_int_mul_10_modif(scaled_value);
@@ -116,23 +115,23 @@ uint32_t		output_without_cutoff(t_dragon4_params params, t_big_int *scale,
 uint32_t		output_with_cutoff(t_dragon4_params params, t_big_int *scale,
 				t_big_int *scaled_value)
 {
-	int32_t		digit_exp;
+	int32_t		exp;
 	uint32_t	output_digit;
 	t_bool		lo_hi[2];
 	int32_t		cutoff_exponent;
 	uint32_t	pos;
 
-	digit_exp = *(params.out_exponent) + 1;
-	cutoff_exponent = cutoff(params, digit_exp);
+	exp = *(params.exp) + 1;
+	cutoff_exponent = cutoff(params, exp);
 	pos = 0;
 	lo_hi[0] = false;
 	lo_hi[1] = false;
 	while (1)
 	{
-		digit_exp = digit_exp - 1;
+		exp = exp - 1;
 		output_digit = big_int_divide_to_output_digit(scaled_value, scale);
 		if (big_int_is_zero(scaled_value) |
-			(digit_exp == cutoff_exponent))
+			(exp == cutoff_exponent))
 			break ;
 		params.buf[pos] = (char)('0' + output_digit);
 		pos++;

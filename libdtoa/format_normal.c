@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:40:28 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 17:49:23 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 18:01:08 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** Then fraction digits are moved by whole digits + 1 to account for
 ** the decimal dot.
 */
-#include <stdio.h>
+
 static void		format_gte_one(t_dragon4_params params, int32_t print_exponent,
 				uint32_t *pos, uint32_t *fraction_digits)
 {
@@ -99,6 +99,8 @@ void			add_trailing_zeros(t_dragon4_params params, int32_t precision,
 {
 	uint32_t	total_digits;
 
+	if (*pos >= params.buf_size)
+		return ;
 	if (fraction_digits == 0)
 	{
 		if (precision > (int32_t)fraction_digits &&
@@ -138,7 +140,7 @@ uint32_t		format_normal(t_dragon4_params params, int32_t precision)
 	int32_t		negative_trim_to;
 
 	exp = 0;
-	params.out_exponent = &exp;
+	params.exp = &exp;
 	pos = dragon4(params);
 	if (params.no_trailing_zeros)
 	{
@@ -153,8 +155,7 @@ uint32_t		format_normal(t_dragon4_params params, int32_t precision)
 		format_gte_one(params, exp, &pos, &fraction_digits);
 	else
 		format_lt_one(params, exp, &pos, &fraction_digits);
-	if (pos < params.buf_size)
-		add_trailing_zeros(params, precision, &pos, fraction_digits);
+	add_trailing_zeros(params, precision, &pos, fraction_digits);
 	params.buf[pos] = '\0';
 	return (pos);
 }
