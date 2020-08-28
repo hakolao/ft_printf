@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_numbers.c                                    :+:      :+:    :+:   */
+/*   parse_int.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 17:29:52 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 19:31:30 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char					*parse_int(t_printf *data)
 		res = ft_strnew(0);
 	else if (data->c == 'd' || data->c == 'i')
 		res = printf_itoa(data, var, 10, true);
-	else if (data->c == 'u')
+	else if (data->c == 'u' || data->c == 'D')
 		res = printf_itoa(data, var, 10, false);
 	else if (data->c == 'o')
 		res = printf_itoa(data, var, 8, false);
