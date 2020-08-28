@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 17:42:41 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 18:21:03 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int		run_more(void)
 	-1444565444646.6465424242242454654, -1444565444646.6465424242242454654l);
 	return (true);
 }
-#include <stdio.h>
+
 static int		sci_tests(void)
 {
 	ft_printf("pft%*.*ntest%d\n", 5, 5, "asdf", 123);
@@ -88,15 +88,12 @@ static int		sci_tests(void)
 	ft_printf("%.10g\n", -0.000000032);
 	ft_printf("%#-5.6g\n", 7.3);
 	ft_printf("%.9g\n", 0.89);
-	printf("%.9g\n", 0.89);
 	ft_printf("%#.9g\n", 0.89);
-	printf("%#.9g\n", 0.89);
 	ft_printf("%.1g\n", -0.00032);
-	printf("%.1g\n", -0.00032);
 	ft_printf("%g\n", -0.00032);
-	printf("%g\n", -0.00032);
 	ft_printf("%.3g\n", -0.00032);
-	printf("%.3g\n", -0.00032);
+	ft_printf("%#.1f\n", 0.0);
+	ft_printf("%#-5.3f", 0.0);
 }
 
 int				main(void)
