@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:40:28 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 16:31:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:41:11 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,19 @@ void			add_trailing_zeros(t_dragon4_params params, int32_t precision,
 {
 	uint32_t	total_digits;
 
-	if (fraction_digits == 0 && !params.no_trailing_zeros && !params.hashtag)
+	if (fraction_digits == 0)
 	{
-		params.buf[(*pos)++] = '.';
-		params.buf_size--;
+		if (precision > (int32_t)fraction_digits &&
+			!params.no_trailing_zeros && !params.hashtag)
+		{
+			params.buf[(*pos)++] = '.';
+			params.buf_size--;
+		}
+		else if (params.no_trailing_zeros && params.hashtag)
+			params.buf[(*pos)++] = '.';
 	}
-	if (!params.no_trailing_zeros || params.hashtag)
+	if (precision > (int32_t)fraction_digits &&
+		(!params.no_trailing_zeros || params.hashtag))
 	{
 		total_digits = *pos + (precision - fraction_digits);
 		if (total_digits > params.buf_size)
@@ -140,10 +147,8 @@ uint32_t		format_normal(t_dragon4_params params, int32_t precision)
 		format_gte_one(params, exp, &pos, &fraction_digits);
 	else
 		format_lt_one(params, exp, &pos, &fraction_digits);
-	if (precision > (int32_t)fraction_digits && pos < params.buf_size)
+	if (pos < params.buf_size)
 		add_trailing_zeros(params, precision, &pos, fraction_digits);
-	else if (fraction_digits == 0 && params.hashtag && pos < params.buf_size)
-		params.buf[pos++] = '.';
 	params.buf[pos] = '\0';
 	return (pos);
 }
