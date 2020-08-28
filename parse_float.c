@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 17:29:40 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 18:10:25 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 11:14:17 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char				*parse_g_gloat(t_printf *data)
 	while (buf1[i] != 'e')
 		i--;
 	exp = ft_atoi(buf1 + i + 1);
-	if (exp >= -4 && exp < data->precision)
+	if (exp >= -4 && exp <= data->precision)
 	{
 		data->var_len = print_lens[1];
 		if (!(res = ft_strnew(data->var_len)))

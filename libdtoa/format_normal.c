@@ -6,16 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:40:28 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 18:17:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 11:12:08 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_dtoa.h"
 
 /*
-** When double value is larger than one, buffer is first appended with zeros
-** by the amount of whole digits - digits returned by dragon4. Until whole digit
-** is covered. Then fraction digits are moved by whole digits + 1 to account for
+** When double value is larger than one, zeros are added to the end.
+** Then fraction digits are moved by whole digits + 1 to account for
 ** the decimal dot.
 */
 
@@ -51,7 +50,7 @@ static void		format_gte_one(t_dragon4_params params, int32_t print_exponent,
 ** And after 0. (this function is only used when double value is less than 1.0)
 */
 
-static void		fill_zeros_before_digit(t_dragon4_params params,
+static void		fill_zeros_before_fraction(t_dragon4_params params,
 				uint32_t digits_start_i)
 {
 	size_t		i;
@@ -85,7 +84,7 @@ static void		format_lt_one(t_dragon4_params params, int32_t print_exponent,
 		if (*fraction_digits > max_fraction_digits)
 			*fraction_digits = max_fraction_digits;
 		ft_memmove(params.buf + digits_start_i, params.buf, *fraction_digits);
-		fill_zeros_before_digit(params, digits_start_i);
+		fill_zeros_before_fraction(params, digits_start_i);
 		*fraction_digits += fraction_zeros;
 		*digits = *fraction_digits;
 	}
@@ -118,16 +117,16 @@ uint32_t		format_normal(t_dragon4_params params, int32_t precision)
 		format_gte_one(params, exp, &digits, &fraction_digits);
 	else
 		format_lt_one(params, exp, &digits, &fraction_digits);
-	if (precision > (int32_t)fraction_digits && digits < params.buf_size)
+	if (precision > (int32_t)fraction_digits && digits < params.buf_size &&
+		!params.no_trailing_zeros)
 	{
-		if (fraction_digits == 0 && !params.no_trailing_zeros)
+		if (fraction_digits == 0)
 			params.buf[digits++] = '.';
 		total_digits = digits + (precision - fraction_digits);
 		if (total_digits > params.buf_size)
 			total_digits = params.buf_size;
-		if (!params.no_trailing_zeros)
-			while (digits < total_digits)
-				params.buf[digits++] = '0';
+		while (digits < total_digits)
+			params.buf[digits++] = '0';
 	}
 	params.buf[digits] = '\0';
 	return (digits);
