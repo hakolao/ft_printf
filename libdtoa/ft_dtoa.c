@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 12:19:53 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 13:30:03 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ static void		set_cutoffs(t_dragon4_params *dragon, t_dtoa_params dtoa)
 		{
 			dragon->cutoff_mode = dtoa.g_mode ? CUTOFF_TOTAL_LENGTH:
 				CUTOFF_FRACTION_LENGTH;
-			dragon->cutoff_num = dtoa.precision + dtoa.g_mode;
+			dragon->cutoff_num = dtoa.precision;
 		}
 		else if (dtoa.format == FORMAT_SCI)
 		{
 			dragon->cutoff_mode = CUTOFF_TOTAL_LENGTH;
-			dragon->cutoff_num = dtoa.precision + !dtoa.g_mode;
+			dragon->cutoff_num = dtoa.precision + 1 - dtoa.g_mode;
 		}
 	}
 }

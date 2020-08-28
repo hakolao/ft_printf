@@ -6,11 +6,12 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 11:34:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 13:30:54 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <float.h>
 
 static int		run_some(void)
 {
@@ -40,9 +41,6 @@ static int		run_some(void)
 	ft_printf("%06f\n", special);
 	return (true);
 }
-
-#include <float.h>
-#include <stdio.h>
 
 static int		run_more(void)
 {
@@ -75,6 +73,9 @@ static int		run_more(void)
 	ft_printf("%g\n", -958.125);
 	ft_printf("%g\n", 0.000001);
 	ft_printf("%g\n", -3.85);
+	ft_printf("%.0g\n", -0.00032);
+	ft_printf("%.0g\n", 573.924);
+	ft_printf("%.1g\n", -9.999);
 	return (true);
 }
 

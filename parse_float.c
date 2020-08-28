@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 17:29:40 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 11:14:17 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 13:27:09 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static char				*parse_g_gloat(t_printf *data)
 {
 	char				*res;
-	char				buf1[DTOA_BUF_SIZE];
-	char				buf2[DTOA_BUF_SIZE];
+	char				norm_buf[DTOA_BUF_SIZE];
+	char				sci_buf[DTOA_BUF_SIZE];
 	long double			var;
 	t_float_dissector	fds;
 	int					print_lens[2];
@@ -32,30 +32,30 @@ static char				*parse_g_gloat(t_printf *data)
 	if (fds.b.sign)
 		data->is_negative = true;
 	data->precision = data->precision >= 0 ? data->precision : 6;
+	data->precision = data->precision == 0 ? 1 : data->precision;
 	print_lens[0] = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
 		.value = var, .format = FORMAT_SCI, .hashtag = data->zerox,
-		.g_mode = true}, buf1, DTOA_BUF_SIZE);
-	print_lens[1] = ft_dtoa_buf((t_dtoa_params){.precision =
-		data->precision - 1,
+		.g_mode = true}, sci_buf, DTOA_BUF_SIZE);
+	print_lens[1] = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
 		.value = var, .format = FORMAT_NORM, .hashtag = data->zerox,
-		.g_mode = true}, buf2, DTOA_BUF_SIZE);
+		.g_mode = true}, norm_buf, DTOA_BUF_SIZE);
 	i = print_lens[0];
-	while (buf1[i] != 'e')
+	while (sci_buf[i] != 'e')
 		i--;
-	exp = ft_atoi(buf1 + i + 1);
-	if (exp >= -4 && exp <= data->precision)
+	exp = ft_atoi(sci_buf + i + 1);
+	if (exp >= -4 && exp < data->precision)
 	{
 		data->var_len = print_lens[1];
 		if (!(res = ft_strnew(data->var_len)))
 			return (NULL);
-		ft_memmove(res, buf2, data->var_len);
+		ft_memmove(res, norm_buf, data->var_len);
 	}
 	else
 	{
 		data->var_len = print_lens[0];
 		if (!(res = ft_strnew(data->var_len)))
 			return (NULL);
-		ft_memmove(res, buf1, data->var_len);
+		ft_memmove(res, sci_buf, data->var_len);
 		if (data->c == 'G')
 			ft_capitalize(res);
 	}
@@ -81,7 +81,7 @@ static char				*parse_f_float(t_printf *data)
 	data->precision = data->precision >= 0 ? data->precision : 6;
 	data->var_len = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
 		.value = var, .format = data->c == 'f' || data->c == 'F' ?
-			FORMAT_NORM : FORMAT_SCI, .hashtag = data->zerox},
+		FORMAT_NORM : FORMAT_SCI, .hashtag = data->zerox, .g_mode = false},
 		buf, DTOA_BUF_SIZE);
 	if (!(res = ft_strnew(data->var_len)))
 		return (NULL);

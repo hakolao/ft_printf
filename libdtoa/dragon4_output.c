@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 18:52:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 11:55:56 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 13:14:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ uint32_t		output_without_cutoff(t_dragon4_params params, t_big_int *scale,
 		big_int_add(scaled_value, &scaled_margins[1], &scaled_value_high);
 		lo_hi[0] = big_int_cmp(scaled_value, &scaled_margins[0]) < 0;
 		lo_hi[1] = big_int_cmp(&scaled_value_high, scale) > 0;
-		if (lo_hi[0] | lo_hi[1] | (digit_exp == cutoff(params, digit_exp)))
+		if (lo_hi[0] | lo_hi[1] |
+			(digit_exp == cutoff(params, *(params.out_exponent) + 1)))
 			break ;
 		params.buf[pos++] = (char)('0' + output_digit);
 		big_int_mul_10_modif(scaled_value);
