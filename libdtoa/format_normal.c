@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:40:28 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 12:45:56 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 15:05:45 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** Then fraction digits are moved by whole digits + 1 to account for
 ** the decimal dot.
 */
-
+#include <stdio.h>
 static void		format_gte_one(t_dragon4_params params, int32_t print_exponent,
 				uint32_t *pos, uint32_t *fraction_digits)
 {
@@ -43,6 +43,8 @@ static void		format_gte_one(t_dragon4_params params, int32_t print_exponent,
 		params.buf[whole_digits] = '.';
 		*pos = whole_digits + 1 + *fraction_digits;
 	}
+	else if (params.no_trailing_zeros && params.force_dot)
+		params.buf[(*pos)++] = '.';
 }
 
 /*
@@ -128,6 +130,10 @@ uint32_t		format_normal(t_dragon4_params params, int32_t precision)
 	exp = 0;
 	params.out_exponent = &exp;
 	pos = dragon4(params);
+	if (params.no_trailing_zeros)
+		while (params.buf[pos - 1] == '0' &&
+			pos > (uint32_t)((exp > 0 ? exp : -exp) + 1))
+			pos--;
 	fraction_digits = 0;
 	if (exp >= 0)
 		format_gte_one(params, exp, &pos, &fraction_digits);
