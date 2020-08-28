@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:41:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 18:02:02 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 18:37:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,27 @@ static void				add_trailing_zeros(t_dragon4_params params,
 	uint32_t	zeros;
 	uint32_t	zeros_i;
 
+	if (params.buf_size <= 1)
+		return ;
 	if (fraction_digits == 0)
 	{
-		params.buf[(*pos)++] = '.';
-		params.buf_size--;
+		if ((precision > (int32_t)fraction_digits &&
+			!params.no_trailing_zeros) || params.hashtag)
+		{
+			params.buf[(*pos)++] = '.';
+			params.buf_size--;
+		}
 	}
-	zeros = (precision - fraction_digits);
-	if (zeros > params.buf_size - 1)
-		zeros = params.buf_size - 1;
-	zeros_i = *pos;
-	while (zeros_i < *pos + zeros)
-		params.buf[zeros_i++] = '0';
-	*pos = zeros_i;
+	if (precision > (int32_t)fraction_digits && !params.no_trailing_zeros)
+	{
+		zeros = (precision - fraction_digits);
+		if (zeros > params.buf_size - 1)
+			zeros = params.buf_size - 1;
+		zeros_i = *pos;
+		while (zeros_i < *pos + zeros)
+			params.buf[zeros_i++] = '0';
+		*pos = zeros_i;
+	}
 }
 
 static void				set_exp_buf(t_dragon4_params params, int32_t exp,
@@ -140,9 +149,7 @@ uint32_t				format_scientific(t_dragon4_params params,
 	}
 	fraction_digits = digits - 1;
 	move_fraction_digits(params, &fraction_digits, &pos);
-	if (precision > (int32_t)fraction_digits && params.buf_size > 1 &&
-		!params.no_trailing_zeros)
-		add_trailing_zeros(params, fraction_digits, precision, &pos);
+	add_trailing_zeros(params, fraction_digits, precision, &pos);
 	add_exp_notation(params, exp, &pos);
 	params.buf[pos] = '\0';
 	return (pos);

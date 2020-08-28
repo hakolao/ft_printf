@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:40:28 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 18:19:29 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 18:40:48 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,14 @@ void			add_trailing_zeros(t_dragon4_params params, int32_t precision,
 		return ;
 	if (fraction_digits == 0)
 	{
-		if (precision > (int32_t)fraction_digits &&
-			!params.no_trailing_zeros && !params.hashtag)
+		if ((precision > (int32_t)fraction_digits &&
+			!params.no_trailing_zeros && !params.hashtag) ||
+					((params.no_trailing_zeros && params.hashtag) ||
+					(params.hashtag && precision > (int32_t)fraction_digits)))
 		{
 			params.buf[(*pos)++] = '.';
 			params.buf_size--;
 		}
-		else if ((params.no_trailing_zeros && params.hashtag) ||
-			(params.hashtag && precision > (int32_t)fraction_digits))
-			params.buf[(*pos)++] = '.';
 	}
 	if (precision > (int32_t)fraction_digits &&
 		(!params.no_trailing_zeros || params.hashtag))
