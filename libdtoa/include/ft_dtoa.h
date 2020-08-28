@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 12:20:01 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:21:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct			s_dragon4_params
 	char			*buf;
 	uint32_t		buf_size;
 	int32_t			*out_exponent;
-	t_bool			force_dot;
+	t_bool			hashtag;
 	t_bool			no_trailing_zeros;
 }						t_dragon4_params;
 

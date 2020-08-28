@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 15:06:13 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:22:35 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 
 	fd.f = dtoa.value;
 	dragon->no_trailing_zeros = dtoa.g_mode;
-	dragon->force_dot = dtoa.hashtag;
+	dragon->hashtag = dtoa.hashtag;
 	if (fd.b.exp != 0)
 	{
 		dragon->buf = buf + fd.b.sign;
