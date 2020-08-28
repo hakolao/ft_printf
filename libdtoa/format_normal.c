@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:40:28 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 16:41:11 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 17:16:10 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,14 +134,18 @@ uint32_t		format_normal(t_dragon4_params params, int32_t precision)
 	int32_t		exp;
 	uint32_t	pos;
 	uint32_t	fraction_digits;
+	int32_t	trim_to;
 
 	exp = 0;
 	params.out_exponent = &exp;
 	pos = dragon4(params);
 	if (params.no_trailing_zeros)
+	{
+		trim_to = ((exp >= 0 ? exp + 1 : precision + exp - 1));
 		while (params.buf[pos - 1] == '0' &&
-			pos > (uint32_t)((exp > 0 ? exp : -exp) + 1))
+			pos > 0 && (int32_t)pos > trim_to)
 			pos--;
+	}
 	fraction_digits = 0;
 	if (exp >= 0)
 		format_gte_one(params, exp, &pos, &fraction_digits);
