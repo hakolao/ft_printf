@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:40:28 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 11:12:08 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 11:48:03 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,20 @@ static void		format_lt_one(t_dragon4_params params, int32_t print_exponent,
 		*digits += 1;
 }
 
+void			add_trailing_zeros(t_dragon4_params params, int32_t precision,
+				uint32_t *digits, uint32_t fraction_digits)
+{
+	uint32_t	total_digits;
+
+	if (fraction_digits == 0)
+		params.buf[(*digits)++] = '.';
+	total_digits = *digits + (precision - fraction_digits);
+	if (total_digits > params.buf_size)
+		total_digits = params.buf_size;
+	while (*digits < total_digits)
+		params.buf[(*digits)++] = '0';
+}
+
 /*
 ** Formats the digit in buffer in positional (normal) format, e.g.:
 ** 123.123456
@@ -107,7 +121,6 @@ uint32_t		format_normal(t_dragon4_params params, int32_t precision)
 	int32_t		exp;
 	uint32_t	digits;
 	uint32_t	fraction_digits;
-	uint32_t	total_digits;
 
 	exp = 0;
 	params.out_exponent = &exp;
@@ -119,15 +132,7 @@ uint32_t		format_normal(t_dragon4_params params, int32_t precision)
 		format_lt_one(params, exp, &digits, &fraction_digits);
 	if (precision > (int32_t)fraction_digits && digits < params.buf_size &&
 		!params.no_trailing_zeros)
-	{
-		if (fraction_digits == 0)
-			params.buf[digits++] = '.';
-		total_digits = digits + (precision - fraction_digits);
-		if (total_digits > params.buf_size)
-			total_digits = params.buf_size;
-		while (digits < total_digits)
-			params.buf[digits++] = '0';
-	}
+		add_trailing_zeros(params, precision, &digits, fraction_digits);
 	params.buf[digits] = '\0';
 	return (digits);
 }

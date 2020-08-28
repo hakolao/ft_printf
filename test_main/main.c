@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 18:05:24 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 11:34:48 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ static int		run_more(void)
 	ft_printf("%#.0f\n", -7.4);
 	ft_printf("%g\n", -958.125);
 	ft_printf("%g\n", 0.000001);
+	ft_printf("%g\n", -3.85);
 	return (true);
 }
 
