@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 18:52:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 18:00:17 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 22:52:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,12 @@ uint32_t		output_with_cutoff(t_dragon4_params params, t_big_int *scale,
 		if (big_int_is_zero(scaled_value) |
 			(exp == cutoff_exponent))
 			break ;
+		ft_putchar(output_digit + '0');
 		params.buf[pos] = (char)('0' + output_digit);
 		pos++;
 		big_int_mul_10_modif(scaled_value);
 	}
+	ft_putendl("");
 	return (round_if_needed(params, is_round_down(scale, scaled_value,
 		output_digit, lo_hi), output_digit, pos));
 }

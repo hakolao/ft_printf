@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 22:13:51 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 20:49:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 23:11:51 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ const char	*just_another_test1(void)
 	d1 = -0.999999;
 	res = ft_dtoa((t_dtoa_params){.format = FORMAT_NORM,
 		.precision = 6, .value = d1});
+	ft_putendl(res);
 	OH_ASSERT("dtoa long number wrong 444",
 		ft_strequ(res, "-0.999999"));
 	ft_strdel(&res);
@@ -59,6 +60,7 @@ const char	*just_another_test2(void)
 	d1 = 1444565444646.6465424242242;
 	res = ft_dtoa((t_dtoa_params){.format = FORMAT_NORM,
 		.precision = 6, .value = d1});
+	ft_putendl(res);
 	OH_ASSERT("dtoa long number wrong 2",
 		ft_strequ(res, "-1444565444646.646542"));
 	ft_strdel(&res);

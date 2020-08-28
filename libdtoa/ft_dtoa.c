@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 18:17:07 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 22:50:06 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ static void		set_cutoffs(t_dragon4_params *dragon, t_dtoa_params dtoa)
 ** See: http://www.ryanjuckett.com/programming/printing-floating-point-numbers/
 ** part-3/
 ** Mantissa becomes (2^63 + float mantissa)
-** Exponent becomes (exponent - 1023 - 52)
+** Exponent becomes (exponent - 16383 - 63)
 ** Sign is 1 when negative, 0 when positive thus buffer length is increased by
 ** sign bit.
 */
-
+#include <stdio.h>
 static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 				char *buf, uint32_t buf_size)
 {
@@ -64,13 +64,14 @@ static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 	fd.f = dtoa.value;
 	dragon->no_trailing_zeros = dtoa.g_mode;
 	dragon->hashtag = dtoa.hashtag;
+	printf("mantissa: %lld sign: %d exp: %d\n", fd.b.fraction, fd.b.sign, fd.b.exp);
 	if (fd.b.exp != 0)
 	{
 		dragon->buf = buf + fd.b.sign;
 		dragon->buf_size = buf_size - fd.b.sign - (dtoa.format == FORMAT_NORM);
-		dragon->mantissa = (1ULL << 52) | fd.b.fraction;
-		dragon->exponent = fd.b.exp - 1023 - 52;
-		dragon->mantissa_high_bit_index = 52;
+		dragon->mantissa = (1ULL << 63) | fd.b.fraction;
+		dragon->exponent = fd.b.exp - 16383 - 63;
+		dragon->mantissa_high_bit_index = 63;
 		dragon->has_unequal_margins = (fd.b.exp != 1) && (fd.b.fraction == 0);
 	}
 	else
@@ -78,7 +79,7 @@ static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 		dragon->buf = buf + fd.b.sign;
 		dragon->buf_size = buf_size - fd.b.sign - (dtoa.format == FORMAT_NORM);
 		dragon->mantissa = fd.b.fraction;
-		dragon->exponent = 1 - 1023 - 52;
+		dragon->exponent = 1 - 16383 - 63;
 		dragon->mantissa_high_bit_index = log_base2_64(fd.b.fraction);
 		dragon->has_unequal_margins = false;
 	}
@@ -101,7 +102,7 @@ char			*ft_dtoa(t_dtoa_params params)
 	fd.f = params.value;
 	if (fd.b.sign == 1)
 		*buf = '-';
-	if (fd.b.exp == 0x7FF)
+	if (fd.b.exp == 0x7FFF)
 		print_len = format_inf_nan(buf + fd.b.sign, fd.b.fraction) + fd.b.sign;
 	else
 	{
@@ -132,7 +133,7 @@ int				ft_dtoa_buf(t_dtoa_params params, char *buf, int buf_size)
 	fd.f = params.value;
 	if (fd.b.sign == 1)
 		*buf = '-';
-	if (fd.b.exp == 0x7FF)
+	if (fd.b.exp == 0x7FFF)
 		print_len = format_inf_nan(buf + fd.b.sign, fd.b.fraction) + fd.b.sign;
 	else
 	{

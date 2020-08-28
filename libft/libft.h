@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 20:48:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 23:12:57 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,14 @@ typedef struct	s_pixel_bounds
 */
 
 typedef struct	s_float_bits {
-	unsigned long long int		fraction:52;
-	unsigned long long int		exp:11;
+	unsigned long long int		fraction:63;
+	unsigned long long int		intbit:1;
+	unsigned long long int		exp:15;
 	unsigned long long int		sign:1;
 }				t_float_bits;
 
 typedef union	u_float_dissector {
-	double			f;
+	long double		f;
 	t_float_bits	b;
 }				t_float_dissector;
 
