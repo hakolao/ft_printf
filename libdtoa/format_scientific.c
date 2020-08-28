@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:41:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 12:45:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 15:29:26 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,12 @@ uint32_t				format_scientific(t_dragon4_params params,
 	uint32_t	pos;
 
 	exp = 0;
-	pos = 0;
 	params.out_exponent = &exp;
 	digits = dragon4(params);
+	if (params.no_trailing_zeros)
+		while (params.buf[digits - 1] == '0' && digits >= 2)
+			digits--;
+	pos = 0;
 	if (params.buf_size > 1)
 	{
 		pos++;
