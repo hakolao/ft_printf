@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 17:29:40 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 18:19:14 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/28 18:30:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char				*choose_g_output(t_printf *data, int *print_lens,
 	return (res);
 }
 
-static char				*parse_g_gloat(t_printf *data)
+static char				*parse_g_float(t_printf *data)
 {
 	char				norm_buf[DTOA_BUF_SIZE];
 	char				sci_buf[DTOA_BUF_SIZE];
@@ -98,7 +98,7 @@ static char				*parse_f_float(t_printf *data)
 
 char					*parse_float(t_printf *data)
 {
-	if (data->c == 'f' || data->c == 'F')
+	if (data->c == 'f' || data->c == 'F' || data->c == 'e' || data->c == 'E')
 		return (parse_f_float(data));
-	return (parse_g_gloat(data));
+	return (parse_g_float(data));
 }
