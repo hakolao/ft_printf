@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 20:48:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 18:02:06 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,18 @@ typedef union	u_float_dissector {
 	double			f;
 	t_float_bits	b;
 }				t_float_dissector;
+
+typedef struct	s_float_bits_ld {
+	unsigned long long int		fraction:63;
+	unsigned long long int		intbit:1;
+	unsigned long long int		exp:15;
+	unsigned long long int		sign:1;
+}				t_float_bits_ld;
+
+typedef union	u_float_dissector_ld {
+	long double			f;
+	t_float_bits_ld		b;
+}				t_float_dissector_ld;
 
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);

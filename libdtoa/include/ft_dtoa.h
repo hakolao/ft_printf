@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 17:59:50 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 18:02:45 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct			s_dtoa_params
 	int32_t			precision;
 	t_bool			hashtag;
 	t_bool			g_mode;
+	t_bool			long_double;
 }						t_dtoa_params;
 
 /*

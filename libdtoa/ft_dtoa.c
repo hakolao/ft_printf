@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 18:17:07 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 18:17:25 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void		set_cutoffs(t_dragon4_params *dragon, t_dtoa_params dtoa)
 ** Float is dissected into mantissa, sign and exponent.
 ** See: http://www.ryanjuckett.com/programming/printing-floating-point-numbers/
 ** part-3/
-** Mantissa becomes (2^63 + float mantissa)
+** Mantissa becomes (2^52 + float mantissa)
 ** Exponent becomes (exponent - 1023 - 52)
 ** Sign is 1 when negative, 0 when positive thus buffer length is increased by
 ** sign bit.
@@ -92,30 +92,25 @@ static void		set_dragon4_params(t_dragon4_params *dragon, t_dtoa_params dtoa,
 
 char			*ft_dtoa(t_dtoa_params params)
 {
-	char				*res;
 	char				buf[DTOA_BUF_SIZE];
 	t_dragon4_params	dragon;
-	uint32_t			print_len;
 	t_float_dissector	fd;
 
 	fd.f = params.value;
 	if (fd.b.sign == 1)
 		*buf = '-';
 	if (fd.b.exp == 0x7FF)
-		print_len = format_inf_nan(buf + fd.b.sign, fd.b.fraction) + fd.b.sign;
+		format_inf_nan(buf + fd.b.sign, fd.b.fraction);
 	else
 	{
 		set_dragon4_params(&dragon, params, buf, DTOA_BUF_SIZE);
 		if (params.format == FORMAT_SCI)
-			print_len = format_scientific(dragon, params.precision) + fd.b.sign;
+			format_scientific(dragon, params.precision);
 		else
-			print_len = format_normal(dragon, params.precision -
-				(params.g_mode && params.hashtag)) + fd.b.sign;
+			format_normal(dragon, params.precision -
+				(params.g_mode && params.hashtag));
 	}
-	if (!(res = ft_strnew(print_len)))
-		return (NULL);
-	ft_strcpy(res, buf);
-	return (res);
+	return (ft_strdup(buf));
 }
 
 /*
