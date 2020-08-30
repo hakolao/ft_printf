@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 18:46:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 20:55:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,20 +129,20 @@ uint32_t				format_inf_nan(char *buf, uint64_t mantissa);
 uint32_t				dragon4(t_dragon4_params params);
 uint32_t				output_without_cutoff(t_dragon4_params params,
 						t_big_int *scale, t_big_int *scaled_value,
-						t_big_int scaled_margins[2]);
+						t_big_int **scaled_margins);
 uint32_t				output_with_cutoff(t_dragon4_params params,
 						t_big_int *scale, t_big_int *scaled_value);
 void					normalized_initial_state(t_dragon4_params params,
 						t_big_int *scale, t_big_int *scaled_value,
-						t_big_int scaled_margins[2]);
+						t_big_int **scaled_margins);
 void					denormalized_initial_state(t_dragon4_params
 						params, t_big_int *scale, t_big_int *scaled_value,
-						t_big_int scaled_margins[2]);
+						t_big_int **scaled_margins);
 void					scale_values_by_digit_exponent(t_big_int *scale,
-						t_big_int *scaled_value, t_big_int scaled_margins[2],
+						t_big_int *scaled_value, t_big_int **scaled_margins,
 						int32_t *digit_exponent);
 void					prepare_values_for_division(t_big_int *scale,
-						t_big_int *scaled_value, t_big_int scaled_margins[2]);
+						t_big_int *scaled_value, t_big_int **scaled_margins);
 
 /*
 ** Math utils
