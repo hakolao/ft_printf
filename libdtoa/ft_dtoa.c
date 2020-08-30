@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 19:00:46 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 21:39:13 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ char			*ft_dtoa(t_dtoa_params params)
 	if (fd.b.sign == 1)
 		*buf = '-';
 	if (fd.b.exp == 0x7FF)
-		format_inf_nan(buf + fd.b.sign, fd.b.fraction);
+		format_inf_nan(buf + (fd.b.sign == 1 && fd.b.fraction == 0),
+			fd.b.fraction);
 	else
 	{
 		set_dragon4_params(&dragon, params, buf, DTOA_BUF_SIZE);
@@ -122,12 +123,15 @@ int				ft_dtoa_buf(t_dtoa_params params, char *buf, int buf_size)
 {
 	t_dragon4_params	dragon;
 	t_float_dissector	fd;
+	uint32_t			inf_nan_sign;
 
 	fd.f = params.value;
 	if (fd.b.sign == 1)
 		*buf = '-';
+	inf_nan_sign = (fd.b.sign == 1 && fd.b.fraction == 0);
 	if (fd.b.exp == 0x7FF)
-		return (format_inf_nan(buf + fd.b.sign, fd.b.fraction) + fd.b.sign);
+		return (format_inf_nan(buf + inf_nan_sign, fd.b.fraction) +
+			inf_nan_sign);
 	else
 	{
 		set_dragon4_params(&dragon, params, buf, buf_size);
