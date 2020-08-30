@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 22:14:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 18:57:24 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 19:06:52 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,8 +194,7 @@ t_big_int		g_power_of_10_big[10] = {(t_big_int){1, {100000000}},
 					0x4964046f, 0x18ae4240, 0xd868b275, 0x8bd2b496, 0x1c5563f4,
 					0xc234d8f5, 0xf868e970, 0xf9151fff, 0xae7be4a2, 0x271133ee,
 					0xbb0fd922, 0x25254932, 0xa60a9fc0, 0x104bcd64, 0x30290145,
-					0x00000062, } }
-					};
+					0x00000062}}};
 
 void			big_int_pow_10(uint32_t exponent, t_big_int *res)
 {
