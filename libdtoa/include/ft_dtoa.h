@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 18:02:45 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 18:34:15 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct			s_dtoa_params
 	int32_t			precision;
 	t_bool			hashtag;
 	t_bool			g_mode;
-	t_bool			long_double;
 }						t_dtoa_params;
 
 /*
@@ -108,6 +107,11 @@ typedef struct			s_dragon4_params
 char					*ft_dtoa(t_dtoa_params params);
 int						ft_dtoa_buf(t_dtoa_params params, char *buf,
 						int buf_size);
+char					*ft_dtoa_ld(t_dtoa_params params);
+int						ft_dtoa_buf_ld(t_dtoa_params params, char *buf,
+						int buf_size);
+void					set_cutoffs(t_dragon4_params *dragon,
+						t_dtoa_params dtoa);
 
 /*
 ** Format

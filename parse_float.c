@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 17:29:40 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 18:77:18 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 18:35:28 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,22 @@ static char				*parse_g_float(t_printf *data)
 	if (data->type == length_L)
 	{
 		var = va_arg(data->variables, long double);
-		print_lens[0] = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
+		print_lens[0] = ft_dtoa_buf_ld((t_dtoa_params){.precision = data->precision,
 			.value = var, .format = FORMAT_SCI, .hashtag = data->zerox,
-			.g_mode = true, .long_double = true}, sci_buf, DTOA_BUF_SIZE);
-		print_lens[1] = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
+			.g_mode = true}, sci_buf, DTOA_BUF_SIZE);
+		print_lens[1] = ft_dtoa_buf_ld((t_dtoa_params){.precision = data->precision,
 			.value = var, .format = FORMAT_NORM, .hashtag = data->zerox,
-			.g_mode = true, .long_double = true}, norm_buf, DTOA_BUF_SIZE);
+			.g_mode = true}, norm_buf, DTOA_BUF_SIZE);
 	}
 	else
 	{
 		var = va_arg(data->variables, double);
 		print_lens[0] = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
 			.value = var, .format = FORMAT_SCI, .hashtag = data->zerox,
-			.g_mode = true, .long_double = false}, sci_buf, DTOA_BUF_SIZE);
+			.g_mode = true}, sci_buf, DTOA_BUF_SIZE);
 		print_lens[1] = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
 			.value = var, .format = FORMAT_NORM, .hashtag = data->zerox,
-			.g_mode = true, .long_double = false}, norm_buf, DTOA_BUF_SIZE);
+			.g_mode = true}, norm_buf, DTOA_BUF_SIZE);
 	}
 	fds.f = var;
 	if (fds.b.sign)
@@ -90,18 +90,18 @@ static char				*parse_f_float(t_printf *data)
 	if (data->type == length_L)
 	{
 		var = va_arg(data->variables, long double);
-		data->var_len = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
+		data->var_len = ft_dtoa_buf_ld((t_dtoa_params){.precision = data->precision,
 			.value = var, .format = data->c == 'f' || data->c == 'F' ?
-			FORMAT_NORM : FORMAT_SCI, .hashtag = data->zerox, .g_mode = false,
-			.long_double = true}, buf, DTOA_BUF_SIZE);
+			FORMAT_NORM : FORMAT_SCI, .hashtag = data->zerox, .g_mode = false,},
+			buf, DTOA_BUF_SIZE);
 	}
 	else
 	{
 		var = va_arg(data->variables, double);
 		data->var_len = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
 			.value = var, .format = data->c == 'f' || data->c == 'F' ?
-			FORMAT_NORM : FORMAT_SCI, .hashtag = data->zerox, .g_mode = false,
-			.long_double = false}, buf, DTOA_BUF_SIZE);
+			FORMAT_NORM : FORMAT_SCI, .hashtag = data->zerox, .g_mode = false},
+			buf, DTOA_BUF_SIZE);
 	}
 	fds.f = var;
 	if (fds.b.sign)

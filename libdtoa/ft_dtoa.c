@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 18:17:25 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 18:33:00 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 ** With normal mode the precision defines the cutoff num.
 */
 
-static void		set_cutoffs(t_dragon4_params *dragon, t_dtoa_params dtoa)
+void			set_cutoffs(t_dragon4_params *dragon, t_dtoa_params dtoa)
 {
 	if (dtoa.precision < 0)
 	{
@@ -121,22 +121,20 @@ char			*ft_dtoa(t_dtoa_params params)
 int				ft_dtoa_buf(t_dtoa_params params, char *buf, int buf_size)
 {
 	t_dragon4_params	dragon;
-	uint32_t			print_len;
 	t_float_dissector	fd;
 
 	fd.f = params.value;
 	if (fd.b.sign == 1)
 		*buf = '-';
 	if (fd.b.exp == 0x7FF)
-		print_len = format_inf_nan(buf + fd.b.sign, fd.b.fraction) + fd.b.sign;
+		return (format_inf_nan(buf + fd.b.sign, fd.b.fraction) + fd.b.sign);
 	else
 	{
 		set_dragon4_params(&dragon, params, buf, buf_size);
 		if (params.format == FORMAT_SCI)
-			print_len = format_scientific(dragon, params.precision) + fd.b.sign;
+			return (format_scientific(dragon, params.precision) + fd.b.sign);
 		else
-			print_len = format_normal(dragon, params.precision -
-				(params.g_mode && params.hashtag)) + fd.b.sign;
+			return (format_normal(dragon, params.precision -
+				(params.g_mode && params.hashtag)) + fd.b.sign);
 	}
-	return (print_len);
 }
