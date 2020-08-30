@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 20:46:11 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 21:43:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ static int		run_more(void)
 	return (true);
 }
 
+#include <float.h>
+#include <stdio.h>
+
 static int		sci_tests(void)
 {
 	ft_printf("pft%*.*ntest%d\n", 5, 5, "asdf", 123);
@@ -95,6 +98,11 @@ static int		sci_tests(void)
 	ft_printf("%#.1f\n", 0.0);
 	ft_printf("%#-5.3f\n", 0.0);
 	ft_printf("% #-5.0e\n", -7.3);
+	ft_printf("%.7Lf\n", -0.99999949l);
+	ft_printf("%.16Lf\n", -LDBL_MAX);
+	printf("%.16Lf\n", -LDBL_MAX);
+	ft_printf("%.16Le\n", -LDBL_MAX);
+	printf("%.16Le\n", -LDBL_MAX);
 }
 
 int				main(void)
