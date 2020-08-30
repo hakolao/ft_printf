@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:41:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 18:37:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 21:56:34 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,29 +68,6 @@ static void				add_trailing_zeros(t_dragon4_params params,
 	}
 }
 
-static void				set_exp_buf(t_dragon4_params params, int32_t exp,
-						char *exp_buf, uint32_t *exp_size)
-{
-	uint32_t	tens;
-	uint32_t	hundreds;
-
-	hundreds = (exp / 100);
-	tens = (exp - hundreds * 100) / 10;
-	if (hundreds == 0)
-	{
-		exp_buf[2] = (char)('0' + tens);
-		exp_buf[3] = (char)('0' + (exp - hundreds * 100 - tens * 10));
-		*exp_size = (params.buf_size - 1) > 4 ? 4 : params.buf_size - 1;
-	}
-	else
-	{
-		exp_buf[2] = (char)('0' + hundreds);
-		exp_buf[3] = (char)('0' + tens);
-		exp_buf[4] = (char)('0' + (exp - hundreds * 100 - tens * 10));
-		*exp_size = (params.buf_size - 1) > 5 ? 5 : params.buf_size - 1;
-	}
-}
-
 /*
 ** Based on the exponent value either + or - is placed after the e in exp buf
 ** array. tens, hundreds and thousand digits are added in their corresponding
@@ -100,7 +77,7 @@ static void				set_exp_buf(t_dragon4_params params, int32_t exp,
 static void				add_exp_notation(t_dragon4_params params,
 						int32_t exp, uint32_t *pos)
 {
-	char		exp_buf[5];
+	char		exp_buf[6];
 	uint32_t	exp_size;
 
 	if (params.buf_size <= 1)

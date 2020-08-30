@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/08/30 18:33:33 by ohakola          ###   ########.fr        #
+#    Updated: 2020/08/30 21:59:53 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SOURCES = ft_dtoa.c \
 			format_normal.c \
 			format_inf_nan.c \
 			format_scientific.c \
+			format_scientific_utils.c \
 			math_utils.c \
 			dragon4.c \
 			dragon4_output.c \

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 20:55:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 21:56:53 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ uint32_t				format_normal(t_dragon4_params params,
 uint32_t				format_scientific(t_dragon4_params params,
 						int32_t precision);
 uint32_t				format_inf_nan(char *buf, uint64_t mantissa);
+void					set_exp_buf(t_dragon4_params params, int32_t exp,
+						char *exp_buf, uint32_t *exp_size);
 
 /*
 ** Dragon4
