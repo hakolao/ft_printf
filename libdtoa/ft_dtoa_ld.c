@@ -6,14 +6,14 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/30 18:32:14 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 19:06:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 19:33:03 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_dtoa.h"
 
-static void		set_dragon4_params_ld(t_dragon4_params *dragon, t_dtoa_params dtoa,
-				char *buf, uint32_t buf_size)
+static void		set_dragon4_params_ld(t_dragon4_params *dragon,
+				t_dtoa_params dtoa, char *buf, uint32_t buf_size)
 {
 	t_float_dissector_ld	fd;
 

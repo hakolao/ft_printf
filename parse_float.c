@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 17:29:40 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 18:49:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 19:32:03 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,35 +42,42 @@ static char				*choose_g_output(t_printf *data, int *print_lens,
 	return (res);
 }
 
-static char				*parse_g_float(t_printf *data)
+static void				get_floats_for_g_mode(t_printf *data,
+						char *norm_buf, char *sci_buf, int print_lens[2])
 {
-	char				norm_buf[DTOA_BUF_SIZE];
-	char				sci_buf[DTOA_BUF_SIZE];
 	long double			var;
-	int					print_lens[2];
 
-	data->precision = data->precision >= 0 ? data->precision : 6;
-	data->precision = data->precision == 0 ? 1 : data->precision;
 	if (data->type == length_L)
 	{
 		var = va_arg(data->variables, long double);
-		print_lens[0] = ft_dtoa_buf_ld((t_dtoa_params){.precision = data->precision,
-			.value_ld = var, .format = FORMAT_SCI, .hashtag = data->zerox,
-			.g_mode = true}, sci_buf, DTOA_BUF_SIZE);
-		print_lens[1] = ft_dtoa_buf_ld((t_dtoa_params){.precision = data->precision,
-			.value_ld = var, .format = FORMAT_NORM, .hashtag = data->zerox,
-			.g_mode = true}, norm_buf, DTOA_BUF_SIZE);
+		print_lens[0] = ft_dtoa_buf_ld((t_dtoa_params){.precision =
+			data->precision, .value_ld = var, .format = FORMAT_SCI,
+			.hashtag = data->zerox, .g_mode = true}, sci_buf, DTOA_BUF_SIZE);
+		print_lens[1] = ft_dtoa_buf_ld((t_dtoa_params){.precision =
+			data->precision, .value_ld = var, .format = FORMAT_NORM,
+			.hashtag = data->zerox, .g_mode = true}, norm_buf, DTOA_BUF_SIZE);
 	}
 	else
 	{
 		var = va_arg(data->variables, double);
-		print_lens[0] = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
-			.value = var, .format = FORMAT_SCI, .hashtag = data->zerox,
-			.g_mode = true}, sci_buf, DTOA_BUF_SIZE);
-		print_lens[1] = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
-			.value = var, .format = FORMAT_NORM, .hashtag = data->zerox,
-			.g_mode = true}, norm_buf, DTOA_BUF_SIZE);
+		print_lens[0] = ft_dtoa_buf((t_dtoa_params){.precision =
+			data->precision, .value = var, .format = FORMAT_SCI,
+			.hashtag = data->zerox, .g_mode = true}, sci_buf, DTOA_BUF_SIZE);
+		print_lens[1] = ft_dtoa_buf((t_dtoa_params){.precision =
+			data->precision, .value = var, .format = FORMAT_NORM,
+			.hashtag = data->zerox, .g_mode = true}, norm_buf, DTOA_BUF_SIZE);
 	}
+}
+
+static char				*parse_g_float(t_printf *data)
+{
+	char				norm_buf[DTOA_BUF_SIZE];
+	char				sci_buf[DTOA_BUF_SIZE];
+	int					print_lens[2];
+
+	data->precision = data->precision >= 0 ? data->precision : 6;
+	data->precision = data->precision == 0 ? 1 : data->precision;
+	get_floats_for_g_mode(data, norm_buf, sci_buf, print_lens);
 	data->is_negative = norm_buf[0] == '-';
 	return (choose_g_output(data, print_lens, norm_buf, sci_buf));
 }
@@ -79,26 +86,21 @@ static char				*parse_f_float(t_printf *data)
 {
 	char				*res;
 	char				buf[DTOA_BUF_SIZE];
-	long double			var;
 
 	res = NULL;
 	data->precision = data->precision >= 0 ? data->precision : 6;
 	if (data->type == length_L)
-	{
-		var = va_arg(data->variables, long double);
-		data->var_len = ft_dtoa_buf_ld((t_dtoa_params){.precision = data->precision,
-			.value_ld = var, .format = data->c == 'f' || data->c == 'F' ?
-			FORMAT_NORM : FORMAT_SCI, .hashtag = data->zerox, .g_mode = false,},
-			buf, DTOA_BUF_SIZE);
-	}
+		data->var_len = ft_dtoa_buf_ld((t_dtoa_params){.precision =
+			data->precision, .value_ld = va_arg(data->variables, long double),
+			.format = data->c == 'f' || data->c == 'F' ? FORMAT_NORM :
+				FORMAT_SCI, .hashtag = data->zerox,
+			.g_mode = false}, buf, DTOA_BUF_SIZE);
 	else
-	{
-		var = va_arg(data->variables, double);
-		data->var_len = ft_dtoa_buf((t_dtoa_params){.precision = data->precision,
-			.value = var, .format = data->c == 'f' || data->c == 'F' ?
-			FORMAT_NORM : FORMAT_SCI, .hashtag = data->zerox, .g_mode = false},
-			buf, DTOA_BUF_SIZE);
-	}
+		data->var_len = ft_dtoa_buf((t_dtoa_params){.precision =
+			data->precision, .value = va_arg(data->variables, double),
+			.format = data->c == 'f' || data->c == 'F' ? FORMAT_NORM :
+			FORMAT_SCI, .hashtag = data->zerox,
+			.g_mode = false}, buf, DTOA_BUF_SIZE);
 	data->is_negative = buf[0] == '-';
 	if (!(res = ft_strnew(data->var_len)))
 		return (NULL);
