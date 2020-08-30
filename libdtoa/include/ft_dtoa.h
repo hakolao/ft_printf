@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 18:34:15 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 18:46:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef enum			e_cutoff_mode
 typedef struct			s_dtoa_params
 {
 	double			value;
+	long double		value_ld;
 	t_dtoa_format	format;
 	int32_t			precision;
 	t_bool			hashtag;

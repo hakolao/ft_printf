@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 22:13:51 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 18:07:45 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/30 18:40:28 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ const char	*just_another_test1(void)
 
 const char	*just_another_test2(void)
 {
-	double	d1;
-	char	*res;
+	double		d1;
+	long double	d2;
+	char		*res;
 
 	*((unsigned long *)(&d1)) = 0x7FF0000000000000;
 	res = ft_dtoa((t_dtoa_params){.format = FORMAT_NORM,
@@ -56,11 +57,12 @@ const char	*just_another_test2(void)
 	OH_ASSERT("dtoa int min wrong 444",
 		ft_strequ(res, "-2147483648.000000"));
 	ft_strdel(&res);
-	// d1 = 1444565444646.6465424242242;
-	// res = ft_dtoa((t_dtoa_params){.format = FORMAT_NORM,
-	// 	.precision = 6, .value = d1});
-	// OH_ASSERT("dtoa long number wrong 2",
-	// 	ft_strequ(res, "-1444565444646.646542"));
-	// ft_strdel(&res);
+	d2 = 1444565444646.6465424242242;
+	res = ft_dtoa_ld((t_dtoa_params){.format = FORMAT_NORM,
+		.precision = 6, .value = d2});
+	ft_putendl(res);
+	OH_ASSERT("dtoa long number wrong 2",
+		ft_strequ(res, "-1444565444646.646542"));
+	ft_strdel(&res);
 	return (0);
 }
