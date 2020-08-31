@@ -6,11 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 19:31:30 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/31 20:14:26 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** Consumes int variable based on length flags.
+*/
 
 static intmax_t			parse_type(t_printf *data)
 {
@@ -36,6 +40,10 @@ static intmax_t			parse_type(t_printf *data)
 		data->is_negative = true;
 	return (var);
 }
+
+/*
+** Chooses which itoa to use based on length modifiers
+*/
 
 static char				*printf_itoa(t_printf *data, intmax_t var,
 						int base, int is_signed)
@@ -64,6 +72,10 @@ static char				*printf_itoa(t_printf *data, intmax_t var,
 	return (ft_itoa_base(var, base));
 }
 
+/*
+** Parses ints based on int specifiers, and lengths
+*/
+
 char					*parse_int(t_printf *data)
 {
 	char			*res;
@@ -87,6 +99,11 @@ char					*parse_int(t_printf *data)
 	check_parsed_zero(data, res);
 	return (res);
 }
+
+/*
+** Parses address (p, pointer) by outputting hexadecimal value, basically a sub
+** case of int
+*/
 
 char					*parse_address(t_printf *data)
 {

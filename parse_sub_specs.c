@@ -6,11 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:26:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 15:41:53 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/31 20:10:09 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** Parses flags and maps that data to t_printf *data.
+*/
 
 static int		parse_flags(t_printf *data)
 {
@@ -26,6 +30,10 @@ static int		parse_flags(t_printf *data)
 	}
 	return (true);
 }
+
+/*
+** Parses precision and maps that data to t_printf *data.
+*/
 
 static int		parse_precision(t_printf *data, char *dot)
 {
@@ -44,6 +52,10 @@ static int		parse_precision(t_printf *data, char *dot)
 	}
 	return (true);
 }
+
+/*
+** Parses width and maps that data to t_printf *data.
+*/
 
 static int		parse_width(t_printf *data, int i)
 {
@@ -73,6 +85,10 @@ static int		parse_width(t_printf *data, int i)
 	return (true);
 }
 
+/*
+** Parses lengths and maps that data to t_printf *data.
+*/
+
 static int		parse_lengths(t_printf *data)
 {
 	int			i;
@@ -85,6 +101,12 @@ static int		parse_lengths(t_printf *data)
 	}
 	return (true);
 }
+
+/*
+** Parses flags, width and precision from everything between % and spec char
+** in fmt. Maps that data to t_printf *data.
+** variables are consumed for * flag.
+*/
 
 int				parse_sub_specifiers(t_printf *data)
 {

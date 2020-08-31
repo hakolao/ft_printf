@@ -6,11 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 15:11:09 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/31 20:44:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** Handles precision per data type.
+*/
 
 static char				*handle_precision(t_printf *data, char *res)
 {
@@ -24,6 +28,10 @@ static char				*handle_precision(t_printf *data, char *res)
 		return (handle_string_precision(data, res));
 	return (res);
 }
+
+/*
+** Handles padding based on data->c (variable type from spec)
+*/
 
 static char				*handle_padding(t_printf *data, char *res)
 {
@@ -42,6 +50,10 @@ static char				*handle_padding(t_printf *data, char *res)
 	return (res);
 }
 
+/*
+** Sets special case flags for int
+*/
+
 static void				handle_int_flag_specials(t_printf *data)
 {
 	if (data->left_justify ||
@@ -57,6 +69,11 @@ static void				handle_int_flag_specials(t_printf *data)
 		data->blank_space = false;
 	}
 }
+
+/*
+** Handles formatting per given variable type (specified by data->c)
+** and flags.
+*/
 
 char					*handle_formatting(t_printf *data, char *res)
 {

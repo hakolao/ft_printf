@@ -6,11 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 15:13:32 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 19:21:41 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/31 20:44:58 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** This file contains helper functions to validate inputs.
+*/
 
 int						is_int_specifier(char c)
 {

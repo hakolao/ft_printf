@@ -6,11 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 18:21:16 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 22:01:21 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/31 20:08:00 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** Checks if zero flag (0) is found in between % and specifier
+*/
 
 static int		check_zero_flag(t_printf *data,
 				int *index, int *found_zero)
@@ -37,6 +41,11 @@ static int		check_zero_flag(t_printf *data,
 	return (true);
 }
 
+/*
+** Checks if any flag (-+ 0#) is found in between % and specifier
+** maps found flags to t_printf data*
+*/
+
 int				check_flag(t_printf *data, int *index, int *found_zero)
 {
 	int		i;
@@ -61,6 +70,10 @@ int				check_flag(t_printf *data, int *index, int *found_zero)
 	*index = i;
 	return (true);
 }
+
+/*
+** Checks for variable size flags and maps them to t_printf *data
+*/
 
 int				check_length(t_printf *data, int *index, char s)
 {
@@ -87,6 +100,10 @@ int				check_length(t_printf *data, int *index, char s)
 		data->type = data->type > length_L ? data->type : length_L;
 	return (true);
 }
+
+/*
+** I do not remember the purpose of this :D (something to do with zerox flag)
+*/
 
 int				check_parsed_zero(t_printf *data, char *res)
 {

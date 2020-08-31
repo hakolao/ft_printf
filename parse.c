@@ -6,11 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:05:04 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 20:16:47 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/31 20:21:57 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** Resets data after a spec and variable has been parsed and consumed.
+*/
 
 static int						reset_var_data(t_printf *data)
 {
@@ -31,6 +35,10 @@ static int						reset_var_data(t_printf *data)
 	return (true);
 }
 
+/*
+** Sets spec lengths information to be used in parse_input.
+*/
+
 static void						set_spec_len(t_fmt_specs *lengths,
 								char *fmt, int i)
 {
@@ -44,6 +52,10 @@ static void						set_spec_len(t_fmt_specs *lengths,
 	else
 		lengths->spec_len = 0;
 }
+
+/*
+** Parses lengths of middle and spec parts to be used in parse_input.
+*/
 
 static t_fmt_specs				fmt_part_lengths(char *fmt, t_fmt_specs lengths)
 {
@@ -72,6 +84,10 @@ static t_fmt_specs				fmt_part_lengths(char *fmt, t_fmt_specs lengths)
 	return (lengths);
 }
 
+/*
+** Adds non-spec parts of fmt string to data->buffer.
+*/
+
 static int						parse_middle(t_printf *data, char *fmt)
 {
 	int		i;
@@ -85,6 +101,11 @@ static int						parse_middle(t_printf *data, char *fmt)
 	data->buffer[data->len] = '\0';
 	return (true);
 }
+
+/*
+** Recursively parses fmt and fills data->buf with non-specs (middle) parts
+** plus recognized variables already handled by the parsing of spec in fmt.
+*/
 
 int								parse_input(t_printf *data, char *fmt)
 {

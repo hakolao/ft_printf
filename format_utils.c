@@ -6,11 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:18:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/28 19:21:53 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/31 20:24:35 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** Adds 0x to res if specified.
+*/
 
 void				swap_zerox(t_printf *data, char *res, int x_index)
 {
@@ -20,6 +24,11 @@ void				swap_zerox(t_printf *data, char *res, int x_index)
 	res[x_index] = '0';
 	res[1] = data->c == 'x' ? 'x' : 'X';
 }
+
+/*
+** Handles sign placement for int or floats if padding or width
+** has been adjusted
+*/
 
 void				swap_sign_after_padding(t_printf *data,
 					char *res, int sign_index)
@@ -40,6 +49,11 @@ void				swap_sign_after_padding(t_printf *data,
 	}
 }
 
+/*
+** Swaps sign to it's place if res has been extended specified by width or
+** precision.
+*/
+
 void				swap_sign_after_precision(t_printf *data,
 					char *res, int sign_index)
 {
@@ -51,6 +65,10 @@ void				swap_sign_after_precision(t_printf *data,
 	else if (data->is_negative && (res[sign_index] = '0'))
 		res[0] = '-';
 }
+
+/*
+** Handles blank (sign) space if specified by flags.
+*/
 
 char				*handle_blank(t_printf *data, char *res)
 {
