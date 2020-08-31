@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/31 20:51:38 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 00:51:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,11 +166,9 @@ uint32_t				log_base2_64(uint64_t val);
 ** Big Int ops
 */
 void					big_int_copy(t_big_int *to_copy, t_big_int *res);
-void					big_int_set_zero(t_big_int *b);
 t_bool					big_int_is_zero(t_big_int *b);
 void					big_int_set_u64(t_big_int *b, uint64_t val);
 void					big_int_set_u32(t_big_int *b, uint32_t val);
-uint32_t				big_int_get_u32(t_big_int *b);
 int32_t					big_int_cmp(t_big_int *lhs, t_big_int *rhs);
 void					big_int_add(t_big_int *lhs, t_big_int *rhs,
 						t_big_int *res);

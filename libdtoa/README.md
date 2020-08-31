@@ -2,9 +2,21 @@
 
 This libdtoa contains a modified version of [Ryan Juckett's Dragon4](http://www.ryanjuckett.com/programming/printing-floating-point-numbers/)
 implementation, which has been ported from C++ to C and has modifications
-specific to my needs of ft_printf.
+specific to my needs of ft_printf. These modifications include:
 
-Code follows School 42 norms. Apart from tests including a parameterized macro.
+- No inline declarations of variables, they must always be pre-declared
+- No functions longer than 25 lines
+- No more than 5 functions per file
+- Only functions allowed that are implemented by myself (apart from `write`, `malloc`, `exit`, `free`). E.g `ft_memmove` in `../libft`.
+
+Code follows School 42 norms.
+
+# Simple tests
+
+While implementing the algorithm, a super simple test framework was used.
+(My own modification of [mu_test.h](http://www.jera.com/techinfo/jtns/jtn002.html) using a TestState struct to better output results and not stop at failures).
+
+The dragon4 implementation permission note:
 
 ```
 /*

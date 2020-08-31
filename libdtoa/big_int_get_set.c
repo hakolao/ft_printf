@@ -6,16 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 22:10:19 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/19 18:46:13 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 00:51:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_dtoa.h"
 
-void			big_int_set_zero(t_big_int *b)
-{
-	b->length = 0;
-}
+/*
+** Sets t_big_int with value uint64_t.
+*/
 
 void			big_int_set_u64(t_big_int *b, uint64_t val)
 {
@@ -34,6 +33,10 @@ void			big_int_set_u64(t_big_int *b, uint64_t val)
 		b->length = 0;
 }
 
+/*
+** Sets t_big_int with value uint32_t.
+*/
+
 void			big_int_set_u32(t_big_int *b, uint32_t val)
 {
 	if (val != 0)
@@ -43,9 +46,4 @@ void			big_int_set_u32(t_big_int *b, uint32_t val)
 	}
 	else
 		b->length = 0;
-}
-
-uint32_t		big_int_get_u32(t_big_int *b)
-{
-	return (b->length == 0) ? 0 : b->blocks[0];
 }

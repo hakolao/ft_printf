@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 22:17:57 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 19:20:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 00:45:08 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,14 @@ static void		shift_misaligned_left(uint32_t shift_blocks,
 	if (big->blocks[big->length - 1] == 0)
 		big->length--;
 }
+
+/*
+** Performs left shift operation (t_big_int << shift). For example:
+** t_big_int b = (t_big_int){3, {0, 5, 8}};
+** big_int_shift_left(32, &b);
+** b == (t_big_int){4, {0, 0, 5, 8}};
+** In this example case, each 32bit block moved one further.
+*/
 
 void			big_int_shift_left(uint32_t shift, t_big_int *big)
 {

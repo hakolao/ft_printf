@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 22:18:43 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 21:13:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 00:55:53 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,21 @@ static void		divide_remaining(t_big_int *dividend, t_big_int *divisor,
 		length--;
 	dividend->length = length;
 }
+
+/*
+** Divides t_big_int nominator with t_big_int denominator. This works
+** under the assumption that the result is within the range [0,10] and the input
+** numbers have been shifted to satisfy:
+** !big_int_is_zero(divisor) && // divisor must not be zero
+** divisor->blocks[divisor->length - 1] >= 8 && //enough precision to make
+**   an accurate first guess at the quotient
+** divisor->blocks[divisor->length - 1] < 0xFFFFFFFF && // to prevent overflow
+** dividend->length <= divisor->length
+** See the master himself: http://www.ryanjuckett.com/programming/
+** printing-floating-point-numbers/part-2/
+** The function works as part of the dragon4 implementation and results in
+** the output digit.
+*/
 
 uint32_t		big_int_divide_to_output_digit(t_big_int *dividend,
 				t_big_int *divisor)

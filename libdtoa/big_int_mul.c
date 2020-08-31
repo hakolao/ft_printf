@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 22:11:51 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/18 22:13:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 00:50:02 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ static void		perform_mul(t_big_int *small, t_big_int *large,
 	}
 }
 
+/*
+** Performs multiplication operation on t_big_int lhs and rhs saving it into
+** result.
+*/
+
 void			big_int_mul(t_big_int *lhs, t_big_int *rhs, t_big_int *res)
 {
 	t_big_int	*large;
@@ -60,6 +65,11 @@ void			big_int_mul(t_big_int *lhs, t_big_int *rhs, t_big_int *res)
 	if (max_len > 0 && res->blocks[max_len - 1] == 0)
 		res->length = max_len - 1;
 }
+
+/*
+** Performs multiplication operation on t_big_int lhs and uint32_t saving it
+** into result.
+*/
 
 void			big_int_mul_u32(t_big_int *lhs, uint32_t rhs, t_big_int *res)
 {
@@ -81,6 +91,10 @@ void			big_int_mul_u32(t_big_int *lhs, uint32_t rhs, t_big_int *res)
 		res->length = lhs->length + 1;
 	}
 }
+
+/*
+** Doubles a t_big_int saving it into result.
+*/
 
 void			big_int_mul_2(t_big_int *lhs, t_big_int *res)
 {

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:59:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 19:43:23 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 01:06:54 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ const char	*test_big_int_add1(void)
 	big2.blocks[0] = 4294967294U;
 	big2.blocks[1] = 124424233;
 	big_int_add(&big1, &big2, &res);
-	OH_ASSERT("adding big ints fail1", res.length == 2);
-	OH_ASSERT("adding big ints fail2", res.blocks[0] == 4294967292);
-	OH_ASSERT("adding big ints fail3", res.blocks[1] == 1358991267);
+	OH_ASSERT("adding big ints length is not 2", res.length == 2);
+	OH_ASSERT("adding big first block is not 4294967292",
+		res.blocks[0] == 4294967292);
+	OH_ASSERT("adding big second block is not 1358991267",
+		res.blocks[1] == 1358991267);
 	return (0);
 }
 
@@ -64,10 +66,13 @@ const char	*test_big_int_add2(void)
 	big4.blocks[1] = 4294967294U;
 	big4.blocks[2] = 4294967294U;
 	big_int_add(&big3, &big4, &res);
-	OH_ASSERT("adding big ints fail4", res.length == 3);
-	OH_ASSERT("adding big ints fail5", res.blocks[0] == 4294967292);
-	OH_ASSERT("adding big ints fail6", res.blocks[1] == 1234567032);
-	OH_ASSERT("adding big ints fail7", res.blocks[2] == 4294967295);
+	OH_ASSERT("adding big ints length is wrong", res.length == 3);
+	OH_ASSERT("adding big ints 0 block is not 4294967292",
+		res.blocks[0] == 4294967292);
+	OH_ASSERT("adding big ints 1 block is not 1234567032",
+		res.blocks[1] == 1234567032);
+	OH_ASSERT("adding big ints 2 block is not 4294967295",
+		res.blocks[2] == 4294967295);
 	return (0);
 }
 
