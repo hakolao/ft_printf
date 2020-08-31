@@ -14,7 +14,7 @@ Only following library functions allowed, the rest is from scratch.
 See e.g: [printf reference](http://www.cplusplus.com/reference/cstdio/printf/)
 
 ```
-ft_printf("%[sub_specs][spec]", [variable_per_spec],+);
+ft_printf("%[flags][width][.precision][length]specifier");
 ```
 
 ## Handles
@@ -58,4 +58,4 @@ This library includes:
 - `ft_dprintf`
 
 Since others have written such extensive tests, I've just ensured this passes all
-[42FileChecker](https://github.com/jgigault/42FileChecker) and [PFT](https://github.com/gavinfielder/pft) checks (except nonsubject tests), and then some.
+[42FileChecker](https://github.com/jgigault/42FileChecker) and [PFT](https://github.com/gavinfielder/pft) checks (except unhandled flags, (see above)), and then some.
