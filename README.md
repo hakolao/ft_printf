@@ -49,7 +49,7 @@ ls(widestring): l is ignored
 
 Float handling follows dragon4 algorithm implemented with guide by [ryanjuckett](http://www.ryanjuckett.com/programming/printing-floating-point-numbers).
 
-- Also assumes little-endian system due to the way I dissect floats, see libft.h
+- Also assumes little-endian system due to the way I dissect floats, see `libft.h`
 
 This library includes:
 

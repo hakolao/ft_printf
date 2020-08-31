@@ -6,14 +6,14 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/31 15:54:45 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 01:10:08 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <float.h>
 
-static int		run_some(void)
+static int		test_prints1(void)
 {
 	double special;
 
@@ -42,7 +42,7 @@ static int		run_some(void)
 	return (true);
 }
 
-static int		run_more(void)
+static int		test_prints2(void)
 {
 	ft_printf("%d%d\n", 42, 41);
 	ft_printf("%d%d%d\n", 42, 43, 44);
@@ -70,7 +70,7 @@ static int		run_more(void)
 	return (true);
 }
 
-static int		sci_tests(void)
+static int		test_prints3(void)
 {
 	ft_printf("pft%*.*ntest%d\n", 5, 5, "asdf", 123);
 	ft_printf("%.18e\n", -DBL_MIN);
@@ -90,7 +90,6 @@ static int		sci_tests(void)
 	ft_printf("%.9g\n", 0.89);
 	ft_printf("%#.9g\n", 0.89);
 	ft_printf("%.1g\n", -0.00032);
-	ft_printf("%g\n", -0.00032);
 	ft_printf("%.3g\n", -0.00032);
 	ft_printf("%#.1f\n", 0.0);
 	ft_printf("%#-5.3f\n", 0.0);
@@ -105,9 +104,9 @@ int				main(void)
 	int		debug_leaks;
 
 	debug_leaks = false;
-	run_some();
-	run_more();
-	sci_tests();
+	test_prints1();
+	test_prints2();
+	test_prints3();
 	if (debug_leaks)
 		while (1)
 			;
