@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/31 15:53:29 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/31 20:51:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,24 @@
 # define FT_DTOA_H
 
 # include <stdint.h>
-
 # include "libft.h"
+
+/*
+** This libdtoa contains a modified version of Ryan Juckett's Dragon4
+** implementation, which has been ported from C++ to C and has modifications
+** specific to my needs of ft_printf. See README.md for Permission note
+*/
 
 /*
 ** Max length of big int array (blocks)
 */
 
 # define MAX_BI_BLOCKS 1023
+
+/*
+** Max buffer size for dtoa. Max long double will fit just under 5000 chars.
+*/
+
 # define DTOA_BUF_SIZE 8192
 
 /*
@@ -80,8 +90,8 @@ typedef struct			s_big_int
 }						t_big_int;
 
 /*
-** Mantissa: 2^52 + float mantissa
-** Exponent: float exponent in base 2 ((exponent - 1023 - 52))
+** Mantissa: 2^52 or 2^63 + float mantissa
+** Exponent: float exponent in base 2 ((exponent - 1023 or 16383 - 52 or 63))
 ** mantissa_high_bit_index: Index of the highest mantissa bit
 ** Cutoff num: Where digit array is cut off (e.g. by precision)
 ** Out exponent: Base 10 exponent of the first digit (e.g. used in sci format)

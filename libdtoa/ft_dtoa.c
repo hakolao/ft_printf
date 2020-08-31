@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:19:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 21:39:13 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/31 20:54:55 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ char			*ft_dtoa(t_dtoa_params params)
 }
 
 /*
-** Dtoa version where the caller can input buffer to prevent memory allocation
-** costs. The length of the resulting char array is returned.
+** ft_dtoa_buf Outputs parsed float in either scientific or normal format
+** to given buffer.
 */
 
 int				ft_dtoa_buf(t_dtoa_params params, char *buf, int buf_size)

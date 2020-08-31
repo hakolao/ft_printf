@@ -1,6 +1,10 @@
 # Dragon4 implementation of dtoa
-The dragon4 algorithm follows algorithm by [ryanjuckett](http://www.ryanjuckett.com/programming/printing-floating-point-numbers/).
-Code has been re-implemented in C and follows School 42 norms.
+
+This libdtoa contains a modified version of [Ryan Juckett's Dragon4](http://www.ryanjuckett.com/programming/printing-floating-point-numbers/)
+implementation, which has been ported from C++ to C and has modifications
+specific to my needs of ft_printf.
+
+Code follows School 42 norms. Apart from tests including a parameterized macro.
 
 ```
 /*
@@ -26,4 +30,4 @@ Code has been re-implemented in C and follows School 42 norms.
  * 3. This notice may not be removed or altered from any source
  *    distribution.
  */
- ```
+```
