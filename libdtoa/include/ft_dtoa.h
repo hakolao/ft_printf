@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/30 21:56:53 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/08/31 15:53:29 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 */
 
 # define MAX_BI_BLOCKS 1023
-# define DTOA_BUF_SIZE 2048
+# define DTOA_BUF_SIZE 8192
 
 /*
 ** Log base 10 of 2 as long double.
