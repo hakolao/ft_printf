@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/01 16:41:21 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 16:44:49 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static uint64_t			parse_type(t_printf *data)
 	else if (data->type == length_hh)
 		var = (uint64_t)((char)va_arg(data->variables, uint32_t));
 	else if (data->type == length_l)
-		var = (uint64_t)(va_arg(data->variables, int32_t));
+		var = (uint64_t)(va_arg(data->variables, int64_t));
 	else if (data->type == length_ll)
 		var = (uint64_t)(va_arg(data->variables, int64_t));
 	else if (data->type == length_j)
@@ -109,9 +109,9 @@ char					*parse_int(t_printf *data)
 char					*parse_address(t_printf *data)
 {
 	char		*res;
-	uintmax_t	var;
+	int64_t		var;
 
-	var = va_arg(data->variables, long long int);
+	var = va_arg(data->variables, int64_t);
 	if (var != 0)
 		res = ft_itoa_base_u64(var, 16);
 	else if (var == 0 && ft_abs(data->precision) > 0)
