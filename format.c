@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:59:46 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/01 15:52:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 15:58:08 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void				handle_int_flag_specials(t_printf *data)
 	if (data->show_sign || data->is_negative)
 		data->blank_space = false;
 	if (data->c == 'u' || data->c == 'x' || data->c == 'X' ||
-		 data->c == 'o' || data->c == 'p')
+		data->c == 'o' || data->c == 'p')
 	{
 		data->show_sign = false;
 		data->is_negative = false;
