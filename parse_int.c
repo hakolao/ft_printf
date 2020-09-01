@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/31 20:14:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 16:41:21 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,28 @@
 ** Consumes int variable based on length flags.
 */
 
-static intmax_t			parse_type(t_printf *data)
+static uint64_t			parse_type(t_printf *data)
 {
-	intmax_t		var;
+	uint64_t		var;
 
-	if (data->c == 'U' && (data->c = 'u'))
-		data->type = length_l;
+	if ((data->c == 'U' && (data->c = 'u')) ||
+		(data->c == 'D' && (data->c = 'd')))
+		data->type = length_ll;
 	if (data->type == length_h)
-		var = (intmax_t)((short int)va_arg(data->variables, int));
+		var = (uint64_t)((short int)va_arg(data->variables, int32_t));
 	else if (data->type == length_hh)
-		var = (intmax_t)((char)va_arg(data->variables, unsigned int));
+		var = (uint64_t)((char)va_arg(data->variables, uint32_t));
 	else if (data->type == length_l)
-		var = (intmax_t)(va_arg(data->variables, long int));
+		var = (uint64_t)(va_arg(data->variables, int32_t));
 	else if (data->type == length_ll)
-		var = (intmax_t)(va_arg(data->variables, long long int));
+		var = (uint64_t)(va_arg(data->variables, int64_t));
 	else if (data->type == length_j)
-		var = (intmax_t)(va_arg(data->variables, long long int));
+		var = (uint64_t)(va_arg(data->variables, int64_t));
 	else if (data->type == length_z)
-		var = (intmax_t)(va_arg(data->variables, long long int));
+		var = (uint64_t)(va_arg(data->variables, int64_t));
 	else
-		var = (intmax_t)va_arg(data->variables, int);
-	if (var < 0)
+		var = (uint64_t)va_arg(data->variables, int32_t);
+	if ((int64_t)var < 0)
 		data->is_negative = true;
 	return (var);
 }
@@ -45,7 +46,7 @@ static intmax_t			parse_type(t_printf *data)
 ** Chooses which itoa to use based on length modifiers
 */
 
-static char				*printf_itoa(t_printf *data, intmax_t var,
+static char				*printf_itoa(t_printf *data, uint64_t var,
 						int base, int is_signed)
 {
 	int				is_conversion_up;
@@ -55,21 +56,21 @@ static char				*printf_itoa(t_printf *data, intmax_t var,
 	if (!is_signed)
 	{
 		if (data->type == length_hh)
-			return (ft_itoa_u_base((unsigned char)var, base));
+			return (ft_itoa_base_u32((unsigned char)var, base));
 		else if (data->type == length_h)
-			return (ft_itoa_u_base((unsigned short int)var, base));
+			return (ft_itoa_base_u32((unsigned short int)var, base));
 		else if (is_conversion_up)
-			return (ft_itoa_uintmax_base(var, base));
+			return (ft_itoa_base_u64(var, base));
 		else
-			return (ft_itoa_u_base(var, base));
+			return (ft_itoa_base_u32(var, base));
 	}
 	else if (data->type == length_hh)
-		return (ft_itoa_base((char)var, base));
+		return (ft_itoa_base_32((char)var, base));
 	else if (data->type == length_h)
-		return (ft_itoa_base((short int)var, base));
+		return (ft_itoa_base_32((short int)var, base));
 	else if (is_conversion_up)
-		return (ft_itoa_intmax_base(var, base));
-	return (ft_itoa_base(var, base));
+		return (ft_itoa_base_64(var, base));
+	return (ft_itoa_base_32(var, base));
 }
 
 /*
@@ -79,7 +80,7 @@ static char				*printf_itoa(t_printf *data, intmax_t var,
 char					*parse_int(t_printf *data)
 {
 	char			*res;
-	intmax_t		var;
+	uint64_t		var;
 
 	var = parse_type(data);
 	res = NULL;
@@ -112,7 +113,7 @@ char					*parse_address(t_printf *data)
 
 	var = va_arg(data->variables, long long int);
 	if (var != 0)
-		res = ft_itoa_uintmax_base(var, 16);
+		res = ft_itoa_base_u64(var, 16);
 	else if (var == 0 && ft_abs(data->precision) > 0)
 	{
 		res = ft_strnew(1);
