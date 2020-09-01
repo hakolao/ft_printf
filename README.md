@@ -22,7 +22,7 @@ ft_printf("%[flags][width][.precision][length]specifier");
 ### Variable specs:
 
 ```
-ndDiuUoxX
+ndDiuUoOxX
 fFeEgG
 csp%
 b for binary where first bit = sign
