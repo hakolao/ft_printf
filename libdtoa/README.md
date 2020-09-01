@@ -8,6 +8,9 @@ specific to my needs of ft_printf. These modifications include:
 - No functions longer than 25 lines
 - No more than 5 functions per file
 - Only functions allowed that are implemented by myself (apart from `write`, `malloc`, `exit`, `free`). E.g `ft_memmove` in `../libft`.
+- Formatting changes based on whether flags # or g are used on ft_printf side
+- Usage of plain `stdint.h` types (don't see why those should be redefined)
+- Only snake case instead of camel case.
 
 Code follows School 42 norms.
 
