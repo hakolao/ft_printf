@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:50:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/31 20:40:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 16:58:25 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static char				*handle_zerox(t_printf *data, char *res)
 {
-	if (data->c == 'o')
+	if (data->c == 'o' || data->c == 'O')
 	{
 		if (res[0] == '0')
 			return (res);
