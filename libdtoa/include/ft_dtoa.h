@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/01 00:51:22 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 12:09:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void					normalized_initial_state(t_dragon4_params params,
 void					denormalized_initial_state(t_dragon4_params
 						params, t_big_int *scale, t_big_int *scaled_value,
 						t_big_int **scaled_margins);
-void					scale_values_by_digit_exponent(t_big_int *scale,
+void					scale_values_after_exponent_estimation(t_big_int *scale,
 						t_big_int *scaled_value, t_big_int **scaled_margins,
 						int32_t *digit_exponent);
 void					prepare_values_for_division(t_big_int *scale,

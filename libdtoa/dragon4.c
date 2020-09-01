@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 19:27:50 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/01 00:13:25 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 12:09:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ uint32_t			dragon4(t_dragon4_params params)
 	else
 		denormalized_initial_state(params, &scale, &scaled_value, margin_ptrs);
 	digit_exponent = get_digit_exponent(params);
-	scale_values_by_digit_exponent(&scale, &scaled_value,
+	scale_values_after_exponent_estimation(&scale, &scaled_value,
 		margin_ptrs, &digit_exponent);
 	*(params.exp) = digit_exponent - 1;
 	prepare_values_for_division(&scale, &scaled_value, margin_ptrs);
