@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 18:21:16 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/31 20:08:00 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 17:13:58 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,7 @@ static int		check_zero_flag(t_printf *data,
 	i = *index;
 	data->pad_zeros = true;
 	*found_zero = true;
-	if (data->spec[i + 1] == '0')
-	{
-		data->pad_zeros = false;
-		*found_zero = false;
-	}
-	else if (i - 1 > 0 && data->spec[i - 1] == '.')
+	if (i - 1 > 0 && data->spec[i - 1] == '.')
 	{
 		data->pad_zeros = false;
 		*found_zero = false;

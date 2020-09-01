@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/01 16:44:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 16:59:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static uint64_t			parse_type(t_printf *data)
 	uint64_t		var;
 
 	if ((data->c == 'U' && (data->c = 'u')) ||
-		(data->c == 'D' && (data->c = 'd')))
+		(data->c == 'D' && (data->c = 'd')) ||
+		(data->c == 'O' && (data->c = 'o')))
 		data->type = length_ll;
 	if (data->type == length_h)
 		var = (uint64_t)((short int)va_arg(data->variables, int32_t));
@@ -90,7 +91,7 @@ char					*parse_int(t_printf *data)
 		res = printf_itoa(data, var, 10, true);
 	else if (data->c == 'u' || data->c == 'D')
 		res = printf_itoa(data, var, 10, false);
-	else if (data->c == 'o')
+	else if (data->c == 'o' || data->c == 'O')
 		res = printf_itoa(data, var, 8, false);
 	else if (data->c == 'x' || data->c == 'X')
 		res = printf_itoa(data, var, 16, false);

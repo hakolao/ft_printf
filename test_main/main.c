@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/01 16:36:09 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/01 17:14:23 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ int				main(void)
 	int		debug_leaks;
 
 	debug_leaks = false;
-	ft_printf("%D\n", 0xff11ff11ff88);
-	printf("%D\n", 0xff11ff11ff88);
+	ft_printf("mine:   %00009U%-2lu mimi et titi%--14u\n", 0, (unsigned long)14, 200);
+	printf("printf: %00009U%-2lu mimi et titi%--14u\n", 0, (unsigned long)14, 200);
 	if (debug_leaks)
 		while (1)
 			;
