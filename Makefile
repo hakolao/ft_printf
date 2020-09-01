@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/08/30 21:35:19 by ohakola          ###   ########.fr        #
+#    Updated: 2020/09/01 11:21:59 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,5 @@ test: all
 	@make fclean
 
 re: fclean all
-
-norm: norminette *.c lib* include*
 
 .PHONY: all, clean, fclean, norm
