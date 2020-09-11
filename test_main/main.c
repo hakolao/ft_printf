@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/11 14:29:18 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/11 16:13:41 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,8 @@ static int		test_prints2(void)
 	return (true);
 }
 
-/*
-** https://stackoverflow.com/questions/3062746/
-** special-simple-random-number-generator
-*/
-
-static int		ft_rand(int seed)
-{
-	seed = (1103515245 * seed + 12345) % (1 << 31);
-	return (seed);
-}
-
 static int		test_prints3(void)
 {
-	char	lol[260];
-	int		i;
-
 	ft_printf("%g\n", -958.125);
 	ft_printf("%g\n", 0.000001);
 	ft_printf("%g\n", -3.85);
@@ -101,7 +87,14 @@ static int		test_prints3(void)
 	ft_printf("%.7Lf\n", -0.99999949l);
 	ft_printf("%.16Lf\n", -LDBL_MAX);
 	ft_printf("%.16Le\n", -LDBL_MAX);
-	ft_printf("%.2f\n", -10.00);
+	ft_printf("%.2f\n", -500.00);
+}
+
+static int		test_rand_floats(void)
+{
+	char	lol[32];
+	int		i;
+
 	i = -10001;
 	while (++i < 10000)
 	{
@@ -113,11 +106,15 @@ static int		test_prints3(void)
 int				main(void)
 {
 	int		debug_leaks;
+	int		test_rand;
 
 	debug_leaks = false;
+	test_rand = false;
 	test_prints1();
 	test_prints2();
 	test_prints3();
+	if (test_rand)
+		test_rand_floats();
 	if (debug_leaks)
 		while (1)
 			;

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 17:29:57 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/01 12:29:21 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/11 15:12:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ const char	*test_big_int_pow10(void)
 	OH_ASSERT("multiply big int with pow 10 fail1",
 		big_int_cmp(&res,
 			&(t_big_int){3, {4294767296, 2163443775, 28744}}) == 0);
+	big1.length = 2;
+	big1.blocks[0] = 0;
+	big1.blocks[1] = 1024;
+	big_int_mul_pow_10(&big1, 3, &res);
+	OH_ASSERT("multiply big int with pow 10 fail2",
+		big_int_cmp(&res,
+			&(t_big_int){2, {0, 1024000}}) == 0);
 	return (0);
 }
 

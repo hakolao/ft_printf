@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/01 16:30:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/11 16:12:05 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdint.h>
 
 typedef enum	e_bool
 {
@@ -181,6 +182,7 @@ char			*ft_strnjoin(char const *s1, char const *s2,
 				size_t len1, size_t len2);
 double			ft_ceil(double num);
 double			ft_floor(double num);
+int				ft_rand(int seed);
 char			*ft_itoa(int32_t nb);
 char			*ft_itoa_64(int64_t nb);
 char			*ft_itoa_base_32(int32_t nb, int32_t base);

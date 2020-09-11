@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:01:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/27 16:36:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/11 14:50:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "ft_dtoa.h"
 # include <stdarg.h>
+# include <stdint.h>
 
 /*
 ** A data struct containing all flag & fmt token related information
