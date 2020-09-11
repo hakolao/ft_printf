@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/08 23:20:44 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/11 14:29:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,22 @@ static int		test_prints2(void)
 	return (true);
 }
 
+/*
+** https://stackoverflow.com/questions/3062746/
+** special-simple-random-number-generator
+*/
+
+static int		ft_rand(int seed)
+{
+	seed = (1103515245 * seed + 12345) % (1 << 31);
+	return (seed);
+}
+
 static int		test_prints3(void)
 {
-	ft_printf("pft%*.*ntest%d\n", 5, 5, "asdf", 123);
-	ft_printf("%.18e\n", -DBL_MIN);
-	ft_printf("%#.0f\n", -7.4);
+	char	lol[260];
+	int		i;
+
 	ft_printf("%g\n", -958.125);
 	ft_printf("%g\n", 0.000001);
 	ft_printf("%g\n", -3.85);
@@ -86,17 +97,17 @@ static int		test_prints3(void)
 	ft_printf("%.7g\n", -3.85);
 	ft_printf("% #-5.1g\n", -7.3);
 	ft_printf("%.10g\n", -0.000000032);
-	ft_printf("%#-5.6g\n", 7.3);
-	ft_printf("%.9g\n", 0.89);
-	ft_printf("%#.9g\n", 0.89);
-	ft_printf("%.1g\n", -0.00032);
-	ft_printf("%.3g\n", -0.00032);
-	ft_printf("%#.1f\n", 0.0);
-	ft_printf("%#-5.3f\n", 0.0);
 	ft_printf("% #-5.0e\n", -7.3);
 	ft_printf("%.7Lf\n", -0.99999949l);
 	ft_printf("%.16Lf\n", -LDBL_MAX);
 	ft_printf("%.16Le\n", -LDBL_MAX);
+	ft_printf("%.2f\n", -10.00);
+	i = -10001;
+	while (++i < 10000)
+	{
+		ft_sprintf(lol, "%.2f", i * 100000.0 / (double)ft_rand(i));
+		ft_printf("%s\n", lol);
+	}
 }
 
 int				main(void)
