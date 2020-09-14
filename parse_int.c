@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/01 16:59:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/14 13:47:25 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char					*parse_int(t_printf *data)
 	else if (data->c == 'x' || data->c == 'X')
 		res = printf_itoa(data, var, 16, false);
 	else if (data->c == 'b')
-		res = printf_itoa(data, ft_abs(var), 2, true);
+		res = printf_itoa(data, ft_abs(var), 2, false);
 	data->var_len = ft_strlen(res);
 	check_parsed_zero(data, res);
 	return (res);
