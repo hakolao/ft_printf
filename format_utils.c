@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:18:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/14 14:32:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/14 14:41:28 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void				swap_zerox(t_printf *data, char *res, int x_index)
 	if ((!(data->zerox && (data->c == 'x' || data->c == 'X')) &&
 		data->c != 'p') || data->is_zero_res)
 		return ;
-	ft_putendl("Hello");
 	res[x_index] = '0';
 	res[1] = data->c == 'x' || data->c == 'p' ? 'x' : 'X';
 }
