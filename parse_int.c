@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 12:52:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/14 13:47:25 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/14 14:10:27 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,10 @@ char					*parse_int(t_printf *data)
 
 char					*parse_address(t_printf *data)
 {
-	char		*res;
-	int64_t		var;
+	char			*res;
+	uint64_t		var;
 
-	var = va_arg(data->variables, int64_t);
+	var = va_arg(data->variables, uint64_t);
 	if (var != 0)
 		res = ft_itoa_base_u64(var, 16);
 	else if (var == 0 && ft_abs(data->precision) > 0)
