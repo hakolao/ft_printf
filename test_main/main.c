@@ -6,14 +6,14 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:25:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/11 16:13:41 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/09/28 13:44:16 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <float.h>
 
-static int		test_prints1(void)
+static void		test_prints1(void)
 {
 	double special;
 
@@ -39,10 +39,9 @@ static int		test_prints1(void)
 	ft_printf("%.0f\n", 0.0);
 	*((unsigned long *)(&special)) = 0xFFF0000000000000;
 	ft_printf("%06f\n", special);
-	return (true);
 }
 
-static int		test_prints2(void)
+static void		test_prints2(void)
 {
 	ft_printf("%d%d\n", 42, 41);
 	ft_printf("%d%d%d\n", 42, 43, 44);
@@ -67,10 +66,9 @@ static int		test_prints2(void)
 		1444565444646.6465424242242, 1444565444646.6465424242242l);
 	ft_printf("{%f}{%lf}{%Lf}\n", -1444565444646.6465424242242454654,
 	-1444565444646.6465424242242454654, -1444565444646.6465424242242454654l);
-	return (true);
 }
 
-static int		test_prints3(void)
+static void		test_prints3(void)
 {
 	ft_printf("%g\n", -958.125);
 	ft_printf("%g\n", 0.000001);
@@ -90,7 +88,7 @@ static int		test_prints3(void)
 	ft_printf("%.2f\n", -500.00);
 }
 
-static int		test_rand_floats(void)
+static void		test_rand_floats(void)
 {
 	char	lol[32];
 	int		i;
