@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 14:43:04 by ohakola           #+#    #+#              #
-#    Updated: 2020/09/11 16:12:13 by ohakola          ###   ########.fr        #
+#    Updated: 2020/10/19 15:54:39 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,10 @@ SOURCES = ft_atoi.c \
 		ft_strnstr.c \
 		ft_toupper.c \
 		ft_memcpy.c \
+		ft_memcpy_utils.c \
 		ft_memccpy.c \
 		ft_memset.c \
+		ft_memset_utils.c \
 		ft_memmove.c \
 		ft_memchr.c \
 		ft_memcmp.c \
