@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2021/05/05 12:21:23 by ohakola          ###   ########.fr        #
+#    Updated: 2021/05/05 13:15:25 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SOURCES = ft_printf.c \
 			parse_sub_specs.c \
 			parse_int.c \
 			parse_float.c \
-			parse_utils.c \
+			parse_utils1.c \
+			parse_utils2.c \
 			string_utils.c \
 			format.c \
 			format_precision.c \
@@ -35,6 +36,7 @@ SOURCES = ft_printf.c \
 			libdtoa/ft_dtoa.c \
 			libdtoa/ft_dtoa_ld.c \
 			libdtoa/format_normal.c \
+			libdtoa/format_normal_utils.c \
 			libdtoa/format_inf_nan.c \
 			libdtoa/format_scientific.c \
 			libdtoa/format_scientific_utils.c \

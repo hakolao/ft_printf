@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 23:26:36 by ohakola           #+#    #+#             */
-/*   Updated: 2021/05/03 16:16:20 by ohakola          ###   ########.fr       */
+/*   Updated: 2021/05/05 13:13:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ double	ft_floor(double num)
 	t_float_dissector	fd;
 
 	fd.f = num;
-	if (fd.b.sign)
+	if (!fd.b.sign)
 		return ((long long int)num);
 	return ((long long int)num - 1);
 }
