@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohakola <ohakola@student.helsinki.fi>      +#+  +:+       +#+        */
+/*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 16:40:30 by ohakola           #+#    #+#             */
-/*   Updated: 2019/10/28 14:19:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2021/05/03 16:08:12 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** corresponding lower-case letter.
 */
 
-int		ft_tolower(int c)
+int	ft_tolower(int c)
 {
 	if (ft_isupper(c))
 		c += 32;

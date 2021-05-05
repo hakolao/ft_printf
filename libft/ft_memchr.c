@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohakola <ohakola@student.helsinki.fi>      +#+  +:+       +#+        */
+/*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 15:08:44 by ohakola           #+#    #+#             */
-/*   Updated: 2019/10/28 13:39:47 by ohakola          ###   ########.fr       */
+/*   Updated: 2021/05/03 16:18:12 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 {
 	unsigned char	*cpy;
 
-	cpy = (unsigned char*)s;
+	cpy = (unsigned char *)s;
 	while (n--)
 	{
 		if (*cpy == (unsigned char)c)

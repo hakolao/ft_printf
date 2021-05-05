@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 22:14:07 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/01 00:48:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2021/05/04 15:42:41 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Multiplies inputted t_big_int by 2.
 */
 
-void			big_int_mul_2_modif(t_big_int *mod)
+void	big_int_mul_2_modif(t_big_int *mod)
 {
 	uint32_t	carry;
 	uint32_t	cur;
@@ -41,7 +41,7 @@ void			big_int_mul_2_modif(t_big_int *mod)
 **  Multiplies inputted t_big_int by 10.
 */
 
-void			big_int_mul_10_modif(t_big_int *mod)
+void	big_int_mul_10_modif(t_big_int *mod)
 {
 	uint32_t	carry;
 	uint64_t	product;

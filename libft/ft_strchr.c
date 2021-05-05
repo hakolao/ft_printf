@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohakola <ohakola@student.helsinki.fi>      +#+  +:+       +#+        */
+/*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 18:25:10 by ohakola           #+#    #+#             */
-/*   Updated: 2019/10/28 13:57:22 by ohakola          ###   ########.fr       */
+/*   Updated: 2021/05/03 16:15:01 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	return ((char*)ft_memchr(s, c, ft_strlen(s) + 1));
+	return ((char *)ft_memchr(s, c, ft_strlen(s) + 1));
 }

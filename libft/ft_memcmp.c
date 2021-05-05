@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohakola <ohakola@student.helsinki.fi>      +#+  +:+       +#+        */
+/*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 15:34:33 by ohakola           #+#    #+#             */
-/*   Updated: 2019/10/28 13:40:17 by ohakola          ###   ########.fr       */
+/*   Updated: 2021/05/03 16:18:06 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	const unsigned char	*s1cpy;
 	const unsigned char	*s2cpy;
 
-	s1cpy = (const unsigned char*)s1;
-	s2cpy = (const unsigned char*)s2;
+	s1cpy = (const unsigned char *)s1;
+	s2cpy = (const unsigned char *)s2;
 	while (n--)
 	{
 		if (*s1cpy++ != *s2cpy++)

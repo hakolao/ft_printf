@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 16:05:38 by ohakola           #+#    #+#             */
-/*   Updated: 2020/08/24 20:16:47 by ohakola          ###   ########.fr       */
+/*   Updated: 2021/05/03 16:07:56 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 ** And scrolls remainder variable by that amount onwards.
 */
 
-static void		save_line_and_scroll(char **remainder,
+static void	save_line_and_scroll(char **remainder,
 				char **line, int scroll_len)
 {
-	char *tmp;
+	char	*tmp;
 
 	*line = ft_strsub(*remainder, 0, scroll_len);
 	tmp = ft_strdup(*remainder + scroll_len + 1);
@@ -33,7 +33,7 @@ static void		save_line_and_scroll(char **remainder,
 ** or end of file
 */
 
-static int		ret_new_line(char **remainder, char **line, int ret)
+static int	ret_new_line(char **remainder, char **line, int ret)
 {
 	size_t		len;
 
@@ -59,7 +59,7 @@ static int		ret_new_line(char **remainder, char **line, int ret)
 ** from when file pointer is further due to having already read the lines
 */
 
-static void		append_to_remainder(char **remainder, char *buf)
+static void	append_to_remainder(char **remainder, char *buf)
 {
 	char	*tmp;
 
@@ -71,10 +71,11 @@ static void		append_to_remainder(char **remainder, char *buf)
 }
 
 /*
-** A function that returns saves a line read from a file descriptor
+** A function that saves a line read from a file descriptor. The next
+** call of this function will save the next line from that file.
 */
 
-int				get_next_line(const int fd, char **line)
+int	get_next_line(const int fd, char **line)
 {
 	int					ret;
 	char				buf[BUFF_SIZE + 1];
@@ -84,8 +85,10 @@ int				get_next_line(const int fd, char **line)
 		return (-1);
 	if (remainders[fd] && ft_strchr(remainders[fd], '\n'))
 		return (ret_new_line(&(remainders[fd]), line, 1));
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+	ret = 1;
+	while (ret > 0)
 	{
+		ret = read(fd, buf, BUFF_SIZE);
 		buf[ret] = '\0';
 		append_to_remainder(&(remainders[fd]), buf);
 		if (ft_strchr(buf, '\n'))

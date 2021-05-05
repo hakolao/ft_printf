@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrev.c                                        :+:      :+:    :+:   */
+/*   t_bool.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/27 15:32:10 by ohakola           #+#    #+#             */
-/*   Updated: 2021/05/03 16:11:55 by ohakola          ###   ########.fr       */
+/*   Created: 2020/09/16 14:04:56 by ohakola           #+#    #+#             */
+/*   Updated: 2021/05/03 15:54:46 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef T_BOOL_H
+# define T_BOOL_H
 
-void	ft_strrev(char *str)
+typedef enum e_bool
 {
-	int		i;
-	int		len;
-	char	temp;
+	false,
+	true
+}				t_bool;
 
-	len = ft_strlen(str);
-	i = 0;
-	while (i < len / 2)
-	{
-		temp = str[i];
-		str[i] = str[len - i - 1];
-		str[len - i - 1] = temp;
-		i++;
-	}
-}
+#endif

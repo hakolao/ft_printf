@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrev.c                                        :+:      :+:    :+:   */
+/*   ft_scroll.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/27 15:32:10 by ohakola           #+#    #+#             */
-/*   Updated: 2021/05/03 16:11:55 by ohakola          ###   ########.fr       */
+/*   Created: 2020/09/14 15:20:13 by ohakola           #+#    #+#             */
+/*   Updated: 2021/05/03 16:15:17 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strrev(char *str)
-{
-	int		i;
-	int		len;
-	char	temp;
+/*
+** Scroll to given character in &str
+*/
 
-	len = ft_strlen(str);
-	i = 0;
-	while (i < len / 2)
-	{
-		temp = str[i];
-		str[i] = str[len - i - 1];
-		str[len - i - 1] = temp;
-		i++;
-	}
+void	ft_scroll_to(char **str, char c)
+{
+	while (**str && **str != c)
+		(*str)++;
+}
+
+/*
+** Scroll to one over given character in &str
+*/
+
+void	ft_scroll_over(char **str, char c)
+{
+	ft_scroll_to(str, c);
+	if (**str)
+		(*str)++;
 }

@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2021/05/05 12:32:53 by ohakola          ###   ########.fr        #
+#    Updated: 2021/05/05 12:48:52 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ FLAGS = -Wall -Wextra -Werror -O2
 SOURCES = ft_dtoa.c \
 			ft_dtoa_ld.c \
 			format_normal.c \
+			format_normal_utils.c \
 			format_inf_nan.c \
 			format_scientific.c \
 			format_scientific_utils.c \

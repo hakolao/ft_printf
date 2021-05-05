@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/11 16:11:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/11 16:11:53 by ohakola          ###   ########.fr       */
+/*   Created: 2020/09/17 19:36:38 by ohakola           #+#    #+#             */
+/*   Updated: 2021/05/03 16:16:56 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 ** special-simple-random-number-generator
 */
 
-int			ft_rand(int seed)
+uint32_t	ft_rand(uint32_t seed)
 {
-	seed = (1103515245 * seed + 12345) % (1 << 31);
-	return (seed);
+	return ((1103515245 * seed + 12345) % (1 << 31));
 }

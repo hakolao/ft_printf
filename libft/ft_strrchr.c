@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohakola <ohakola@student.helsinki.fi>      +#+  +:+       +#+        */
+/*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 18:54:27 by ohakola           #+#    #+#             */
-/*   Updated: 2019/10/28 14:14:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2021/05/03 16:12:06 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	char *ret;
+	char	*ret;
 
 	ret = NULL;
 	while (*s)
 	{
 		if (*s == c)
-			ret = (char*)s;
+			ret = (char *)s;
 		s++;
 	}
 	if (*s == c)
-		ret = (char*)s;
+		ret = (char *)s;
 	return (ret);
 }

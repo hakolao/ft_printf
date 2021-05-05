@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohakola <ohakola@student.helsinki.fi>      +#+  +:+       +#+        */
+/*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 16:08:21 by ohakola           #+#    #+#             */
-/*   Updated: 2019/10/28 13:59:11 by ohakola          ###   ########.fr       */
+/*   Updated: 2021/05/03 16:42:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 		return (0);
 	else if (*s1 && !*s2)
 		return (1);
-	return ((unsigned char)*s1 < (unsigned char)*s2 ? -1 : 1);
+	if ((unsigned char)*s1 < (unsigned char)*s2)
+		return (-1);
+	return (1);
 }

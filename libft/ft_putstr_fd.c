@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohakola <ohakola@student.helsinki.fi>      +#+  +:+       +#+        */
+/*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 16:57:23 by ohakola           #+#    #+#             */
-/*   Updated: 2019/10/28 13:51:56 by ohakola          ###   ########.fr       */
+/*   Updated: 2021/05/03 16:17:05 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ void	ft_putstr_fd(char const *str, int fd)
 	if (!str)
 		return ;
 	len = ft_strlen(str);
-	write(fd, str, len);
+	if (write(fd, str, len))
+	{
+	}
 }
