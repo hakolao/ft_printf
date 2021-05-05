@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 17:29:40 by ohakola           #+#    #+#             */
-/*   Updated: 2021/05/05 11:53:46 by ohakola          ###   ########.fr       */
+/*   Updated: 2021/05/05 13:34:11 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,16 @@ static void	get_floats_for_g_mode(t_printf *data,
 		.format = FORMAT_SCI, .hashtag = data->zerox, .g_mode = true};
 	params[1] = (t_dtoa_params){.precision = data->precision, .value = var,
 		.format = FORMAT_NORM, .hashtag = data->zerox, .g_mode = true};
-	print_lens[0] = ft_dtoa_buf(params[0], sci_buf, DTOA_BUF_SIZE);
-	print_lens[1] = ft_dtoa_buf(params[1], norm_buf, DTOA_BUF_SIZE);
+	if (data->type == length_L)
+	{
+		print_lens[0] = ft_dtoa_buf_ld(params[0], sci_buf, DTOA_BUF_SIZE);
+		print_lens[1] = ft_dtoa_buf_ld(params[1], norm_buf, DTOA_BUF_SIZE);
+	}
+	else
+	{
+		print_lens[0] = ft_dtoa_buf(params[0], sci_buf, DTOA_BUF_SIZE);
+		print_lens[1] = ft_dtoa_buf(params[1], norm_buf, DTOA_BUF_SIZE);
+	}
 }
 
 /*
@@ -106,13 +114,14 @@ static char	*parse_f_float(t_printf *data)
 
 	if (data->precision < 0)
 		data->precision = 6;
-	format = FORMAT_SCI;
-	if (data->c == 'f' || data->c == 'F')
-		format = FORMAT_NORM;
+	format = get_float_f_format(data);
 	var = get_double_var(data);
 	params = (t_dtoa_params){.precision = data->precision, .value = var,
 		.format = format, .hashtag = data->zerox, .g_mode = false};
-	data->var_len = ft_dtoa_buf(params, buf, DTOA_BUF_SIZE);
+	if (data->type == length_L)
+		data->var_len = ft_dtoa_buf_ld(params, buf, DTOA_BUF_SIZE);
+	else
+		data->var_len = ft_dtoa_buf(params, buf, DTOA_BUF_SIZE);
 	data->is_negative = buf[0] == '-';
 	res = ft_strnew(data->var_len);
 	if (!res)
