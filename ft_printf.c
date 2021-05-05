@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:00:25 by ohakola           #+#    #+#             */
-/*   Updated: 2021/01/08 20:38:47 by ohakola          ###   ########.fr       */
+/*   Updated: 2021/05/05 12:08:35 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ int						ft_dprintf(int fd, const char *format, ...)
 	if (!parse_input(&data, (char*)format))
 		return (false);
 	va_end(data.variables);
-	write(data.fd, data.buffer, data.len);
+	if (write(data.fd, data.buffer, data.len))
+	{
+		
+	}
 	ft_strdel(&data.buffer);
 	return (data.len);
 }
@@ -83,7 +86,10 @@ int						ft_printf(const char *format, ...)
 	if (!parse_input(&data, (char*)format))
 		return (false);
 	va_end(data.variables);
-	write(data.fd, data.buffer, data.len);
+	if (write(data.fd, data.buffer, data.len))
+	{
+		
+	}
 	ft_strdel(&data.buffer);
 	return (data.len);
 }

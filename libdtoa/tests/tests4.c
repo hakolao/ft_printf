@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 22:13:51 by ohakola           #+#    #+#             */
-/*   Updated: 2020/09/01 01:26:36 by ohakola          ###   ########.fr       */
+/*   Updated: 2021/05/05 12:30:16 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ const char	*just_another_test2(void)
 	long double	d2;
 	char		*res;
 
+	d1 = 0;
 	*((unsigned long *)(&d1)) = 0x7FF0000000000000;
 	res = ft_dtoa((t_dtoa_params){.format = FORMAT_NORM,
 		.precision = 6, .value = d1});

@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/08/30 21:59:53 by ohakola          ###   ########.fr        #
+#    Updated: 2021/05/05 12:32:53 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,13 +43,18 @@ OBJS = $(SOURCES:.c=.o)
 all: $(DIR_OBJ) $(NAME)
 
 $(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
+	@rm -rf temp
+	@mkdir temp
+	@make -C $(LIBFT)
+	@cd temp && ar x ../$(LIBFT)/libft.a
+	ar rc $(NAME) $(OBJS) temp/*.o
 	@ranlib $(NAME)
 
 %.o: $(DIR_SRC)/%.c
 	@$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $<
 
 clean:
+	@/bin/rm -rf temp
 	@/bin/rm -f $(OBJS)
 
 fclean: clean
@@ -59,7 +64,7 @@ TEST_SRCS =$(wildcard $(DIR_TESTS)/*.c)
 test: all
 	@make -C $(LIBFT)
 	$(CC) -o test_run $(TEST_SRCS) -L$(LIBFT) -lft $(FLAGS) $(INCLUDES) \
-		 -I ./tests/include $(NAME)
+		 -I ./tests/include $(NAME) -Wno-strict-aliasing
 	./test_run
 	@/bin/rm -f main.o
 	@/bin/rm -f test_run

@@ -6,11 +6,11 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 14:43:04 by ohakola           #+#    #+#              #
-#    Updated: 2020/10/19 15:54:39 by ohakola          ###   ########.fr        #
+#    Updated: 2021/05/05 12:11:23 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = clang
+CC = gcc
 NAME = libft.a
 DIR_SRC = ./
 DIR_OBJ = temp
